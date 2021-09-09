@@ -6,7 +6,6 @@ const instance = () =>{
 	if(typeof window === "undefined") return {}
 	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 	const mic = new SpeechRecognition()
-	// const available = ['en-ca', 'en-us', 'pt-br', 'fr-ca']
 	mic.continuous = true
 	mic.interimResults = true
 	console.log(getLanguage())

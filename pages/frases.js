@@ -1,11 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'font-awesome/css/font-awesome.min.css'
-
 import React, { useEffect, useState } from "react";
 import { Alert, Button } from "react-bootstrap";
 import { getWords, removeWord } from "../services/storage";
 
-import Footer from '../components/Footer'
 import Capsule from '../components/Capsule';
 
 export default function Phrase(){
@@ -20,12 +16,12 @@ export default function Phrase(){
 	}
 	return (
 		<Capsule
-			title="Formulário diferente"
-			description="Aplicação react para exercitar conhecimentos e pratica do inglês"
-			keywords="SPA, speech, english, practice, web developer, english test, speaking english, english exercise, migrate language, pratique inglês, mardozux"
+			title="Frase cadastradas"
+			description="Lista com as frases escolhidas pelo usuário para futuros exercicios."
+			path="frases"
+			displayFooter={false}
 			>
-			<main className="scape-sidebar">
-
+			<section className="flex-center">
 				{words.length > 0?
 					words.map((word, index) => {
 						return (
@@ -42,8 +38,7 @@ export default function Phrase(){
 					Não ha nenhuma frase salva em sua base de dados local
 				</Alert>
 				}
-			</main>
-			<Footer />
+			</section>
 		</Capsule>
 	)
 }

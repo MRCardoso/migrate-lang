@@ -24,6 +24,7 @@
     "speak practice"
   ],
   "dependencies": {
+    "axios": "^0.21.4",
     "bootstrap": "^5.1.1",
     "font-awesome": "^4.7.0",
     "next": "11.1.2",

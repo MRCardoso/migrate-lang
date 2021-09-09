@@ -1,37 +1,51 @@
 import React, {useEffect, useState} from "react";
-import {FormControl, InputGroup, Form} from 'react-bootstrap';
+import {FormControl, InputGroup,FloatingLabel, Form} from 'react-bootstrap';
 
 export default function SpeechInput(props){
-    const {setIsListining, isListning, note, startRecord} = props
+    const {setIsListining, isListning, note, setNote, startRecord} = props
     const [value, setValue] = useState('')
     
     useEffect(() => {
         if(startRecord === false){
             setValue(note)
-            if(typeof props.callback === "function"){ props.callback(note) }
+            if(typeof props.callback === "function"){
+                props.callback(note, setValue)
+            }
+            if(props.clearOnEnd){
+                setNote('')
+            }
         } else if(startRecord === true){
             setValue('')
         }
 		// eslint-disable-next-line react-hooks/exhaustive-deps
     },[startRecord])
+
+    useEffect(() => {
+        if(props.clearField)
+            refreshValue('')
+    }, [props.clearField])
+
+    const refreshValue = (value) => {
+        if( typeof props.refreshOrigin === 'function')
+            props.refreshOrigin(value)
+        setValue(value)
+    }
     
     return (
         <React.Fragment>
-            <Form>
+            <div>
                 {props.hasLabel? <Form.Label>{props.title}</Form.Label>: ''}
                 <InputGroup className="mb-2">
                     { props.type && props.type === "textarea"
-                    ? <FormControl as="textarea" value={value} rows={3} placeholder={props.title} onChange={e => setValue(e.target.value)} />
-                    : <FormControl value={value} placeholder={props.title} onChange={e => setValue(e.target.value)} />
+                    ? <FormControl as="textarea" value={value} rows={3} placeholder={props.title} onChange={e => refreshValue(e.target.value)} />
+                    : <FormControl value={value} placeholder={props.title} onChange={e => refreshValue(e.target.value)} />
                     }
-                    
                     <InputGroup.Text onClick={() => setIsListining(prevState => !prevState)}>
                         { isListning ? <i className="fa fa-stop-circle"></i> : <i className="fa fa-microphone"></i>}
                     </InputGroup.Text>
                 </InputGroup>
                 {props.printNote? <Form.Text className="Form.text-muted">{note}</Form.Text>: ''}
-            </Form>
-
+            </div>
         </React.Fragment>
     )
 }

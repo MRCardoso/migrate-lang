@@ -1,9 +1,8 @@
 import React from "react"
 import { DropdownButton, Dropdown} from 'react-bootstrap'
-import {setLanguage, getLanguage} from '../services/storage'
+import {setLanguage, getLanguageLabel} from '../services/storage'
 
-const lang = getLanguage().toLowerCase()
-
+const lang = getLanguageLabel()
 
 export default function Lang(){
     const changeLanguage  = (event, value) => {
@@ -12,10 +11,10 @@ export default function Lang(){
 		window.location.reload()
 	}
     const languages = [
-        {value: "en-US", label: "EN"},
-        {value: "pr-BR", label: "PR"},
+        {value: "en-US", label: "Inglês"},
+        {value: "pt-BR", label: "Português"},
     ]
-
+    
     return (
         <DropdownButton size="sm" title={lang}>
             {languages.map(ln => {

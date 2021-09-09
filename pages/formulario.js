@@ -1,62 +1,134 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'font-awesome/css/font-awesome.min.css'
-
 import React, { useState } from "react";
-import {FormControl, Dropdown, DropdownButton, Button, Row, Col, Form} from 'react-bootstrap';
-import {randomBytes} from "crypto"
+import {Button, Form, Alert} from 'react-bootstrap';
 
 import Recognizer from "../components/Recognizer";
 import SpeechInput from "../components/SpeechInput";
 import Capsule from '../components/Capsule';
+import Card from '../components/Card';
+import { getDateFromValue, setArticle } from '../services/storage';
 
-export default function Hash(){
-	const [hash, setHash] = useState("")
-	const [size, setSize] = useState("")
-	const [type, setType] = useState(1)
+export default function Formulary(){
+	const [clearForm, setClearForm] = useState(false)
+	const [error, setError] = useState([])
+	const [success, setSuccess] = useState(false)
+	const [title, setTitle] = useState('')
+	const [message, setMessage] = useState('')
+	const [startDate, setStartDate] = useState('')
+	const [endDate, setEndDate] = useState('')
 	
-	const createHash = () => {
-		let newSize = size.replace(/[^0-9]/ig, '')
-		if(!newSize){
-			newSize = 20
+	const messages = [
+		"Deixe de lado a digitação e de quebra aproveite pra praticar seu inglês.",
+		"Ao lado do campo estará um botão para ativar o microfine e preencher o campo com sua fala, quando terminar.",
+	]
+
+	const formatDate = (value, mutate, key) => {
+		const validated = getDateFromValue(value)
+		mutate(validated ? validated: 'InvalidDate')
+		if(key==0)
+			setStartDate(validated)
+		else
+			setEndDate(validated)
+	}
+	const save = () => {
+		const errors = []
+		if(!title) errors.push('Título é obrigatório.')
+		if(!message) errors.push('Mensagem é obrigatória.')
+		if(!(startDate && startDate !== "InvalidDate")) errors.push('Inicio é obrigatório.')
+		if(!(endDate && endDate !== "InvalidDate")) errors.push('Fim é obrigatório.')
+
+		setError([...errors])
+		
+		if(errors.length === 0){
+			const done = setArticle({title, message, startDate, endDate, id: Date.now()})
+			setSuccess(done)
+			setClearForm(done)
+		} else{
+			setSuccess(false)
 		}
-		setHash(randomBytes(parseInt(newSize)).toString(type === 1 ? "hex": "base64"))
 	}
 
 	return (
 		<Capsule 
-			title="Lista de frases"
-			description="Aplicação react para exercitar conhecimentos e pratica do inglês"
-			keywords="SPA, speech, english, practice, web developer, english test, speaking english, english exercise, migrate language, pratique inglês, mardozux"
+			title="Formulário por voz"
+			description="Utilize sua fala para preencher campos do formulário, também crie uma chave aleatória."
+			path="formulario"
+			displayFooter={true}
 			>
-			<main className="scape-sidebar">
-				<Recognizer>
-					<SpeechInput type="text" title="Titúlo" disabled={false} printNote={true} hasLabel={true} />
-				</Recognizer>
-				<Recognizer>
-					<SpeechInput type="textarea" title="Mensagem" disabled={false} printNote={true} hasLabel={true} />
-				</Recognizer>
+			<section className="flex-center full-height">
+				<article>
+					<Card title="Campos preenchidos por fala" message={messages} />
+				</article>
+				<Form>
+					{error.length > 0 ? 
+					<Alert variant="danger"  onClose={() => setError([])} dismissible>
+						<p>Por favor corriga os erros abaixo:</p>
+						<ul>
+							{error.map((e,i) => <li key={i}>{e}</li>)}
+						</ul>
+					</Alert> 
+					: (
+						success ? 
+						<Alert variant="success"  onClose={() => setSuccess(false)} dismissible>
+							Formulário salvo com sucesso.
+						</Alert> 
+						: ''
+					)}
+					<Recognizer isMany={false}>
+						<SpeechInput 
+							type="text"
+							title="Título"
+							clearField={clearForm}
+							clearOnEnd={true}
+							refreshOrigin={value => setTitle(value) }
+							callback={value => setTitle(value)}
+							disabled={false}
+							printNote={true}
+							hasLabel={true}
+						/>
+					</Recognizer>
+					<Recognizer isMany={false}>
+						<SpeechInput
+							type="text"
+							title="Inicio"
+							clearField={clearForm}
+							clearOnEnd={true}
+							refreshOrigin={value => setStartDate(value) }
+							callback={(value, mutate) => formatDate(value, mutate, 0)}
+							disabled={false}
+							printNote={true}
+							hasLabel={true}
+						/>
+					</Recognizer>
+					<Recognizer isMany={false}>
+						<SpeechInput
+							type="text"
+							title="Fim"
+							clearField={clearForm}
+							clearOnEnd={true}
+							refreshOrigin={value => setEndDate(value) }
+							callback={(value, mutate) => formatDate(value, mutate, 1)}
+							disabled={false}
+							printNote={true}
+							hasLabel={true}
+						/>
+					</Recognizer>
+					<Recognizer>
+						<SpeechInput
+							type="textarea"
+							title="Mensagem"
+							clearField={clearForm}
+							clearOnEnd={true}
+							refreshOrigin={value => setMessage(value) }
+							callback={value => setMessage(value)}
+							disabled={false}
+							printNote={true}
+							hasLabel={true}
+						/>
+					</Recognizer>
+				</Form>
 
-				<Row>
-					<Form.Label>Texto Randomico</Form.Label>
-					<Col md="8">
-						<FormControl value={hash} placeholder="Create Hash" disabled={true} />
-					</Col>
-					<Col>
-						<Recognizer isMany={false}>
-							<SpeechInput type="text" title="Tamanho do hash" disabled={false} callback={(value) => setSize(value)} printNote={false} hasLabel={false} />
-						</Recognizer>
-					</Col>
-					<Col>
-						<DropdownButton variant="outline-secondary" title={type === 1 ? 'Hex': 'Base64'} id="input-group-dropdown-1">
-							<Dropdown.Item onClick={() => setType(1)}>Hex</Dropdown.Item>
-							<Dropdown.Item onClick={() => setType(2)}>base64</Dropdown.Item>
-						</DropdownButton>
-					</Col>
-					<Col>
-						<Button variant="primary" type="button" onClick={createHash}>Criar hash</Button>
-					</Col>
-				</Row>
-			</main>
+				<Button variant="primary" type="button" className="mt-4" onClick={save}>Salvar</Button>
+			</section>
 		</Capsule>
 	)
 }

@@ -33,26 +33,26 @@ export default function Tips(){
 	]
 
 	return (
-		<Container>
-				{wordsHR.map((item, index) => {
-					return (
-						<Row key={index}>
-							<h3>{item.title}</h3>
-							<Table striped bordered hover>
-								<thead>
-									<tr>
-										{item.cols.map(col => <th key={col}>{col}</th>)}
-									</tr>
-								</thead>
-								<tbody>
-									{item.rows.map((row, index2) => {
-										return (<tr key={index2}>{row.map(r => <td key={r}>{r}</td>)}</tr>)
-									})}
-								</tbody>
-							</Table>
-						</Row>
-					)
-				})}
-		</Container>
+		<section className="mb-60">
+			{wordsHR.map((item, index) => {
+				return (
+					<Row className="mh-20" key={index}>
+						<h3>{item.title}</h3>
+						<Table striped bordered hover className="table-responsive">
+							<thead>
+								<tr>
+									{item.cols.map((col, i) => <th key={i}>{col}</th>)}
+								</tr>
+							</thead>
+							<tbody>
+								{item.rows.map((row, index2) => {
+									return (<tr key={index2}>{row.map(r => <td key={r}>{r}</td>)}</tr>)
+								})}
+							</tbody>
+						</Table>
+					</Row>
+				)
+			})}
+		</section>
 	)
 }

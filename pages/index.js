@@ -1,11 +1,8 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'font-awesome/css/font-awesome.min.css'
-
 // import Image from 'next/image'
 // import styles from '../styles/Home.module.css'
+import React from "react";
 
 import {Row} from "react-bootstrap";
-
 import Card from '../components/Card'
 import Recognizer from '../components/Recognizer'
 import Speech from "../components/Speech";
@@ -46,31 +43,28 @@ export default function Home() {
 
 	return (
 		<Capsule
-			title="Pratique sua fala"
-			description="Aplicação react para exercitar conhecimentos e pratica do inglês"
-			keywords="speech, english, practice, web developer, english test, speaking english, migrate language, pratique inglês"
+			title="Pratique sua pronuncia do inglês"
+			description="Aplicação para praticar e melhorar a pronunciação do inglês"
+			path=""
+			displayFooter={true}
 		>
-			<div className="flex-center" id="block-speech">
-				<h2>Pratique sua fala</h2>
-				<Row className="">
+			<article className="flex-center full-height" id="block-speech">
+				<Row>
 					<Recognizer>
 						<Speech />
 					</Recognizer>
 				</Row>
-				<a href="#block-cards" title="Missão">Missão</a>
-			</div>
+			</article>
 			
-			<div className="flex-center" id="block-cards">
+			<article className="flex-center" id="block-cards">
 				<Row>
 					{cards.map(c => <Card key={c.title} title={c.title} message={c.message} />)}
 				</Row>
-				<a href="#block-tips" title="Dicas">Dicas</a>
-			</div>
+			</article>
 
-			<div className="flex-center" id="block-tips">
+			<article className="flex-center" id="block-tips">
 				<Tips />
-				<a href="#block-speech" title="Pratique">Pratique</a>
-			</div>
+			</article>
 			
 		</Capsule>
 	)
