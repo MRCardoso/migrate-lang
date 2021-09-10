@@ -1,7 +1,7 @@
 import React from "react";
 import Link from 'next/link'
 import Image from 'next/image'
-import { Container, Nav, Navbar, Button } from "react-bootstrap"
+import { Container, Nav, Navbar } from "react-bootstrap"
 import Lang from "./Lang"
 
 export default function Sidebar({activeScroll}) {

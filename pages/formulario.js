@@ -61,7 +61,7 @@ export default function Formulary(){
 				<Form>
 					{error.length > 0 ? 
 					<Alert variant="danger"  onClose={() => setError([])} dismissible>
-						<p>Por favor corriga os erros abaixo:</p>
+						Por favor corriga os erros abaixo:
 						<ul>
 							{error.map((e,i) => <li key={i}>{e}</li>)}
 						</ul>
@@ -127,7 +127,7 @@ export default function Formulary(){
 					</Recognizer>
 				</Form>
 
-				<Button variant="primary" type="button" className="mt-4" onClick={save}>Salvar</Button>
+				<Button variant="primary" type="button" aria-label="Salvar" className="mt-4" onClick={save}>Salvar</Button>
 			</section>
 		</Capsule>
 	)

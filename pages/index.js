@@ -57,9 +57,7 @@ export default function Home() {
 			</article>
 			
 			<article className="flex-center" id="block-cards">
-				<Row>
-					{cards.map(c => <Card key={c.title} title={c.title} message={c.message} />)}
-				</Row>
+				{cards.map(c => <Card key={c.title} title={c.title} message={c.message} />)}
 			</article>
 
 			<article className="flex-center" id="block-tips">

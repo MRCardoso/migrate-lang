@@ -27,7 +27,7 @@ export default function Phrase(){
 						return (
 							<div key={index} className="list flex-between">
 								<div>{word}</div>
-								<Button variant="danger" onClick={() => onRemove(word)}>
+								<Button variant="danger" aria-label="Remover frase" onClick={() => onRemove(word)}>
 									<i className="fa fa-times-circle"></i>
 								</Button>
 							</div>

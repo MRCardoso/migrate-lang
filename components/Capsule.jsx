@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react'
 export default function Capsule(props) {
 	const url = canonicalName(props.path)
 	const displaySidebar = (typeof props.displaySidebar === "undefined" ? true : props.displaySidebar)
+	const displayTitle = (typeof props.displayTitle === "undefined" ? true : props.displayTitle)
 	const [activeScroll, setActiveScroll] = useState(false)
 
 	useEffect(() => {
@@ -62,11 +63,11 @@ export default function Capsule(props) {
 			{displaySidebar ? <Sidebar activeScroll={activeScroll} /> : ''}
 			
 			<main className="container" id="app">
-				{displaySidebar? <header className="scape-sidebar"><h1>{props.title}</h1></header> :''}
+				{displayTitle? <header className="scape-sidebar"><h1>{props.title}</h1></header> :''}
             	{props.children}
 			</main>
 			
-			<button type="button" onClick={scrollTop} title="Pratique" className={`back-top ${activeScroll ? 'on-top' : ''}`}>
+			<button type="button" onClick={scrollTop} aria-label="Voltar ao topo" title="Voltar ao topo" className={`back-top ${activeScroll ? 'on-top' : ''}`}>
 				<i className="fa fa-chevron-up"></i>
 			</button>
 			{props.displayFooter? <Footer /> : ''}

@@ -34,7 +34,7 @@ export default function Article(){
                                 <span>
                                     <small>{item.startDate}</small> à <small>{item.endDate}</small>
                                 </span>
-                                <Button variant="danger" size="sm" onClick={() => onRemove(item.id)}>
+                                <Button variant="danger" aria-label="Remover artigo" size="sm" onClick={() => onRemove(item.id)}>
 									<i className="fa fa-times-circle"></i>
 								</Button>
 							</article>

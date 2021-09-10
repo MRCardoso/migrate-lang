@@ -5,6 +5,8 @@ import React from "react";
 import Capsule from '../components/Capsule';
 import Link from 'next/link'
 import Image from 'next/image'
+import Card from "../components/Card";
+import { CardGroup } from "react-bootstrap";
 
 export default function Home(props) {
 	
@@ -17,36 +19,35 @@ export default function Home(props) {
 			description={`${props.github.name} ${props.github.bio}`}
 			path=""
 			displayFooter={true}
+            displayTitle={false}
 		>
-			<section className="fiex-center full-height">
-                <div className="flex-inline flex-start">
-                    <div className="image">
-                        <Image
-                            loader={loader}
-                            src="/logo.png"
-                            alt="Logo Marca"
-                            layout="fill"
-                            />
-                    </div>
-                    <aside style={{marginLeft: '12px'}}>
-                        <h4>{props.github.bio}</h4>
-                        <div>
-                            <Link href={props.github.html_url}>
-                                <a title="GitHub pessoal" target="_blank" rel="noreferrer">
-                                    <i className="fa fa-github"></i>
-                                    {props.github.login}
-                                </a>
-                            </Link>
-                        </div>
-                        <div>
-                            {props.github.public_repos} Repositórios
-                        </div>
-                        <div><i className="fa fa-twitter"></i>{props.github.twitter_username}</div>
-                    </aside>
-
+			<section className="flex-about">
+                <div className="image">
+                    <Image
+                        loader={loader}
+                        src="/logo.png"
+                        alt="Logo Marca"
+                        layout="fill"
+                        />
                 </div>
+                <h1>{props.github.name}</h1>
+                <aside>
+                    <h4>{props.github.bio}</h4>
+                    <div>
+                        <Link href={props.github.html_url}>
+                            <a title="GitHub pessoal" target="_blank" rel="noreferrer">
+                                <i className="fa fa-github"></i> {props.github.login}
+                            </a>
+                        </Link>
+                    </div>
+                    <div>
+                        {props.github.public_repos} Repositórios
+                    </div>
+                    <div>
+                        <i className="fa fa-twitter"></i>{props.github.twitter_username}
+                    </div>
+                </aside>
 			</section>
-            
 		</Capsule>
 	)
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import {FormControl, DropdownButton, Button, Dropdown, Row, Col, InputGroup} from 'react-bootstrap'
+import {FormControl, DropdownButton, Button, Dropdown, Row, Col, InputGroup, Form} from 'react-bootstrap'
 import Capsule from '../components/Capsule'
 import Recognizer from "../components/Recognizer"
 import SpeechInput from "../components/SpeechInput"
@@ -51,26 +51,28 @@ export default function Random(){
                     {showMessage === true ? <span className="alert alert-success mt-4 text-center">Texto copiado.</span> : ''}
                     <Row>
                         <Col md="8">
+                            <Form.Label>Hash gerado</Form.Label>
                             <InputGroup className="mb-2">
-                                <InputGroup.Text onClick={() => copyText()}>
+                                <InputGroup.Text className="btn-info text-white" onClick={() => copyText()}>
                                     <i className="fa fa-copy"></i>
                                 </InputGroup.Text>
-                                <FormControl value={hash} placeholder="Create Hash" disabled={true} />
+                                <FormControl value={hash} placeholder="Hash gerado" disabled={true} />
                             </InputGroup>
                         </Col>
                         <Col>
                             <Recognizer isMany={false}>
-                                <SpeechInput type="text" title="Tamanho do hash" disabled={false} callback={(value) => setSize(value)} printNote={false} hasLabel={false} />
+                                <SpeechInput type="text" title="Tamanho" disabled={false} callback={(value) => setSize(value)} printNote={false} hasLabel={true} />
                             </Recognizer>
                         </Col>
                         <Col>
-                            <DropdownButton variant="outline-secondary" title={type === 1 ? 'Hex': 'Base64'} id="input-group-dropdown-1">
+                            <Form.Label className="text-right">Formato</Form.Label>
+                            <DropdownButton variant="outline-secondary" title={type === 1 ? 'Hex': 'Base64'}>
                                 <Dropdown.Item onClick={() => setType(1)}>Hex</Dropdown.Item>
                                 <Dropdown.Item onClick={() => setType(2)}>base64</Dropdown.Item>
                             </DropdownButton>
                         </Col>
                         <Col>
-                            <Button variant="primary" type="button" onClick={createHash}>Criar hash</Button>
+                            <Button variant="primary" type="button" aria-label="Criar hash" onClick={createHash}>Criar hash</Button>
                         </Col>
                     </Row>
                 </div>
@@ -90,7 +92,7 @@ export default function Random(){
                             </Recognizer>
                         </Col>
                         <Col>
-                            {number? <button type="button" className="button-circle">{number}</button>: ''}
+                            {number? <button type="button" aria-label="Valor sorteado" className="button-circle">{number}</button>: ''}
                         </Col>
                     </Row>
                 </div>

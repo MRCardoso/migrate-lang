@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Form } from 'react-bootstrap'
 import {copy} from '../services/utils'
 
 export default function Speech(props){
@@ -14,10 +15,11 @@ export default function Speech(props){
     }
     return (
         <React.Fragment>
-            <div className="flex-inline">
-                <textarea className="textarea" rows="4" onChange={e => setPhrase(e.target.value)} value={phrase}></textarea> 
-            </div>
-
+            <Form.Group className="mb-3" controlId="content-to-compare">
+                <Form.Label>Digite uma frase e pratique sua pronuncia</Form.Label>
+                <Form.Control as="textarea" rows={4} onChange={e => setPhrase(e.target.value)} value={phrase} />
+            </Form.Group>
+            
             {showMessage === true ? <span className="alert alert-success mt-4 text-center">Texto copiado.</span> : ''}
             
             <div className="flex-inline">
@@ -25,13 +27,13 @@ export default function Speech(props){
                     <p>{note? note: "Clique e fale"}</p>
                 </div>
                 <div className="box-buttons">
-                    <button className="button-circle" type="button" onClick={() => setIsListining(prevState => !prevState)}>
+                    <button className="button-circle" aria-label="Ativar/desativar fala" type="button" onClick={() => setIsListining(prevState => !prevState)}>
                         { isListning ? <i className="fa fa-stop-circle"></i> : <i className="fa fa-microphone"></i>}
                     </button>
-                    <button className="button-circle" type="button" onClick={copyText}>
+                    <button className="button-circle" type="button" aria-label="Copiar texto" onClick={copyText}>
                         <i className="fa fa-copy"></i>
                     </button>
-                    <button className={`button-circle ${isListning || !note? 'circle-disable': ''}`} type="button"  onClick={handleSaveNote} disabled={isListning || !note}>
+                    <button className={`button-circle ${isListning || !note? 'circle-disable': ''}`} type="button" aria-label="Salvar texto" onClick={handleSaveNote} disabled={isListning || !note}>
                         <i className="fa fa-save"></i>
                     </button>
                 </div>

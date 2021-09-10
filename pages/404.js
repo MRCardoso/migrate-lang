@@ -9,6 +9,7 @@ export default function Error404(){
 			path="404"
 			displaySidebar={false}
 			displayFooter={false}
+            displayTitle={false}
             >
 
             <section style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column'}}>
