@@ -7,5 +7,5 @@ export const keywords = (extraKeys = []) => {
 }
 
 export const canonicalName = (path = '') => {
-    return `https://migrate-lang.vercel.app/${path || ''}`
+    return `https://megrolang.com.br/${path || ''}`
 }
