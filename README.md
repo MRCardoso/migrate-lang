@@ -11,7 +11,7 @@ From this pain was born this solution "megrolang.com.br", the idea is, you click
 learning doesn't have to be boring, if you learn playing.
 
 * **Deployment:** https://vercel.com/
-* **URL:** https://megrolang.com.br/
+* **URL:** https://migrate-lang.vercel.app/
 
 Contact from social midia, sugestions or constructive criticism will be welcome
 * **Linkedin: ** https://www.linkedin.com/in/mrcardoso/
