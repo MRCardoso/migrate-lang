@@ -25,7 +25,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 		}
 		return false
 	}
-	if(!currentPath) paths.push({uri: '#sobre', label: "Sobre"})
+	if(!currentPath) paths.push({uri: '#contato', label: "Contato"})
 
 	return (
 		<header>

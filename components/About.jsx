@@ -44,7 +44,7 @@ export default function About() {
     }
     
 	return (
-        <section className="flex-about" id="sobre">
+        <section className="flex-about" id="contato">
             <div className="image">
                 <Image
                     loader={loader}

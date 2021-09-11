@@ -61,6 +61,7 @@ export default function Capsule(props) {
 				<meta name="twitter:creator" content="@mus2cardoso" />
                 
 				<link rel="icon" href="/favicon.ico" />
+				<script data-ad-client="ca-pub-4005388148768290" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 			</Head>
 			
 			{displaySidebar ? <Sidebar activeScroll={activeScroll} currentPath={props.path} /> : ''}
