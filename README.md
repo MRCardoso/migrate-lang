@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Web Application focused in the practice of english
 
 I have a need, learn english and recover a lot of time thrown in the trash "waiting for it...".
@@ -13,10 +11,13 @@ learning doesn't have to be boring, if you learn playing.
 * **Deployment:** https://vercel.com/
 * **URL:** https://megrolang.com.br/
 
-Contact from social midia, sugestions or constructive criticism will be welcome
-* **Linkedin: ** https://www.linkedin.com/in/mrcardoso/
-* **instagram: ** https://www.instagram.com/mardozux/
+Contact by social midia, sugestions or constructive criticism will be welcome
+* **Linkedin:** https://www.linkedin.com/in/mrcardoso/
+* **instagram:** https://www.instagram.com/mardozux/
 
 Yes, the name starts with "me", why you future belongs only to you.
 
 But pronounce the "and" forcefully, like the cat🐱 "meeeeallll"
+
+---
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
