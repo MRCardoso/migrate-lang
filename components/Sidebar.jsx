@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Container, Nav, Navbar } from "react-bootstrap"
 import Lang from "./Lang"
 
-export default function Sidebar({activeScroll}) {
+export default function Sidebar({activeScroll, currentPath}) {
 
 	const thirdPart = [
         {url: 'https://www.linkedin.com/in/mrcardoso/', icon: 'linkedin', label: "Linkedin"},
@@ -18,8 +18,14 @@ export default function Sidebar({activeScroll}) {
 		{uri: '/frases', label: 'Frases'},
 		{uri: '/artigos', label: 'Artigos'},
 		{uri: '/randomize', label: 'Randomize'},
-		{uri: '/sobre', label: 'Sobre'},
 	]
+	const isCurrentLink = (value) => {
+		if(currentPath){
+			return new RegExp(currentPath).test(value)
+		}
+		return false
+	}
+	if(!currentPath) paths.push({uri: '#sobre', label: "Sobre"})
 
 	return (
 		<header>
@@ -40,8 +46,8 @@ export default function Sidebar({activeScroll}) {
 						<Nav className="me-auto">
 							{paths.map(p => {
 								return (
-									<Link key={p.uri} href={p.uri} className="active">
-										<a className="nav-link">{p.label}</a>
+									<Link key={p.uri} href={p.uri}>
+										<a className={'nav-link '+(isCurrentLink(p.uri) ? 'active-link' : '')}>{p.label}</a>
 									</Link>
 								)
 							})}

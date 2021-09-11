@@ -72,7 +72,7 @@ export default function Random(){
                             </DropdownButton>
                         </Col>
                         <Col>
-                            <Button variant="primary" type="button" aria-label="Criar hash" onClick={createHash}>Criar hash</Button>
+                            <Button variant="primary" type="button" aria-label="Criar hash" onClick={createHash}>Gerar hash</Button>
                         </Col>
                     </Row>
                 </div>

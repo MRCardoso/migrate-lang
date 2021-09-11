@@ -1,27 +1,10 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: #ECF0F1 !important;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
 :root{
-  --bg-dark: hsl(257, 64%, 49%);
+  --bg-dark: #5a2dcd;
   --bg-light: #7752d4;
+  --bg-vivid: #EAEBFD;
   --button-green: #28a745;
   --border-black: #2D2D2D;
-  --bg-black: #111; 
+  --bg-black: #29292A; 
   --bg-white: #fEfEfE; 
   --text-light: #FFF; 
   --text-light-2: #EDEDEF; 
@@ -35,6 +18,24 @@ a {
       0 2px 23px 0 rgba(0,0,0, 0.1),
       0 2px 49px 0 rgba(0,0,0, 0.6);
 }
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: var(--bg-vivid) !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .scape-sidebar{
   margin-top: 120px;
 }
@@ -55,6 +56,9 @@ a {
   transition: all ease 0.5s;
 }
 
+.navbar-light .navbar-nav .nav-link{
+  color: var(--bg-black) !important;
+}
 .btn-primary{
   background: var(--bg-light) !important;
   color: var(--text-light) !important;
@@ -62,9 +66,15 @@ a {
 .black-purple{
   background: var(--bg-light) !important;
   color: var(--text-light) !important;
+  border-bottom: 1px solid var(--bg-white);
 }
 
-.black-purple a.nav-link, .black-purple a[rel="noreferrer"]{
+.navbar-light .navbar-nav .active-link{
+  font-weight: bold;
+  border-bottom: 1px solid var(--bg-light);
+}
+
+.black-purple .navbar-nav .nav-link, .black-purple a[rel="noreferrer"]{
   color: var(--text-light) !important;
 }
 .mb-60{
@@ -73,12 +83,42 @@ a {
 .mh-20{
   margin: 0 20px !important;
 }
+
+.loading{
+  display: flex;
+  font-weight: bold;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  color: var(--bg-dark);
+}
+
 .flex-about{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  color: var(--text-light);
+  background: linear-gradient(to top, var(--bg-dark), transparent);
+}
+
+.about-text{
+  width: 50%;
+  padding: 8px;
+  font-weight: bold;
+}
+.flip-leave-active {
+  animation: flip-out 0.3s ease;
+}
+.flex-about a{
+  color: var(--text-light);
+  text-decoration: none;
+}
+.flex-about a:hover{
+  color: var(--text-light);
+  text-decoration: underline;
 }
 .flex-center{
   display: flex;
@@ -92,6 +132,9 @@ a {
   height: 100vh;
 }
 
+.flex-vertical{
+  flex-direction: column;
+}
 .flex-inline{
   width: 60%;
   border-radius: 4px;
@@ -132,12 +175,12 @@ a {
   background-color: var(--bg-dark);
   border: none;
   color: white;
-  padding: 8px 20px;
+  padding: 8px 14px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 32px;
-  margin: 4px 2px;
+  font-size: 16px;
+  margin: 2px 2px;
   border-radius: 50%;
 }
 
@@ -193,19 +236,6 @@ footer.footer{
 .informations{
   list-style: none;
 }
-.links{
-  display: flex;
-  flex-direction: row;
-}
-.links > a{
-  color: var(--text-light);
-  text-decoration: none;
-  margin: 0 8px;
-  font-size: 20px
-}
-.links a:hover{
-  color: var(--bg-light)
-}
 
 .links-outline > a{
   color: var(--bg-dark);
@@ -232,9 +262,9 @@ input:focus, textarea:focus, select:focus{
 
 .box-2{
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* text-align: center; */
   margin: 34px;
   padding: 16px;
   width: 50%;
@@ -242,6 +272,7 @@ input:focus, textarea:focus, select:focus{
   background-color: var(--bg-white);
   box-shadow: inset 0 0 4px var(--border-black);
   border-radius: 4px;
+  word-wrap: break-word;
 }
 
 .back-top{
@@ -266,6 +297,11 @@ input:focus, textarea:focus, select:focus{
   color: var(--text-light-2);
 }
 
+.question{
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+}
 .image{
   position: relative;
   width: 200px;
@@ -296,6 +332,14 @@ input:focus, textarea:focus, select:focus{
   .flex-inline{
     display: flex;
     flex-direction: column;
+  }
+
+  .flex-about{
+    height: auto;
+  }
+  
+  .about-text{
+    width: 90%;
   }
   .table-responsive {
       display: block;

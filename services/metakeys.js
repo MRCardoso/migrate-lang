@@ -7,5 +7,5 @@ export const keywords = (extraKeys = []) => {
 }
 
 export const canonicalName = (path = '') => {
-    return `http://localhost:3000/${path || ''}`
+    return `https://migrate-lang.vercel.app/${path || ''}`
 }

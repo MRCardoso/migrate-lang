@@ -17,7 +17,7 @@ export default function Phrase(){
 	return (
 		<Capsule
 			title="Frase cadastradas"
-			description="Lista com as frases escolhidas pelo usuário para futuros exercicios."
+			description="Lista com as frases escolhidas pelo usuário para futuros exercícios."
 			path="frases"
 			displayFooter={false}
 			>

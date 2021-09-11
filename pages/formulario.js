@@ -127,7 +127,9 @@ export default function Formulary(){
 					</Recognizer>
 				</Form>
 
-				<Button variant="primary" type="button" aria-label="Salvar" className="mt-4" onClick={save}>Salvar</Button>
+				<Button variant="primary" type="button" aria-label="Salvar" className="mt-4" onClick={save}>
+					<i className="fa fa-save"></i> Salvar
+				</Button>
 			</section>
 		</Capsule>
 	)

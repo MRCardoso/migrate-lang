@@ -12,7 +12,7 @@ import Tips from '../components/Tips';
 export default function Home() {
 	const cards = [
 		{
-			title: "Sobre",
+			title: "Objetivo",
 			message: [
 				"Você pode copiar uma frase/palavra no campo texto e praticar algumas palavras que tenha mais dificuldade em falar.",
 				"Você pode salvar as frases que ver úteis para futuras conferências/práticas no dados do seu navegador.",
@@ -36,15 +36,15 @@ export default function Home() {
 			message: [
 				"Como tem sido a muito tempo, os EUA tem geredo tendência e padrões que são espelhadas em todo mundo.",
 				"E muitas vezes vários produtos e serviços que começam a ganhar destaque aqui, já eram coisa antida a muito tempo nos paises de primeiro mundo.",
-				"a verdade e dificil, mas precisa ser dita, se vc não puder se aprofundar em algum porque o inglês e um empecilho"
+				"a verdade e difícil, mas precisa ser dita, se vc não puder se aprofundar em algum porque o inglês e um empecilho"
 			]
 		},
 	]
 
 	return (
 		<Capsule
-			title="Pratique sua pronuncia do inglês"
-			description="Aplicação para praticar e melhorar a pronunciação do inglês"
+			title="Pratique sua pronúncia do inglês"
+			description="Aplicação para praticar e melhorar a pronunciação do inglês, rumo a proficiência."
 			path=""
 			displayFooter={true}
 		>
