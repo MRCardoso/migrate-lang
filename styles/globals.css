@@ -149,10 +149,6 @@ a {
   justify-content: flex-start !important;
 }
 
-.box-buttons{
-  display: flex;
-  flex-direction: column;
-}
 .flex{
   display: flex;
 }
@@ -174,7 +170,8 @@ a {
 .button-circle {
   background-color: var(--bg-dark);
   border: none;
-  color: white;
+  /* background-color: transparent; */
+  color: var(--bg-white);
   padding: 8px 14px;
   text-align: center;
   text-decoration: none;
@@ -266,13 +263,35 @@ input:focus, textarea:focus, select:focus{
   /* justify-content: center; */
   /* text-align: center; */
   margin: 34px;
-  padding: 16px;
+  padding: 8px;
   width: 50%;
   height: 200px;
   background-color: var(--bg-white);
   box-shadow: inset 0 0 4px var(--border-black);
   border-radius: 4px;
   word-wrap: break-word;
+}
+
+.box-recognizer{
+  /* padding-bottom: 0 !important; */
+  position: relative;
+  flex-direction: column;
+}
+.box-content{
+  flex: 1;
+}
+
+.box-buttons{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.box-notify {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  border-radius: 50%;
 }
 
 .back-top{

@@ -20,7 +20,7 @@ export default function Recognizer(props){
 	const [phrase, setPhrase] = useState('')
 	const [note, setNote] = useState('')
 	const [saveNotes, setSaveNotes] = useState([])
-	const [phraseOk, setPhraseOk] = useState(null)
+	const [phraseReason, setPhraseReason] = useState({})
 	const [startRecord, setStartRecord] = useState(null)
 	
 	useEffect(() => {
@@ -39,7 +39,17 @@ export default function Recognizer(props){
 				}
 				return wd
 			})
-			setPhraseOk(missing.length===0)
+			let reason = {
+				status: false,
+				message: "Lamento, houve alguns erros em sua pronúncia, tente novamente."
+			}
+			if(missing.length===0){
+				reason = {
+					status: true,
+					message: "Maravilha!! sua pronúncia esta certa"
+				}
+			}
+			setPhraseReason(reason)
 		}
 	}
 	
@@ -47,6 +57,7 @@ export default function Recognizer(props){
 		if(isListning){
 			try {
 				setNote('')
+				setPhraseReason({})
 				mic.start()
 				mic.onend = ()=> { mic.start() }
 			} catch (error) {
@@ -107,13 +118,13 @@ export default function Recognizer(props){
 			phrase, 
 			note, 
 			saveNotes, 
-			phraseOk,
+			phraseReason,
 			startRecord,
 			setIsListining,
 			setPhrase,
 			setNote,
 			setSaveNotes,
-			setPhraseOk,
+			setPhraseReason,
 			handleListening,
 			handleSaveNote
 		})}
