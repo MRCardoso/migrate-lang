@@ -8,7 +8,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 	const [colorPicker, setColorPicker] = useState("#EAEBFD")
 	const thirdPart = [
         {url: 'https://www.linkedin.com/in/mrcardoso/', icon: 'linkedin', label: "Linkedin"},
-        {url: 'https://github.com/MRCardoso/migrate-lang/issues', icon: 'git' },
+        {url: 'https://github.com/MRCardoso', icon: 'git' },
         {url: 'https://www.facebook.com/mardozux', icon: 'facebook-square', label: "Página no facebook"},
         {url: 'https://www.instagram.com/mardozux/', icon: 'instagram', label: "Instagram de game developer"},
         {url: 'https://mardozux.itch.io/', icon: 'gamepad', label: "Jogos publicados" },
