@@ -30,12 +30,15 @@ export default function Recognizer(props){
 	
 	const comparePhrases = (transcoder) => {
 		if(phrase && phrase.trim()){
-			const wordTarget = phrase.toLowerCase().replace(/\n/ig, ' ').split(' ').filter(n => n.trim())
+			const wordTarget = phrase.toLowerCase().replace(/\n/ig, ' ').replace(/(\,|\.)/g,'').split(' ').filter(n => n.trim())
 			const wordOrigin = transcoder.toLowerCase().split(' ')
 			const missing = []
+			
 			wordTarget.map((wd, index) =>{
 				if(index in wordOrigin && !(wordOrigin[index] === wd)){
-					missing.push(wd)
+					if(!(/\w\*\*\*/.test(wordOrigin[index]))){
+						missing.push(wd)
+					}
 				}
 				return wd
 			})
@@ -43,7 +46,8 @@ export default function Recognizer(props){
 				status: false,
 				message: "Lamento, sua pronúncia está incorreta, tente novamente."
 			}
-			if(missing.length===0){
+			
+			if(missing.length===0 && wordTarget.length === wordOrigin.length){
 				reason = {
 					status: true,
 					message: "Maravilha!! sua pronúncia está correta"
@@ -107,7 +111,7 @@ export default function Recognizer(props){
 	}
 
 	const handleSaveNote = () => {
-		setWord(note)
+		setWord(phrase)
 		setNote('')
 	}
 

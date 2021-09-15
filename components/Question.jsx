@@ -14,7 +14,7 @@ export default function Question(){
             </Popover>
         }
         >
-            <button type="button" aria-label="Dúvidas?" className="button-circle question">
+            <button type="button" aria-label="Dúvidas?" className="button-circle button-purple question">
                 <i className="fa fa-question-circle"></i>
             </button>
         </OverlayTrigger>

@@ -11,3 +11,8 @@ export const copy = (value) =>{
     }
     return false
 }
+
+export const validateNumber = (value, defValue) => {
+    let newValue = parseInt(value)
+    return (Number.isNaN(newValue)) ? defValue : newValue;
+}

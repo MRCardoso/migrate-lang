@@ -4,7 +4,8 @@
   --bg-vivid: #EAEBFD;
   --button-green: #28a745;
   --border-black: #2D2D2D;
-  --bg-black: #29292A; 
+  --bg-black: #29292A;
+  --bg-grey: #D8D8DF;
   --bg-white: #fEfEfE; 
   --text-light: #FFF; 
   --text-light-2: #EDEDEF; 
@@ -23,7 +24,10 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; 
+}
+
+body{
   background-color: var(--bg-vivid) !important;
 }
 
@@ -50,6 +54,12 @@ a {
 }
 .bg-white{
   background-color: var(--mic-compare);
+}
+.form-control-color{
+  width: 20px !important;
+  padding: 0 !important;
+  margin: 4px;
+  border: none;
 }
 .navbar{
   background: transparent !important;
@@ -173,28 +183,24 @@ a {
 }
 
 .button-circle {
-  background-color: var(--bg-dark);
   border: none;
-  /* background-color: transparent; */
-  color: var(--bg-white);
+  color: var(--bg-black);
   padding: 8px 14px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   margin: 2px 2px;
   border-radius: 50%;
 }
 
-.button-outline{
-  background: transparent;
-  border: none;
-  font-size: 16px;
-  color: var(--bg-dark);
-  margin: 2px;
+.button-purple{
+  background-color: var(--bg-dark);
+  color: var(--bg-white);
 }
-
 .button-circle:hover{
+  background-color: var(--bg-grey);
+}
+.button-purple:hover{
   background-color: var(--bg-light);
 }
 .circle-disable{
@@ -283,20 +289,34 @@ input:focus, textarea:focus, select:focus{
   word-wrap: break-word;
 }
 
-.box-content{
-  flex: 1;
+.speech-container{
+  display: flex;
+  flex-direction: column;
+  margin: 34px 0;
+  padding: 8px;
+  width: 50%;
+  background-color: var(--bg-white);
+  box-shadow: inset 0 0 4px var(--border-black);
+  border-radius: 4px;
+  word-wrap: break-word;
 }
 
-.box-buttons{
-  display: flex;
-  justify-content: flex-end;
+.speech-success{
+  background-color: #28a745;
+  color: var(--bg-white);
+  border-radius: 4px;
+  padding: 2px;
 }
-.box-notify {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border: none;
-  border-radius: 50%;
+
+.speech-danger{
+  background-color: #e24d4d;
+  color: var(--bg-white);
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.right{
+  float: right;
 }
 
 .back-top{

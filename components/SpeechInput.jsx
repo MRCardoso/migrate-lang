@@ -37,11 +37,11 @@ export default function SpeechInput(props){
                 {props.hasLabel? <Form.Label>{props.title}</Form.Label>: ''}
                 <InputGroup className="mb-2">
                     { props.type && props.type === "textarea"
-                    ? <FormControl as="textarea" value={value} rows={3} placeholder={props.placeholder || props.title} onChange={e => refreshValue(e.target.value)} />
-                    : <FormControl value={value} placeholder={props.placeholder || props.title} onChange={e => refreshValue(e.target.value)} />
+                    ? <FormControl as="textarea" value={value} rows={6} placeholder={props.placeholder || props.title} onChange={e => refreshValue(e.target.value)} disabled={props.disabled} />
+                    : <FormControl value={value} placeholder={props.placeholder || props.title} onChange={e => refreshValue(e.target.value)} disabled={props.disabled} />
                     }
-                    <InputGroup.Text onClick={() => setIsListining(prevState => !prevState)}>
-                        { isListning ? <i className="fa fa-stop-circle"></i> : <i className="fa fa-microphone"></i>}
+                    <InputGroup.Text onClick={() => setIsListining(prevState => !prevState)} className={isListning? 'button-purple text-white': ''}>
+                        { isListning ? <i className="fa fa-stop"></i> : <i className="fa fa-microphone"></i>}
                     </InputGroup.Text>
                 </InputGroup>
                 {props.printNote? <Form.Text className="Form.text-muted">{note}</Form.Text>: ''}
