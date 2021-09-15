@@ -37,8 +37,8 @@ export default function SpeechInput(props){
                 {props.hasLabel? <Form.Label>{props.title}</Form.Label>: ''}
                 <InputGroup className="mb-2">
                     { props.type && props.type === "textarea"
-                    ? <FormControl as="textarea" value={value} rows={3} placeholder={props.title} onChange={e => refreshValue(e.target.value)} />
-                    : <FormControl value={value} placeholder={props.title} onChange={e => refreshValue(e.target.value)} />
+                    ? <FormControl as="textarea" value={value} rows={3} placeholder={props.placeholder || props.title} onChange={e => refreshValue(e.target.value)} />
+                    : <FormControl value={value} placeholder={props.placeholder || props.title} onChange={e => refreshValue(e.target.value)} />
                     }
                     <InputGroup.Text onClick={() => setIsListining(prevState => !prevState)}>
                         { isListning ? <i className="fa fa-stop-circle"></i> : <i className="fa fa-microphone"></i>}

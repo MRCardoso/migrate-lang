@@ -41,12 +41,12 @@ export default function Recognizer(props){
 			})
 			let reason = {
 				status: false,
-				message: "Lamento, houve alguns erros em sua pronúncia, tente novamente."
+				message: "Lamento, sua pronúncia está incorreta, tente novamente."
 			}
 			if(missing.length===0){
 				reason = {
 					status: true,
-					message: "Maravilha!! sua pronúncia esta certa"
+					message: "Maravilha!! sua pronúncia está correta"
 				}
 			}
 			setPhraseReason(reason)

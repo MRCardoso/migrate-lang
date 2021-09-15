@@ -5,6 +5,7 @@ import Recognizer from "../components/Recognizer"
 import SpeechInput from "../components/SpeechInput"
 import {randomBytes} from "crypto"
 import {shuffle, rand, copy} from '../services/utils' 
+import ToastModal from "../components/ToastModal"
 
 export default function Random(){
 	const [hash, setHash] = useState("")
@@ -12,6 +13,7 @@ export default function Random(){
 	const [type, setType] = useState(1)
     const [number, setNumber] = useState("")
     const [showMessage, setShowMessage] = useState(false)
+    const [colorPicker, setColorPicker] = useState("#FFF")
 
 	const createHash = () => {
 		let newSize = size.replace(/[^0-9]/ig, '')
@@ -35,28 +37,27 @@ export default function Random(){
     const copyText = () =>{
         if(copy(hash)){
             setShowMessage(true)
-            setTimeout(() => {setShowMessage(false)}, 500);
         }
     }
 
 	return (
         <Capsule 
-			title="Gerador de texto aleatorio"
-			description="Gerador de texto randomicos que podem ser usaddos pra senhas e chaves complexas."
+			title="Algumas funcionalidade úteis"
+			description="Gerador de texto randomicos e outras utilidades."
 			path="randomize"
 			displayFooter={true}
 			>
+            <ToastModal message={showMessage? 'texto copiado para a área de transferência': null} onClose={() => setShowMessage(false)} />
             <section className="flex-center full-height">
                 <div className="article">
-                    {showMessage === true ? <span className="alert alert-success mt-4 text-center">Texto copiado.</span> : ''}
                     <Row>
                         <Col md="8">
-                            <Form.Label>Hash gerado</Form.Label>
+                            <Form.Label>Gerador de Texto aleatório</Form.Label>
                             <InputGroup className="mb-2">
                                 <InputGroup.Text className="btn-info text-white" onClick={() => copyText()}>
                                     <i className="fa fa-copy"></i>
                                 </InputGroup.Text>
-                                <FormControl value={hash} placeholder="Hash gerado" disabled={true} />
+                                <FormControl value={hash} placeholder="Seu código aleatorio" disabled={true} />
                             </InputGroup>
                         </Col>
                         <Col>
@@ -83,7 +84,8 @@ export default function Random(){
                             <Recognizer isMany={false}>
                                 <SpeechInput
                                     type="text"
-                                    title="Diga números aleatorios e seguida embaralhamos e sorteamos o vencedor."
+                                    title="Sorteio um número"
+                                    placeholder="Diga números aleatorios e seguida embaralhamos e sorteamos o vencedor."
                                     disabled={true}
                                     callback={(value) => shuffleChoose(value)}
                                     printNote={true}
@@ -95,6 +97,10 @@ export default function Random(){
                             {number? <button type="button" aria-label="Valor sorteado" className="button-circle">{number}</button>: ''}
                         </Col>
                     </Row>
+                </div>
+                <div className="article mb-4" style={{background: colorPicker}}>
+                    <Form.Label htmlFor="exampleColorInput">Paleta de cores</Form.Label>
+                    <Form.Control type="color" value={colorPicker} onChange={e => setColorPicker(e.target.value)} title="Escolha uma cor" />
                 </div>
             </section>
         </Capsule>

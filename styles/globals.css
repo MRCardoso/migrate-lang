@@ -55,7 +55,12 @@ a {
   background: transparent !important;
   transition: all ease 0.5s;
 }
-
+.toast-container{
+  z-index: 1;
+}
+.toast-header, .toast-body{
+  color: var(--bg-white);
+}
 .navbar-light .navbar-nav .nav-link{
   color: var(--bg-black) !important;
 }
@@ -181,6 +186,14 @@ a {
   border-radius: 50%;
 }
 
+.button-outline{
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: var(--bg-dark);
+  margin: 2px;
+}
+
 .button-circle:hover{
   background-color: var(--bg-light);
 }
@@ -258,10 +271,8 @@ input:focus, textarea:focus, select:focus{
 }
 
 .box-2{
+  position: relative;
   display: flex;
-  /* align-items: center; */
-  /* justify-content: center; */
-  /* text-align: center; */
   margin: 34px;
   padding: 8px;
   width: 50%;
@@ -272,11 +283,6 @@ input:focus, textarea:focus, select:focus{
   word-wrap: break-word;
 }
 
-.box-recognizer{
-  /* padding-bottom: 0 !important; */
-  position: relative;
-  flex-direction: column;
-}
 .box-content{
   flex: 1;
 }
@@ -284,7 +290,6 @@ input:focus, textarea:focus, select:focus{
 .box-buttons{
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
 }
 .box-notify {
   position: absolute;

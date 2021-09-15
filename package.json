@@ -1,6 +1,6 @@
 {
-  "name": "migrate-lang",
-  "version": "1.5.0",
+  "name": "megrolang",
+  "version": "1.6.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "keywords": [
+    "megrolang",
     "javascript recognizer forms",
     "react app",
     "reactjs",

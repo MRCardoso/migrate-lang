@@ -1,36 +1,34 @@
 import React, { useState } from 'react'
-import { Form, OverlayTrigger,Tooltip } from 'react-bootstrap'
+import { Form, OverlayTrigger, Tooltip} from 'react-bootstrap'
 import {copy} from '../services/utils'
+import ToastModal from './ToastModal'
 
 export default function Speech(props){
     const {setPhrase, phraseReason, setIsListining, isListning, phrase, handleSaveNote, note} = props
     const [showMessage, setShowMessage] = useState(null)
     const copyText = () =>{
         if(copy(note)){
-            setShowMessage("Texto copiado.")
-            setTimeout(() => {
-                setShowMessage(null)
-            }, 1000);
+            setShowMessage("texto copiado para a área de transferência")
         }
     }
 
     const customSave = () => {
         handleSaveNote()
-        setShowMessage("Texto salvo.")
-        setTimeout(() => {
-            setShowMessage(null)
-        }, 1000);
+        setShowMessage("Texto salvo nos dados do navegador")
     }
     return (
         <React.Fragment>
-            {showMessage !== null ? <span className="text-success mt-4">{showMessage}</span> : ''}
+            <ToastModal message={showMessage} onClose={()=> setShowMessage(null)} />
             <div className="flex-inline">
-                <div className="box-2 flex-vertical text-secundary">
-                    <Form.Label>Digite uma frase e compare com sua pronúncia</Form.Label>
-                    <Form.Control as="textarea" rows={6} onChange={e => setPhrase(e.target.value)} value={phrase} placeholder="Digite uma frase e pratique sua pronúncia" />
+                <div className="box-2 flex-vertical">
+                    <Form.Label>Digite algo</Form.Label>
+                    <Form.Control as="textarea" rows={6} onChange={e => setPhrase(e.target.value)} value={phrase} placeholder="Sua voz será comparada com o texto colocado aqui..." />
                 </div>
-                <div className={`box-2 box-recognizer ${phraseReason.status === true? 'text-success': (phraseReason.status === false ? 'text-danger': '')}`}>
-                    <p className="box-content">{note? note: "Sua voz será convertida em texto aqui..."}</p>
+                <div className={`box-2 flex-vertical ${phraseReason.status === true? 'text-success': (phraseReason.status === false ? 'text-danger': '')}`}>
+                    <div className="box-content">
+                        <h6>Diga algo</h6>
+                        {note? note: "Ative o microfone e fale livremente, ou compare com o texto ao lado..."}
+                    </div>
                     <div className="box-buttons">
                         <OverlayTrigger placement="bottom" overlay={<Tooltip>Iniciar/encerrar captura de fala.</Tooltip>}>
                             <button className="button-circle" aria-label="Ativar/desativar fala" type="button" onClick={() => setIsListining(prevState => !prevState)}>

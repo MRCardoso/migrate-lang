@@ -15,9 +15,9 @@ export default function Sidebar({activeScroll, currentPath}) {
     ]
 	const paths = [
 		{uri: '/formulario', label: 'Formulário'},
+		{uri: '/utilidades', label: 'Utilidades'},
 		{uri: '/frases', label: 'Frases'},
 		{uri: '/artigos', label: 'Artigos'},
-		{uri: '/randomize', label: 'Randomize'},
 	]
 	const isCurrentLink = (value) => {
 		if(currentPath){

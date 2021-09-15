@@ -19,17 +19,17 @@ export default function Tips(){
 		},
 		{
 			title: "Verbo to be",
-			cols: ["Pronome", "presente", "Afirmação", "abrev", "negação", "abrev", "pergunta"],
+			cols: ["Pronome", "Possessivo", "presente", "Afirmação", "abrev", "negação", "abrev", "pergunta"],
 			rows: [
-				["I", "am", "I am", "I'm", "I am not", "i'm not", "Am i?"],
-				["He", "is", "He is", "He's", "He is not", "He isn't", "Is he?"],
-				["She", "is", "She is", "She's", "She is not", "She isn't", "Is she?"],
-				["It", "is", "It is", "it's", "It is not", "It isn't", "Is it?"],
-				["We", "Are", "We are", "we're", "We are not", "We aren't", "Are we?"],
-				["You", "Are", "You are", "your're", "You are not", "You aren't", "Are you?"],
-				["They", "Are", "They are", "They're", "They are not", "They aren't", "Are they?"],
+				["I", "My", "am", "I am", "I'm", "I am not", "i'm not", "Am i?"],
+				["He", "His","is", "He is", "He's", "He is not", "He isn't", "Is he?"],
+				["She", "Her", "is", "She is", "She's", "She is not", "She isn't", "Is she?"],
+				["It", "Its", "is", "It is", "it's", "It is not", "It isn't", "Is it?"],
+				["We", "Our", "Are", "We are", "we're", "We are not", "We aren't", "Are we?"],
+				["You", "Your", "Are", "You are", "your're", "You are not", "You aren't", "Are you?"],
+				["They", "Their", "Are", "They are", "They're", "They are not", "They aren't", "Are they?"],
 			]
-		}
+		},
 	]
 
 	return (

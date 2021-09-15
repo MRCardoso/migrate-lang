@@ -67,7 +67,7 @@ export default function Capsule(props) {
 			
 			<main id="app">
 				<section className="container">
-					{displayTitle? <header className="scape-sidebar"><h1>{props.title}</h1></header> :''}
+					{displayTitle? <header><h1>{props.title}</h1></header> :''}
 					{props.children}
 				</section>
 				{!props.path ? <About />: ''}

@@ -7,7 +7,6 @@ export default function Question(){
             <Popover id={`popover-positioned-right`}>
             <Popover.Header as="h3">Dúvidas</Popover.Header>
             <Popover.Body>
-                <p>Sua voz será capturada pelo microfone (caso exista) e será convertida em texto para ver como esta indo sua pronúncia.</p>
                 <p>O botão com o icone <i className="fa fa-microphone"></i> permite Iniciar/encerrar a captura de fala.</p>
                 <p>O botão com o icone <i className="fa fa-copy"></i> permite copiar texto gerado na captura de fala.</p>
                 <p>O botão com o icone <i className="fa fa-save"></i> permite salvar texto gerado na captura de fala.</p>

@@ -6,6 +6,7 @@ import SpeechInput from "../components/SpeechInput";
 import Capsule from '../components/Capsule';
 import Card from '../components/Card';
 import { getDateFromValue, setArticle } from '../services/storage';
+import ToastModal from "../components/ToastModal";
 
 export default function Formulary(){
 	const [clearForm, setClearForm] = useState(false)
@@ -47,6 +48,19 @@ export default function Formulary(){
 		}
 	}
 
+	const renderMessages = () => {
+		if(error.length > 0){
+			return (<ul>{error.map((e,i) => <li key={i}>{e}</li>)}</ul>)
+		}
+		if(success){
+			return "Formulário salvo com sucesso."
+		}
+		return null
+	}
+
+	const renderMessageOut = () => (error.length > 0 ? setError([]) : (success ? setSuccess(false) : null))
+	const renderMessageColor = () => (error.length > 0 ? "danger" : (success ? "success" : "secondary"))
+
 	return (
 		<Capsule 
 			title="Formulário por voz"
@@ -54,29 +68,16 @@ export default function Formulary(){
 			path="formulario"
 			displayFooter={true}
 			>
+			<ToastModal message={renderMessages()} onClose={renderMessageOut} variant={renderMessageColor()} />
+
 			<section className="flex-center full-height">
-				<article>
-					<Card title="Campos preenchidos por fala" message={messages} />
-				</article>
+				<Card title="Campos preenchidos por fala" message={messages} />	
 				<Form>
-					{error.length > 0 ? 
-					<Alert variant="danger"  onClose={() => setError([])} dismissible>
-						Por favor corriga os erros abaixo:
-						<ul>
-							{error.map((e,i) => <li key={i}>{e}</li>)}
-						</ul>
-					</Alert> 
-					: (
-						success ? 
-						<Alert variant="success"  onClose={() => setSuccess(false)} dismissible>
-							Formulário salvo com sucesso.
-						</Alert> 
-						: ''
-					)}
 					<Recognizer isMany={false}>
 						<SpeechInput 
 							type="text"
 							title="Título"
+							placeholder="Defina seu título"
 							clearField={clearForm}
 							clearOnEnd={true}
 							refreshOrigin={value => setTitle(value) }
@@ -90,6 +91,7 @@ export default function Formulary(){
 						<SpeechInput
 							type="text"
 							title="Inicio"
+							placeholder="Ex: january 01 2021"
 							clearField={clearForm}
 							clearOnEnd={true}
 							refreshOrigin={value => setStartDate(value) }
@@ -103,6 +105,7 @@ export default function Formulary(){
 						<SpeechInput
 							type="text"
 							title="Fim"
+							placeholder="Ex: december 31 2021"
 							clearField={clearForm}
 							clearOnEnd={true}
 							refreshOrigin={value => setEndDate(value) }
@@ -116,6 +119,7 @@ export default function Formulary(){
 						<SpeechInput
 							type="textarea"
 							title="Mensagem"
+							placeholder="Defina sua mensagem"
 							clearField={clearForm}
 							clearOnEnd={true}
 							refreshOrigin={value => setMessage(value) }
@@ -128,7 +132,7 @@ export default function Formulary(){
 				</Form>
 
 				<Button variant="primary" type="button" aria-label="Salvar" className="mt-4" onClick={save}>
-					<i className="fa fa-save"></i> Salvar
+					Salvar
 				</Button>
 			</section>
 		</Capsule>
