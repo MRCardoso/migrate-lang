@@ -8,6 +8,7 @@ import Recognizer from '../components/Recognizer'
 import Speech from "../components/Speech";
 import Capsule from '../components/Capsule';
 import Tips from '../components/Tips';
+import Utilities from "../components/Utilidades";
 
 export default function Home() {
 	const cards = [
@@ -49,17 +50,19 @@ export default function Home() {
 			displayFooter={true}
 		>
 			<article className="flex-center mt-4">
-				<Row>
-					<Recognizer>
-						<Speech />
-					</Recognizer>
-				</Row>
+				<Recognizer>
+					<Speech />
+				</Recognizer>
 			</article>
-			
+
 			<article className="flex-center">
 				{cards.map(c => <Card key={c.title} title={c.title} message={c.message} />)}
 			</article>
 
+			<article className="flex-center">
+				<Utilities />
+			</article>
+			
 			<article className="flex-center">
 				<Tips />
 			</article>

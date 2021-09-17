@@ -1,4 +1,5 @@
 import React, {useState, useEffect } from "react";
+import { save } from "../services/collections/phrases";
 import { getLanguage, setWord } from '../services/storage';
 
 
@@ -110,8 +111,10 @@ export default function Recognizer(props){
 		}
 	}
 
-	const handleSaveNote = () => {
-		setWord(phrase)
+	const handleSaveNote = async () => {
+		// setWord(phrase)
+		const value = await save(phrase, phraseReason && phraseReason.status)
+		console.log({value})
 		setNote('')
 	}
 

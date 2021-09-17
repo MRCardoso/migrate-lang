@@ -1,24 +1,23 @@
 import React, { useState } from 'react'
-import { Form, OverlayTrigger, Tooltip, Spinner} from 'react-bootstrap'
+import { Form, OverlayTrigger, Tooltip} from 'react-bootstrap'
+import { useAuth } from '../contexts/AuthContext'
 import {copy} from '../services/utils'
-import ToastModal from './ToastModal'
 
 export default function Speech(props){
     const {setPhrase, phraseReason, setIsListining, isListning, phrase, handleSaveNote, note} = props
-    const [showMessage, setShowMessage] = useState(null)
+    const {setMessager} = useAuth()
     const copyText = () =>{
         if(copy(phrase)){
-            setShowMessage("texto copiado para a área de transferência")
+            setMessager({variant: "success", message: "texto copiado para a área de transferência"})
         }
     }
 
     const customSave = () => {
         handleSaveNote()
-        setShowMessage("Texto salvo nos dados do navegador")
+        setMessager({variant: "success", message: "Texto salvo nos dados do navegador"})
     }
     return (
         <React.Fragment>
-            <ToastModal message={showMessage} onClose={()=> setShowMessage(null)} />
             <div className="speech-container">
                 <Form.Label>Digite algo</Form.Label>
                 <Form.Control as="textarea" className="mb-2" rows={6} onChange={e => setPhrase(e.target.value)} value={phrase} placeholder="Coloque seu texto aqui para ativar os botões abaixo..." />
