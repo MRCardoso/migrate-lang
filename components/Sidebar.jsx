@@ -3,9 +3,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Container, Nav, Navbar, Form} from "react-bootstrap"
 import Lang from "./Lang"
+import User from "./User";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Sidebar({activeScroll, currentPath}) {
 	const [colorPicker, setColorPicker] = useState("#EAEBFD")
+	const {currentUser} = useAuth()
 	const thirdPart = [
         {url: 'https://www.linkedin.com/in/mrcardoso/', icon: 'linkedin', label: "Linkedin"},
         {url: 'https://github.com/MRCardoso', icon: 'git' },
@@ -13,10 +16,7 @@ export default function Sidebar({activeScroll, currentPath}) {
         {url: 'https://www.instagram.com/mardozux/', icon: 'instagram', label: "Instagram de game developer"},
         {url: 'https://mardozux.itch.io/', icon: 'gamepad', label: "Jogos publicados" },
     ]
-	const paths = [
-		{uri: '/utilidades', label: 'Utilidades'},
-		{uri: '/frases', label: 'Frases'},
-	]
+	const paths = [];
 	const isCurrentLink = (value) => {
 		if(currentPath){
 			return new RegExp(currentPath).test(value)
@@ -27,12 +27,20 @@ export default function Sidebar({activeScroll, currentPath}) {
 		document.body.style = `background: ${value} !important`
 		setColorPicker(value)
 	}
-	if(!currentPath) paths.push({uri: '#contato', label: "Contato"})
+	if(!currentPath) {
+		paths.push({uri: '#', label: "Home"})
+		paths.push({uri: '#utilidades', label: "Utilidades"})
+		paths.push({uri: '#contato', label: "Contato"})
+	}
+
+	paths.push({uri: '/frases', label: 'Frases'})
+
+	if(currentUser) paths.push({uri: "/suas-frases", label: "Suas frases"})
 
 	return (
 		<header>
 			<Navbar className={activeScroll ? 'black-purple fixed-top': ''} expand="lg">
-				<Container>
+				<Container fluid>
 					<Link href="/">
 						<a className="navbar-brand">
 						<Image
@@ -65,6 +73,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 						</Nav>
 						<Form.Control type="color" value={colorPicker} onChange={e => setCollor(e.target.value)} title="Escolha uma cor" />
 						<Lang />
+						<User />
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>

@@ -1,15 +1,18 @@
 import React from "react";
-import {Toast, ToastContainer} from 'react-bootstrap'
 
-export default function ToastModal({message, onClose, title="Atenção", variant="success"}){
+export default function ToastModal({message, onClose, title="Atenção", variant="default"}){
     return (
-        <ToastContainer position="top-end" className="p-3">
-            <Toast show={message !== null} onClose={onClose} bg={variant}>
-                <Toast.Header>
-                    <strong className="me-auto">{title}</strong>
-                </Toast.Header>
-                <Toast.Body>{message}</Toast.Body>
-            </Toast>
-        </ToastContainer>
+        (message ?
+            <div className={`my-toast my-toast-${variant||"default"}`}>
+                <header>
+                    <strong>{title}</strong>
+                    <i onClick={onClose} className="clicable fa fa-times"></i>
+                </header>
+                <div>
+                    <p>{message}</p>
+                </div>
+            </div>
+            : ""
+        )
     )
 }

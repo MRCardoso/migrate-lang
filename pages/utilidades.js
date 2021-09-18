@@ -8,7 +8,7 @@ import ToastModal from "../components/ToastModal";
 import {randomBytes} from "crypto"
 import {shuffle, rand, copy, validateNumber} from '../services/utils' 
 
-export default function Formulary(){
+export default function Utilities(){
 	const [hash, setHash] = useState("")
 	const [size, setSize] = useState(20)
 	const [number, setNumber] = useState("")
