@@ -1,5 +1,5 @@
 import app from "../firebase"
-import { getFirestore, collection, getDocs, setDoc, where, query, doc, limit, orderBy, updateDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, setDoc, where, query, doc, limit, orderBy, updateDoc, deleteDoc } from 'firebase/firestore';
 
 const db = getFirestore(app)
 const tableName = "phrases"
@@ -13,6 +13,9 @@ export const list = async () => {
     return response.docs.map(doc => ({id: doc.id, ...doc.data()}))
 }
 
+export const remove = (docid) =>{
+    return deleteDoc((doc(db, tableName, docid)))
+}
 export const save = async (value, reason) => {
     try {
         const hit = (reason===true? 1 : 0)

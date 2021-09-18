@@ -11,11 +11,16 @@ export function useAuth(){
     return useContext(AuthContext)
 }
 
-export default function AuthProvider({children}) {
+export default function AuthProvider({children, recall}) {
     const router = useRouter()
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
-    const [messager, setMessager] = useState(null)
+    const [notify, setNotify] = useState(null)
+
+    const setMessager = (message) => {
+        setNotify(null)
+        setTimeout(() => setNotify(message), 50);
+    }
     
     useEffect(() => {
         const subscribe = loadUser(user => {
@@ -26,6 +31,11 @@ export default function AuthProvider({children}) {
         return subscribe
     }, [])
     
+    useEffect(() => {
+        if( recall && recall.message && recall.variant){
+            setMessager(recall)
+        }
+    }, [recall])
 
     const value = {
         currentUser,
@@ -48,7 +58,7 @@ export default function AuthProvider({children}) {
     return (
         <AuthContext.Provider value={value}>
             {children}
-            <ToastModal message={messager && messager.message} onClose={() => setMessager(null)} variant={messager && messager.variant} />
+            <ToastModal message={notify && notify.message} onClose={() => setNotify(null)} variant={notify && notify.variant} />
         </AuthContext.Provider>
     )
 }

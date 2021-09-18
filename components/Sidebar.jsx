@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Container, Nav, Navbar, Form} from "react-bootstrap"
 import Lang from "./Lang"
-import User from "./User";
+// import User from "./User"
 import { useAuth } from "../contexts/AuthContext";
 
 export default function Sidebar({activeScroll, currentPath}) {
@@ -16,7 +16,8 @@ export default function Sidebar({activeScroll, currentPath}) {
         {url: 'https://www.instagram.com/mardozux/', icon: 'instagram', label: "Instagram de game developer"},
         {url: 'https://mardozux.itch.io/', icon: 'gamepad', label: "Jogos publicados" },
     ]
-	const paths = [];
+	const paths = [{uri: '/frases', label: 'Frases'}];
+	const indexPaths = [];
 	const isCurrentLink = (value) => {
 		if(currentPath){
 			return new RegExp(currentPath).test(value)
@@ -28,19 +29,13 @@ export default function Sidebar({activeScroll, currentPath}) {
 		setColorPicker(value)
 	}
 	if(!currentPath) {
-		paths.push({uri: '#', label: "Home"})
-		paths.push({uri: '#utilidades', label: "Utilidades"})
-		paths.push({uri: '#contato', label: "Contato"})
+		indexPaths.push({uri: '#utilidades', label: "Utilidades"})
+		indexPaths.push({uri: '#contato', label: "Contato"})
 	}
-
-	paths.push({uri: '/frases', label: 'Frases'})
-
-	if(currentUser) paths.push({uri: "/suas-frases", label: "Suas frases"})
-
 	return (
 		<header>
 			<Navbar className={activeScroll ? 'black-purple fixed-top': ''} expand="lg">
-				<Container fluid>
+				<Container>
 					<Link href="/">
 						<a className="navbar-brand">
 						<Image
@@ -54,6 +49,15 @@ export default function Sidebar({activeScroll, currentPath}) {
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="me-auto">
+							{indexPaths.map(p => {
+								return (
+									<Link key={p.uri} href={p.uri}>
+										<a className={'nav-link '+(isCurrentLink(p.uri) ? 'active-link' : '')}>{p.label}</a>
+									</Link>
+								)
+							})}
+						</Nav>
+						<Nav className="me-right">
 							{paths.map(p => {
 								return (
 									<Link key={p.uri} href={p.uri}>
@@ -62,6 +66,8 @@ export default function Sidebar({activeScroll, currentPath}) {
 								)
 							})}
 						</Nav>
+						<Form.Control type="color" value={colorPicker} onChange={e => setCollor(e.target.value)} title="Escolha uma cor" />
+						<Lang />
 						<Nav className="me-right links-outline">
 							{thirdPart.map(t => {
 								return (
@@ -71,9 +77,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 								)
 							})}
 						</Nav>
-						<Form.Control type="color" value={colorPicker} onChange={e => setCollor(e.target.value)} title="Escolha uma cor" />
-						<Lang />
-						<User />
+						{/* <User /> */}
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>

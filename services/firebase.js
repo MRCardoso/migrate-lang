@@ -25,7 +25,6 @@ export const loadUser = (next) => onAuthStateChanged(auth, next)
 
 export const update = (data) => {
     const promises = [];
-    console.log(auth.currentUser)
     if(!auth.currentUser){
         throw "erro user"
     }

@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from "react";
-import { save } from "../services/collections/phrases";
-import { getLanguage, setWord } from '../services/storage';
+import { save as onlineSave } from "../services/collections/phrases";
+import { getLanguage, save as offlineSave } from '../services/storage';
 
 
 const instance = () =>{
@@ -30,8 +30,8 @@ export default function Recognizer(props){
 	}, [isListning])
 	
 	const comparePhrases = (transcoder) => {
-		if(phrase && phrase.trim()){
-			const wordTarget = phrase.toLowerCase().replace(/\n/ig, ' ').replace(/(\,|\.)/g,'').split(' ').filter(n => n.trim())
+		if(phrase && phrase.trim() && transcoder && transcoder.trim()){
+			const wordTarget = phrase.toLowerCase().replace(/\n/ig, ' ').replace(/(\,|\.|\!|\?)/g,'').split(' ').filter(n => n.trim())
 			const wordOrigin = transcoder.toLowerCase().split(' ')
 			const missing = []
 			
@@ -111,11 +111,21 @@ export default function Recognizer(props){
 		}
 	}
 
-	const handleSaveNote = async () => {
-		// setWord(phrase)
-		const value = await save(phrase, phraseReason && phraseReason.status)
-		console.log({value})
-		setNote('')
+	const handleSaveNote = async (saveCloud, next) => {
+		if(phraseReason && phraseReason.status){
+			var promises = [offlineSave(phrase, phraseReason.status)]
+			if(saveCloud)
+				promises.push(onlineSave(phrase, phraseReason.status))
+			
+			Promise.all(promises).then(_ => {
+				setNote('')
+				setPhraseReason({})
+				next(true, `Texto salvo nos dados do navegador ${saveCloud ? " e na nuvem": ""}`)
+			})
+			return
+		}
+		
+		return next(false, "Não há nada novo para salvar!")
 	}
 
 	return (

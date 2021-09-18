@@ -22,3 +22,6 @@ export const isGuestRoutes = (path) => {
         /(auth\/|404|frases)/.test(path)
     )
 }
+
+export const alphabetValues = ["A", "B", "C", "D", "E", "F","G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+export const numberValues = new Array(100).fill(0).map((_, i) => i + 1)

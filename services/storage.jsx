@@ -1,5 +1,4 @@
-const S_KEY_DATA = "storage-words-list";
-const S_KEY_ARTICLE = "storage-articles";
+const S_KEY_DATA = "storage-phrases-list";
 const S_KEY_LANG = "storage-active-language";
 
 const dataKey = (state) => {
@@ -16,72 +15,55 @@ const store = (key, value) => {
     localStorage.setItem(key, value)
 }
 
-const saveJson = (key, value) => {
-    let content = read(key)
-    content = (content ? JSON.parse(content) : [])
-    const newContent = [...content, value]
-    store(key, JSON.stringify(newContent))
-    return newContent
+export const save = (content, reason) => {
+    return new Promise(resolve => {
+        try {
+            const hit = (reason===true? 1 : 0)
+            const fail = (reason===false? 1 : 0)
+            const key = dataKey(S_KEY_DATA)
+            const nextValue = String(content).toLowerCase().trim()
+            const newItem = {id: Date.now(), content: nextValue, hit, fail}
+            const newList = []
+            
+            let items = read(key)
+            items = (items ? JSON.parse(items) : [])
+            items.forEach(i => {
+                if(i.content === nextValue.toLowerCase()){
+                    newItem.hit += i.hit
+                    newItem.fail += i.fail
+                } else{
+                    newList.push(i)
+                }
+            })
+            newList.push(newItem)
+            
+            store(key, JSON.stringify(newList))
+            resolve(true)
+        } catch(e){
+            resolve(false)
+        }
+    })
 }
 
-export const setArticle = (data) => {
-    try {
-        const key = dataKey(S_KEY_ARTICLE)
-        return saveJson(key, data)
-    } catch(e){
-        return null;
-    }
+export const list = () =>{
+    return new Promise(resolve => {
+        try {
+            let content = read(dataKey(S_KEY_DATA))
+            resolve(content ? JSON.parse(content) : [])
+        } catch (error) {
+            resolve([])
+        }
+    })
 }
 
-export const getArticles = () =>{
-    try {
-        let content = read(dataKey(S_KEY_ARTICLE))
-        return (content ? JSON.parse(content) : [])
-    } catch (error) {
-        return []
-    }
-}
-
-export const removeArticle = (index) => {
-    const articles = getArticles()
-    const value = articles.findIndex(n=> n.id === index)
-    
-    if(value !== -1){
-        articles.splice(value, 1)
-        store(dataKey(S_KEY_ARTICLE), JSON.stringify([...articles]))
-        return true
-    }
-    return false
-}
-
-export const setWord = (note) => {
-    try {
-        const key = dataKey(S_KEY_DATA)
-        return saveJson(key, note)
-    } catch(e){
-        return null;
-    }
-}
-
-export const getWords = () =>{
-    try {
-        let content = read(dataKey(S_KEY_DATA))
-        return (content ? JSON.parse(content) : [])
-    } catch (error) {
-        return []
-    }
-}
-
-export const removeWord = (index) => {
-    const words = getWords()
-    const value = words.findIndex(n=> n.toLowerCase() === index.toLowerCase())
-
-    if(value !== -1){
-        words.splice(value, 1)
-        store(dataKey(S_KEY_DATA), JSON.stringify([...words]))
-        return true
-    }
-    return false
+export const remove = (id) => {
+    return new Promise(resolve => {
+        list().then(phrases => {
+            const newPhrases = phrases.filter(p => p.id !== id)
+            store(dataKey(S_KEY_DATA), JSON.stringify(newPhrases))
+            resolve(true)
+        })
+    })
 }
 
 export const setLanguage = (value) => {

@@ -81,7 +81,7 @@ export default function Capsule(props) {
                 
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<AuthProvider>
+			<AuthProvider recall={props.recall}>
 				{ /auth\//.test(props.path) ? <main id="app">{props.children}</main> : renderCommon() }
 			</AuthProvider>
 		</React.Fragment>

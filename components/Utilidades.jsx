@@ -4,7 +4,7 @@ import {Form, InputGroup, FormControl, Accordion} from 'react-bootstrap';
 import Recognizer from "./Recognizer";
 import SpeechInput from "./SpeechInput";
 import {randomBytes} from "crypto"
-import {shuffle, rand, copy, validateNumber} from '../services/utils' 
+import {shuffle, rand, copy, validateNumber, alphabetValues, numberValues} from '../services/utils' 
 import { useAuth } from "../contexts/AuthContext";
 
 export default function Utilities(){
@@ -21,8 +21,8 @@ export default function Utilities(){
         setHash(randomBytes(validateNumber(size, 20)).toString("hex"))
     }
 
-	const alphabet = ["A", "B", "C", "D", "E", "F","G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-	const numbers = new Array(100).fill(0).map((_, i) => i + 1)
+	const alphabet = alphabetValues
+	const numbers = numberValues
 
     const shuffleChoose = (value) => {
         const values = value
