@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Alert, OverlayTrigger, Tooltip, Spinner, Button} from "react-bootstrap"
 import {alphabetValues, copy} from '../services/utils'
-import { list as onlineList, remove as onlineRemove } from "../services/collections/phrases"
+import { list as onlineList, remove as onlineRemove } from "../services/firebase/entities/phrases"
 import { list as offlineList, remove as offlineRemove } from "../services/storage";
 import { useAuth } from "../contexts/AuthContext";
 

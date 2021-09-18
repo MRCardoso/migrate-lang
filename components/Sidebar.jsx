@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Container, Nav, Navbar, Form} from "react-bootstrap"
 import Lang from "./Lang"
-// import User from "./User"
+import User from "./User"
 import { useAuth } from "../contexts/AuthContext";
 
 export default function Sidebar({activeScroll, currentPath}) {
@@ -77,7 +77,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 								)
 							})}
 						</Nav>
-						{/* <User /> */}
+						<User />
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>

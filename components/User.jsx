@@ -21,13 +21,11 @@ export default function User() {
             currentUser 
             ?
                 <DropdownButton size="sm" title="Dados do usuário">
-                    <Dropdown.Item href="#">
-                        <Link href="/profile">
-                            <a title="Acessar perfil" style={{textDecoration: 'none', color: '#2D2D2F'}}>
-                                {!currentUser.displayName ? "Editar Perfil": currentUser.displayName}
-                            </a>
-                        </Link>
-                    </Dropdown.Item>
+                    <Link href="/profile">
+                        <a title="Acessar perfil" className="dropdown-item" style={{textDecoration: 'none', color: '#2D2D2F'}}>
+                            {!currentUser.displayName ? "Editar Perfil": currentUser.displayName}
+                        </a>
+                    </Link>
                     <Dropdown.Divider />
                     <Dropdown.Item href="#" onClick={getOut}>Sair</Dropdown.Item>
                 </DropdownButton>

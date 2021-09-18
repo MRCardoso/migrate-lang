@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from "react";
-import { save as onlineSave } from "../services/collections/phrases";
+import { save as onlineSave } from "../services/firebase/entities/phrases";
 import { getLanguage, save as offlineSave } from '../services/storage';
 
 
@@ -112,7 +112,7 @@ export default function Recognizer(props){
 	}
 
 	const handleSaveNote = async (saveCloud, next) => {
-		if(phraseReason && phraseReason.status){
+		if(phraseReason && "status" in phraseReason){
 			var promises = [offlineSave(phrase, phraseReason.status)]
 			if(saveCloud)
 				promises.push(onlineSave(phrase, phraseReason.status))

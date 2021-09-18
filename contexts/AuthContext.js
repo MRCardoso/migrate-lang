@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { signin, signup, forgot, logout, loadUser, update } from '../services/firebase' 
+import { signin, signup, forgot, logout, loadUser, update } from '../services/firebase/app' 
 import { isGuestRoutes } from '../services/utils'
 import { useRouter } from 'next/router'
 import {Spinner} from 'react-bootstrap'
