@@ -73,7 +73,7 @@ export default function Phrases({mode}){
 				</div>
 				: 
 				words.length > 0? [
-					<div className="d-flex justify-content-center mt-4 mb-4">
+					<div key="filter-letter" className="d-flex justify-content-center mt-4 mb-4">
 						{alphabetValues.map(letter => {
 							if(letters.indexOf(letter) !== -1)
 								return <button key={letter} className="btn btn-primary" style={{margin: '0 2px'}} onClick={() => setFilterLetter(filterLetter == letter ? null : letter)}>{letter}</button>
