@@ -16,9 +16,3 @@ export const validateNumber = (value, defValue) => {
     let newValue = parseInt(value)
     return (Number.isNaN(newValue)) ? defValue : newValue;
 }
-
-export const isGuestRoutes = (path) => {
-    return (
-        /(auth\/|404|frases)/.test(path)
-    )
-}

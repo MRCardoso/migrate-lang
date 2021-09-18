@@ -10,7 +10,6 @@ import { canonicalName, appName } from '../services/metakeys';
 import React, { useEffect, useState } from 'react'
 import About from './About'
 import Question from './Question'
-import AuthProvider from '../contexts/AuthContext'
 
 export default function Capsule(props) {
 	const url = canonicalName(props.path)
@@ -33,24 +32,6 @@ export default function Capsule(props) {
 	const scrollTop = (e) => {
 		e.preventDefault()
 		window.scrollTo(0, 0)
-	}
-
-	const renderCommon = () => {
-		return <>
-			{displaySidebar ? <Sidebar activeScroll={activeScroll} currentPath={props.path} /> : ''}
-			<main id="app">
-				<section className="container">
-					{displayTitle? <header><h1>{props.title}</h1></header> :''}
-					{props.children}
-				</section>
-				{!props.path ? <About />: ''}
-			</main>
-			<button type="button" onClick={scrollTop} aria-label="Voltar ao topo" title="Voltar ao topo" className={`back-top ${activeScroll ? 'on-top' : ''}`}>
-				<i className="fa fa-chevron-up"></i>
-			</button>
-			<Question />
-			{props.displayFooter? <Footer /> : ''}
-		</>
 	}
 	return (
 		<React.Fragment>
@@ -81,9 +62,22 @@ export default function Capsule(props) {
                 
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<AuthProvider>
-				{ /auth\//.test(props.path) ? <main id="app">{props.children}</main> : renderCommon() }
-			</AuthProvider>
+			
+			{displaySidebar ? <Sidebar activeScroll={activeScroll} currentPath={props.path} /> : ''}
+			
+			<main id="app">
+				<section className="container">
+					{displayTitle? <header><h1>{props.title}</h1></header> :''}
+					{props.children}
+				</section>
+				{!props.path ? <About />: ''}
+			</main>
+			
+			<button type="button" onClick={scrollTop} aria-label="Voltar ao topo" title="Voltar ao topo" className={`back-top ${activeScroll ? 'on-top' : ''}`}>
+				<i className="fa fa-chevron-up"></i>
+			</button>
+			<Question />
+			{props.displayFooter? <Footer /> : ''}
 		</React.Fragment>
 	)
 }

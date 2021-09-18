@@ -71,47 +71,6 @@ a {
 .toast-header, .toast-body{
   color: var(--bg-white);
 }
-
-.my-toast{
-  z-index: 10 !important;
-  min-width: 300px;
-  position: fixed;
-  right: 20px;
-  top: 15%;
-  border-radius: 4px;
-  animation: fadein 0.5s;
-}
-
-.my-toast header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 8px;
-  width: 100%;
-  border-bottom: 1px solid #D8D8DF;
-}
-.my-toast div{
-  padding: 8px;
-}
-
-.my-toast-success{
-  background-color: #28a745;
-  color: var(--bg-white);
-}
-
-.my-toast-danger{
-  background-color: #e24d4d;
-  color: var(--bg-white);
-}
-
-.my-toast-default{
-  background-color: #8D8D8F;
-  color: var(--bg-white);
-}
-
-.my-toast-secondary{
-  background-color: var(--bg-black);
-}
 .navbar-light .navbar-nav .nav-link{
   color: var(--bg-black) !important;
 }
@@ -221,23 +180,6 @@ a {
   background: var(--bg-white);
   border-radius: 4px;
   margin: 8px;
-}
-
-.list-phrase{
-  flex-direction: column;
-}
-.list-pronounce{
-  background-color: var(--bg-grey);
-  /* color: var(--bg-white); */
-  padding: 4px;
-  border-radius: 4px;
-}
-.list-pronounce strong{
-  margin-right: 4px;
-}
-
-.list-pronounce span{
-  padding: 4px;
 }
 
 .button-circle {
@@ -352,7 +294,7 @@ input:focus, textarea:focus, select:focus{
   flex-direction: column;
   margin: 34px 0;
   padding: 8px;
-  width: 100%;
+  width: 50%;
   background-color: var(--bg-white);
   box-shadow: inset 0 0 4px var(--border-black);
   border-radius: 4px;
@@ -411,12 +353,6 @@ input:focus, textarea:focus, select:focus{
 }
 .image img{
   border-radius: 100px !important;
-}
-
-/* Animations */
-@keyframes fadein {
-  from {opacity: 0;}
-  to {opacity: 1;}
 }
 
 @media screen and (max-width: 650px)
