@@ -3,12 +3,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Container, Nav, Navbar, Form} from "react-bootstrap"
 import Lang from "./Lang"
-import User from "./User"
-import { useAuth } from "../contexts/AuthContext";
 
 export default function Sidebar({activeScroll, currentPath}) {
 	const [colorPicker, setColorPicker] = useState("#EAEBFD")
-	const {currentUser} = useAuth()
 	const thirdPart = [
         {url: 'https://www.linkedin.com/in/mrcardoso/', icon: 'linkedin', label: "Linkedin"},
         {url: 'https://github.com/MRCardoso', icon: 'git' },
@@ -77,7 +74,6 @@ export default function Sidebar({activeScroll, currentPath}) {
 								)
 							})}
 						</Nav>
-						<User />
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>
