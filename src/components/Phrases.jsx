@@ -24,7 +24,8 @@ export default function Phrases(){
 				for (let i=0;i<phrasesRaw.length; i++){
 					const p = phrasesRaw[i]
 					if(filter.text !== ""){
-						if(!(new RegExp(filter.text.toLowerCase()).test(p.content.toLowerCase()))){
+						const valueItem = filter.text.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+						if(!(new RegExp(valueItem).test(p.content.toLowerCase()))){
 							continue;
 						}
 					}
@@ -141,7 +142,7 @@ export default function Phrases(){
 
 	return (
 		<>
-			<section className="flex-center mb-4">
+			<section className="flex-center" style={{minHeight: '100vh'}}>
 				<div className="pronounce-filters">
 					<div style={{display: 'flex', flexDirection:'column'}}>
 						<span className="mb-2" style={{verticalAlign:'bottom'}}>Base de dados</span>
@@ -182,7 +183,7 @@ export default function Phrases(){
 				</div>
 				: 
 				phrases.length > 0?  renderPhrases() :
-				<Alert variant="warning">
+				<Alert variant="warning" className="mt-2">
 					{filter.text? `Nenhuma frase encontrada para a busca "${filter.text}"` : "Nenhuma frase foi encontrada"}
 				</Alert>
 			}
