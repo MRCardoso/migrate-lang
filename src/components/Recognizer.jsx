@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from "react";
-import { getLanguage, setWord } from '../services/storage';
+import { save as onlineSave } from "../services/firebase/entities/phrases";
+import { getLanguage, save as offlineSave } from '../services/storage';
 
 
 const instance = () =>{
@@ -29,8 +30,8 @@ export default function Recognizer(props){
 	}, [isListning])
 	
 	const comparePhrases = (transcoder) => {
-		if(phrase && phrase.trim()){
-			const wordTarget = phrase.toLowerCase().replace(/\n/ig, ' ').replace(/(\,|\.)/g,'').split(' ').filter(n => n.trim())
+		if(phrase && phrase.trim() && transcoder && transcoder.trim()){
+			const wordTarget = phrase.toLowerCase().replace(/\n/ig, ' ').replace(/(\,|\.|\!|\?)/g,'').split(' ').filter(n => n.trim())
 			const wordOrigin = transcoder.toLowerCase().split(' ')
 			const missing = []
 			
@@ -110,9 +111,26 @@ export default function Recognizer(props){
 		}
 	}
 
-	const handleSaveNote = () => {
-		setWord(phrase)
-		setNote('')
+	const handleSaveNote = async (saveCloud, next) => {
+		try {
+			if(phraseReason && "status" in phraseReason){
+				var promises = [offlineSave(phrase, phraseReason.status, saveCloud)]
+				if(saveCloud)
+					promises.push(onlineSave(phrase, phraseReason.status))
+				
+				return Promise.all(promises).then(_ => {
+					setNote('')
+					setPhraseReason({})
+					next(true, `Texto salvo nos dados do navegador ${saveCloud ? " e na nuvem": ""}`)
+				}, err => {
+					next(false, err.message || "Não foi possível salvar frase")
+				})
+			}
+			
+			return next(false, "Não há nada novo para salvar!")
+		} catch (error) {
+			next(false, "Não foi possível salvar frase")
+		}
 	}
 
 	return (

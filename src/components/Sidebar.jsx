@@ -13,10 +13,8 @@ export default function Sidebar({activeScroll, currentPath}) {
         {url: 'https://www.instagram.com/mardozux/', icon: 'instagram', label: "Instagram de game developer"},
         {url: 'https://mardozux.itch.io/', icon: 'gamepad', label: "Jogos publicados" },
     ]
-	const paths = [
-		{uri: '/utilidades', label: 'Utilidades'},
-		{uri: '/frases', label: 'Frases'},
-	]
+	const paths = [{uri: '/frases', label: 'Frases'}];
+	const indexPaths = [];
 	const isCurrentLink = (value) => {
 		if(currentPath){
 			return new RegExp(currentPath).test(value)
@@ -27,8 +25,10 @@ export default function Sidebar({activeScroll, currentPath}) {
 		document.body.style = `background: ${value} !important`
 		setColorPicker(value)
 	}
-	if(!currentPath) paths.push({uri: '#contato', label: "Contato"})
-
+	if(!currentPath) {
+		indexPaths.push({uri: '#utilidades', label: "Utilidades"})
+		indexPaths.push({uri: '#contato', label: "Contato"})
+	}
 	return (
 		<header>
 			<Navbar className={activeScroll ? 'black-purple fixed-top': ''} expand="lg">
@@ -46,6 +46,15 @@ export default function Sidebar({activeScroll, currentPath}) {
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="me-auto">
+							{indexPaths.map(p => {
+								return (
+									<Link key={p.uri} href={p.uri}>
+										<a className={'nav-link '+(isCurrentLink(p.uri) ? 'active-link' : '')}>{p.label}</a>
+									</Link>
+								)
+							})}
+						</Nav>
+						<Nav className="me-right">
 							{paths.map(p => {
 								return (
 									<Link key={p.uri} href={p.uri}>
@@ -54,6 +63,8 @@ export default function Sidebar({activeScroll, currentPath}) {
 								)
 							})}
 						</Nav>
+						<Form.Control type="color" value={colorPicker} onChange={e => setCollor(e.target.value)} title="Escolha uma cor" />
+						<Lang />
 						<Nav className="me-right links-outline">
 							{thirdPart.map(t => {
 								return (
@@ -63,8 +74,6 @@ export default function Sidebar({activeScroll, currentPath}) {
 								)
 							})}
 						</Nav>
-						<Form.Control type="color" value={colorPicker} onChange={e => setCollor(e.target.value)} title="Escolha uma cor" />
-						<Lang />
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>

@@ -71,6 +71,47 @@ a {
 .toast-header, .toast-body{
   color: var(--bg-white);
 }
+
+.my-toast{
+  z-index: 10 !important;
+  min-width: 300px;
+  position: fixed;
+  right: 20px;
+  top: 15%;
+  border-radius: 4px;
+  animation: fadein 0.5s;
+}
+
+.my-toast header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  width: 100%;
+  border-bottom: 1px solid #D8D8DF;
+}
+.my-toast div{
+  padding: 8px;
+}
+
+.my-toast-success{
+  background-color: #28a745;
+  color: var(--bg-white);
+}
+
+.my-toast-danger{
+  background-color: #e24d4d;
+  color: var(--bg-white);
+}
+
+.my-toast-default{
+  background-color: #8D8D8F;
+  color: var(--bg-white);
+}
+
+.my-toast-secondary{
+  background-color: var(--bg-black);
+}
 .navbar-light .navbar-nav .nav-link{
   color: var(--bg-black) !important;
 }
@@ -97,6 +138,10 @@ a {
 }
 .mh-20{
   margin: 0 20px !important;
+}
+.mh-x2{
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .loading{
@@ -174,12 +219,49 @@ a {
   width: 100%;
   margin-top: 14px;
 }
+.pronounce-filters {
+  background: var(--bg-white);
+  box-shadow: 0 0 4px var(--border-black);
+  padding: 8px;
+  margin: 4px;
+  border-radius: 4px;
+}
 .list{
   display: flex;
   padding: 8px;
   background: var(--bg-white);
   border-radius: 4px;
   margin: 8px;
+}
+
+.list-phrase{
+  flex: 1;
+}
+
+.list-pronounce{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* background-color: var(--bg-grey); */
+  color: var(--bg-black);
+  font-weight: bolder;
+}
+.list-pronounce > div{
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 0 6px;
+  
+}
+.shadow-success{
+  box-shadow: inset 0 0 6px #28a745;
+}
+.shadow-danger{
+  box-shadow: inset 0 0 6px #e24d4d;
+}
+
+.list-pronounce, .list-pronounce > div{
+  margin-right: 4px;
 }
 
 .button-circle {
@@ -274,6 +356,7 @@ footer.footer{
 
 input:focus, textarea:focus, select:focus{
   outline: none !important;
+  box-shadow: none !important;
 }
 
 .box-2{
@@ -293,12 +376,34 @@ input:focus, textarea:focus, select:focus{
   display: flex;
   flex-direction: column;
   margin: 34px 0;
-  padding: 8px;
-  width: 50%;
+  width: 100%;
   background-color: var(--bg-white);
-  box-shadow: inset 0 0 4px var(--border-black);
+  box-shadow: 0 0 4px var(--border-black);
   border-radius: 4px;
   word-wrap: break-word;
+}
+.speech-container label{
+  padding: 8px 8px 0 8px
+}
+
+.speech-container > .speech-buttons{
+  padding: 0 8px;
+}
+.speech-container .speech-reason{
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+}
+
+.speech-container textarea{
+  border: none !important;
+  resize: none !important;
+  border-radius: 0 !important;
+  border-bottom: 1px solid var(--bg-dark) !important;
+}
+
+.speech-container hr{
+  color: var(--bg-dark);
 }
 
 .speech-success{
@@ -353,6 +458,12 @@ input:focus, textarea:focus, select:focus{
 }
 .image img{
   border-radius: 100px !important;
+}
+
+/* Animations */
+@keyframes fadein {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 
 @media screen and (max-width: 650px)
