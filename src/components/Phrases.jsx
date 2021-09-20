@@ -103,31 +103,31 @@ export default function Phrases(){
 
 	const renderPhrases = () => {
 		const content = []
-		phrases.forEach((word, index) => {
+		phrases.forEach((phrase, index) => {
 			content.push(
 				<div key={index} className="list">
 					<div className="list-phrase">
 						<header>
-							<i aria-label="Copiar texto" onClick={() => copyText(word.c)} className="clicable mh-x2 fa fa-copy"></i>
-							<strong style={{margin: '0 4px'}}>{word.content}</strong>
+							<i aria-label="Copiar texto" onClick={() => copyText(phrase.content)} className="clicable mh-x2 fa fa-copy"></i>
+							<strong style={{margin: '0 4px'}}>{phrase.content}</strong>
 						</header>
 					</div>
 					<div className="list-pronounce">
 						{/* <strong>Pronúncias</strong> */}
 						<OverlayTrigger placement="left" overlay={<Tooltip>Pronúncias corretas</Tooltip>}>
 							<div className="text-success shadow-success">
-								<i aria-label="Pronúncias corretas" className="fa fa-check-circle"></i> {word.hit}
+								<i aria-label="Pronúncias corretas" className="fa fa-check-circle"></i> {phrase.hit}
 							</div>
 						</OverlayTrigger>
 						<OverlayTrigger placement="right" overlay={<Tooltip>Pronúncias erradas</Tooltip>}>
 							<div className="text-danger shadow-danger">
-								<i aria-label="Pronúncias erradas" className="fa fa-exclamation-circle"></i> {word.fail}
+								<i aria-label="Pronúncias erradas" className="fa fa-exclamation-circle"></i> {phrase.fail}
 							</div>
 						</OverlayTrigger>
 					</div>
 					{database==="offline"?
 					<OverlayTrigger placement="right" overlay={<Tooltip>Remover pronúncia</Tooltip>}>
-						<Button disabled={disableAction} size="sm" variant="danger" aria-label="Remover frase" onClick={() => onRemove(word)}>
+						<Button disabled={disableAction} size="sm" variant="danger" aria-label="Remover frase" onClick={() => onRemove(phrase)}>
 							<i className="fa fa-times-circle"></i>
 						</Button>
 					</OverlayTrigger>
