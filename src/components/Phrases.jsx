@@ -114,19 +114,19 @@ export default function Phrases(){
 					</div>
 					<div className="list-pronounce">
 						{/* <strong>Pronúncias</strong> */}
-						<OverlayTrigger placement="left" overlay={<Tooltip>Pronúncias corretas</Tooltip>}>
+						<OverlayTrigger placement="bottom" overlay={<Tooltip>Pronúncias corretas</Tooltip>}>
 							<div className="text-success shadow-success">
 								<i aria-label="Pronúncias corretas" className="fa fa-check-circle"></i> {phrase.hit}
 							</div>
 						</OverlayTrigger>
-						<OverlayTrigger placement="right" overlay={<Tooltip>Pronúncias erradas</Tooltip>}>
+						<OverlayTrigger placement="bottom" overlay={<Tooltip>Pronúncias erradas</Tooltip>}>
 							<div className="text-danger shadow-danger">
 								<i aria-label="Pronúncias erradas" className="fa fa-exclamation-circle"></i> {phrase.fail}
 							</div>
 						</OverlayTrigger>
 					</div>
 					{database==="offline"?
-					<OverlayTrigger placement="right" overlay={<Tooltip>Remover pronúncia</Tooltip>}>
+					<OverlayTrigger placement="bottom" overlay={<Tooltip>Remover pronúncia</Tooltip>}>
 						<Button disabled={disableAction} size="sm" variant="danger" aria-label="Remover frase" onClick={() => onRemove(phrase)}>
 							<i className="fa fa-times-circle"></i>
 						</Button>
@@ -141,7 +141,7 @@ export default function Phrases(){
 
 	return (
 		<>
-			<section className="flex-center">
+			<section className="flex-center mb-4">
 				<div className="pronounce-filters">
 					<div style={{display: 'flex', flexDirection:'column'}}>
 						<span className="mb-2" style={{verticalAlign:'bottom'}}>Base de dados</span>
@@ -159,12 +159,12 @@ export default function Phrases(){
 						{alphabetValues.map(letter => {
 							if(letters.indexOf(letter) !== -1){
 								return <button key={letter}
-											className={`btn btn-${filter.letter == letter ? 'primary': 'secondary'}`}
+											className={`btn btn-sm btn-${filter.letter == letter ? 'primary': 'secondary'}`}
 											style={{margin: '0 2px'}}
 											onClick={() => setFilter({...filter, letter: filter.letter === letter ? "" : letter})}
 										>{letter}</button>
 							}
-							return <span key={letter} className="btn" style={{margin: '0 2px'}}>{letter}</span>
+							return <span key={letter} className="btn btn-sm" style={{margin: '0 2px'}}>{letter}</span>
 						})}
 					</div>
 					<hr />

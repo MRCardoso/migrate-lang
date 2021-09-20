@@ -9,7 +9,7 @@ export default function Frases(){
 			title="Frase cadastradas"
 			description="Lista com as frases escolhidas pelo usuário para futuros exercícios."
 			path="frases"
-			displayFooter={false}
+			displayFooter={true}
 			>
 				<Phrases />
 		</Capsule>
