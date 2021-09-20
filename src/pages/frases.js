@@ -11,7 +11,7 @@ export default function Frases(){
 			path="frases"
 			displayFooter={false}
 			>
-				<Phrases mode="offline" />
+				<Phrases />
 		</Capsule>
 	)
 }

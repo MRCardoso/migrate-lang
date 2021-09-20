@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { Form, OverlayTrigger, Tooltip, Button, DropdownButton, Dropdown} from 'react-bootstrap'
+import React from 'react'
+import { Form, OverlayTrigger, Tooltip, DropdownButton, Dropdown} from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
-import {copy} from '../services/utils'
+import {copy, enabledCloud} from '../services/utils'
 
 export default function Speech(props){
     const {setPhrase, phraseReason, setIsListining, isListning, phrase, handleSaveNote, note} = props
@@ -41,7 +41,9 @@ export default function Speech(props){
                         <OverlayTrigger placement="top" overlay={<Tooltip>Salve o resultado nos dados do navegador, ou na nuvem e ajude a popular nossa base de dados.</Tooltip>}>
                             <DropdownButton size="sm" title="Salvar" disabled={isListning || !phrase}>
                                 <Dropdown.Item href="#" onClick={() => customSave(false)}><i className={`fa fa-save`}></i> Salvar offline</Dropdown.Item>
+                                {enabledCloud?
                                 <Dropdown.Item href="#" onClick={() => customSave(true)}><i className={`fa fa-cloud`}></i> Salvar offline e online</Dropdown.Item>
+                                :""}
                             </DropdownButton>
                         </OverlayTrigger>
                     </div>

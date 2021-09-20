@@ -219,6 +219,13 @@ a {
   width: 100%;
   margin-top: 14px;
 }
+.pronounce-filters {
+  background: var(--bg-white);
+  box-shadow: 0 0 4px var(--border-black);
+  padding: 8px;
+  margin: 4px;
+  border-radius: 4px;
+}
 .list{
   display: flex;
   padding: 8px;

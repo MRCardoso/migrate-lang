@@ -1,9 +1,8 @@
-const S_KEY_DATA = "storage-phrases-list";
+const S_KEY_DATA = "storage-words-list";
 const S_KEY_LANG = "storage-active-language";
 
 const dataKey = (state) => {
-    const lang = getLanguage().toLowerCase()
-    return `${state}-${lang}`
+    return `${state}-en-us`
 }
 const read = (key) => {
     if(typeof localStorage === "undefined") return null
@@ -15,18 +14,37 @@ const store = (key, value) => {
     localStorage.setItem(key, value)
 }
 
-export const save = (content, reason) => {
+/** 
+ * Adaptation of new feature in phrases save, including a database on cloud in firebase
+ * implement the system control of pronounces OK and FAIL
+*/
+const migrateToV2 = (content) => {
+    return content.reduce((acc, v, i) => {
+        const d = new Date()
+        d.setSeconds(d.getSeconds() + i)
+        
+        acc.push({id: d.getTime(), content: v, hit: 0, fail: 0, synced: false})
+        return acc
+    }, [])
+}
+
+export const save = (content, reason, saveCloud) => {
     return new Promise(resolve => {
         try {
             const hit = (reason===true? 1 : 0)
             const fail = (reason===false? 1 : 0)
             const key = dataKey(S_KEY_DATA)
             const nextValue = String(content).toLowerCase().trim()
-            const newItem = {id: Date.now(), content: nextValue, hit, fail}
+            const newItem = {id: Date.now(), content: nextValue, hit, fail, synced: saveCloud }
             const newList = []
             
             let items = read(key)
             items = (items ? JSON.parse(items) : [])
+
+            if (typeof items[0] === "string"){
+                items = migrateToV2(items)
+            }
+
             items.forEach(i => {
                 if(i.content === nextValue.toLowerCase()){
                     newItem.hit += i.hit
@@ -49,7 +67,22 @@ export const list = () =>{
     return new Promise(resolve => {
         try {
             let content = read(dataKey(S_KEY_DATA))
-            resolve(content ? JSON.parse(content) : [])
+            if(content){
+                content = JSON.parse(content)
+                
+                if (typeof content[0] === "string"){
+                    content = migrateToV2(content)
+                    store(dataKey(S_KEY_DATA), JSON.stringify(content))
+                }
+                content.sort((a, b) => {
+                    if(a.content < b.content) { return -1; }
+                    if(a.content > b.content) { return 1; }
+                    return 0;
+                })
+            } else {
+                content = []
+            }
+            resolve(content)
         } catch (error) {
             resolve([])
         }

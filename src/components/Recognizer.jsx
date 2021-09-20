@@ -112,20 +112,25 @@ export default function Recognizer(props){
 	}
 
 	const handleSaveNote = async (saveCloud, next) => {
-		if(phraseReason && "status" in phraseReason){
-			var promises = [offlineSave(phrase, phraseReason.status)]
-			if(saveCloud)
-				promises.push(onlineSave(phrase, phraseReason.status))
+		try {
+			if(phraseReason && "status" in phraseReason){
+				var promises = [offlineSave(phrase, phraseReason.status, saveCloud)]
+				if(saveCloud)
+					promises.push(onlineSave(phrase, phraseReason.status))
+				
+				return Promise.all(promises).then(_ => {
+					setNote('')
+					setPhraseReason({})
+					next(true, `Texto salvo nos dados do navegador ${saveCloud ? " e na nuvem": ""}`)
+				}, err => {
+					next(false, err.message || "Não foi possível salvar frase")
+				})
+			}
 			
-			Promise.all(promises).then(_ => {
-				setNote('')
-				setPhraseReason({})
-				next(true, `Texto salvo nos dados do navegador ${saveCloud ? " e na nuvem": ""}`)
-			})
-			return
+			return next(false, "Não há nada novo para salvar!")
+		} catch (error) {
+			next(false, "Não foi possível salvar frase")
 		}
-		
-		return next(false, "Não há nada novo para salvar!")
 	}
 
 	return (

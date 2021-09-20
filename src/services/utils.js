@@ -25,3 +25,9 @@ export const isGuestRoutes = (path) => {
 
 export const alphabetValues = ["A", "B", "C", "D", "E", "F","G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 export const numberValues = new Array(100).fill(0).map((_, i) => i + 1)
+export const alphabetKeyIndex = alphabetValues.reduce((acc, value, index) => {
+    acc[value] = index
+    return acc
+}, {})
+
+export const enabledCloud = (process.env.NEXT_PUBLIC_ENABLED_CLOUD_STORAGE==="true"? true: false)
