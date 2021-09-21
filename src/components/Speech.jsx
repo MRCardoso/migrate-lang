@@ -24,7 +24,7 @@ export default function Speech(props){
                 <Form.Control as="textarea" className="mb-2" rows={6} onChange={e => setPhrase(e.target.value)} value={phrase} placeholder="Coloque seu texto aqui para ativar os botões abaixo..." />
                 <div className="d-flex speech-buttons">
                     <div style={{flex: 1}}>
-                        <OverlayTrigger placement="bottom" overlay={<Tooltip>Iniciar/encerrar captura de fala.</Tooltip>}>
+                        <OverlayTrigger placement="right" overlay={<Tooltip>Iniciar/encerrar captura de fala.</Tooltip>}>
                             <button className={`button-circle ${isListning ? 'button-purple': ''} ${!phrase? 'circle-disable': ''}`} aria-label="Ativar/desativar fala" type="button" onClick={() => phrase && setIsListining(prevState => !prevState)}>
                                 { isListning ? <i className="fa fa-stop"></i> : <i className="fa fa-microphone"></i>}
                             </button>
