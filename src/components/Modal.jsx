@@ -9,7 +9,7 @@ export default function ModalForm(props) {
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" aria-label="fechar" onClick={() =>{ props.closeCallback()}}>Close</Button>
+                <Button variant="secondary" aria-label="fechar" onClick={() =>{ props.closeCallback()}}>Fechar</Button>
             </Modal.Footer>
         </Modal>
     )

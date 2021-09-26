@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import Link from 'next/link'
 import Image from 'next/image'
 import { Container, Nav, Navbar, Form} from "react-bootstrap"
-import Lang from "./Lang"
 
 export default function Sidebar({activeScroll, currentPath}) {
 	const [colorPicker, setColorPicker] = useState("#EAEBFD")
@@ -13,7 +12,7 @@ export default function Sidebar({activeScroll, currentPath}) {
         {url: 'https://www.instagram.com/mardozux/', icon: 'instagram', label: "Instagram de game developer"},
         {url: 'https://mardozux.itch.io/', icon: 'gamepad', label: "Jogos publicados" },
     ]
-	const paths = [{uri: '/frases', label: 'Frases'}];
+	const paths = [{uri: '/frases', label: 'Frases'}, {uri: '/imagineer', label: 'Imagineer'}];
 	const indexPaths = [];
 	const isCurrentLink = (value) => {
 		if(currentPath){
@@ -64,7 +63,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 							})}
 						</Nav>
 						<Form.Control type="color" value={colorPicker} onChange={e => setCollor(e.target.value)} title="Escolha uma cor" />
-						<Lang />
+						{/* <Lang /> */}
 						<Nav className="me-right links-outline">
 							{thirdPart.map(t => {
 								return (

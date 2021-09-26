@@ -147,9 +147,9 @@ export default function Phrases(){
 					<div style={{display: 'flex', flexDirection:'column'}}>
 						<span className="mb-2" style={{verticalAlign:'bottom'}}>Base de dados</span>
 						<div>
-							<button className={`btn btn-sm btn-${database === "offline"?"primary":"light"}`} style={{flex: 1, margin: '0 2px'}} onClick={() => loadData("offline")}>Local</button>
+							<button className={`btn btn-sm btn-${database === "offline"?"primary":"light"}`} style={{flex: 1, margin: '0 2px'}} onClick={() => loadData("offline")}>Privado</button>
 							{enabledCloud?
-							<button className={`btn btn-sm btn-${database === "online"?"primary":"light"}`} style={{flex: 1, margin: '0 2px'}} onClick={() => loadData("online")}>Nuvem</button>
+							<button className={`btn btn-sm btn-${database === "online"?"primary":"light"}`} style={{flex: 1, margin: '0 2px'}} onClick={() => loadData("online")}>Público</button>
 							:""}
 						</div>
 					</div>

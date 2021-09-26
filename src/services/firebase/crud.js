@@ -1,9 +1,10 @@
 import app from "./app"
-import { getFirestore, collection, getDocs, setDoc, where, query, doc, limit, orderBy, updateDoc, deleteDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, where, query, doc, limit, orderBy, updateDoc, deleteDoc } from 'firebase/firestore';
 
 const db = getFirestore(app)
 
-const createItem = (table, data) => setDoc(doc(collection(db, table)), data)
+const getDocId = (table, id) => doc(db, table, id)
+const createItem = (table, data) => addDoc(collection(db, table), data)
 const updateItem = (table, id, data) => updateDoc(doc(db, table, id), data)
 const removeItem = (table, id) => deleteDoc(doc(db, table, id))
 const select = (table) => collection(db, table)
@@ -36,5 +37,6 @@ export const __update = updateItem
 export const __delete = removeItem
 export const __select = select
 export const __condition = condition
+export const __getDocId = getDocId
 
 export default db
