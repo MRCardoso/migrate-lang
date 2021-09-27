@@ -9,6 +9,10 @@ export default function SpeechInput(props){
         if(startRecord === false){
             setValue(note)
             props.clearOnEnd && setNote('')
+
+            if(typeof props.callback === "function"){
+                props.callback(note)
+            }
         } else if(startRecord === true){
             setValue('')
         }

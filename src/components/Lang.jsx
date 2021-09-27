@@ -1,15 +1,10 @@
 import React from "react"
-import { DropdownButton, Button, Dropdown} from 'react-bootstrap'
+import {Button, Dropdown} from 'react-bootstrap'
 import {setLanguage, getLanguageLabel} from '../services/storage'
 
 const lang = getLanguageLabel()
 
 export default function Lang({next, title, icon, activeted}){
-    const changeLanguage  = (event, value) => {
-		event.preventDefault()
-		setLanguage(value)
-		window.location.reload()
-	}
     const languages = [
         {value: "en-US", label: "Inglês"},
         {value: "pt-BR", label: "Português"},

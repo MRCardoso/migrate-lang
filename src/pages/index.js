@@ -48,7 +48,7 @@ export default function Home() {
 			displayFooter={true}
 		>
 			<article className="flex-center mt-4">
-				<Recognizer>
+				<Recognizer isMany={false}>
 					<Speech />
 				</Recognizer>
 				<Link href="/imagineer">
@@ -58,6 +58,12 @@ export default function Home() {
 				<Link href="/imagineer/create">
 					<a className="w-100 mb-4 btn btn-primary" title="historias">Crie suas próprias</a>
 				</Link>
+				<p className="d-flex justify-content-center">
+					Baixe a extensão
+					<a href="https://www.grammarly.com/" className="btn btn-sm btn-secondary mh-x2" target="_blank" rel="noreferrer">
+						<i className="fa fa-puzzle-piece"></i> grammarly
+					</a>
+					em seu navegador, para ajudar com a gramática.</p>
 			</article>
 
 			<article className="flex-center">

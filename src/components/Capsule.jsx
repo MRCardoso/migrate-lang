@@ -9,7 +9,6 @@ import Footer from '../components/Footer'
 import { canonicalName, appName } from '../services/metakeys';
 import React, { useEffect, useState } from 'react'
 import About from './About'
-import Question from './Question'
 import AuthProvider from '../contexts/AuthContext'
 
 export default function Capsule(props) {
@@ -48,7 +47,6 @@ export default function Capsule(props) {
 			<button type="button" onClick={scrollTop} aria-label="Voltar ao topo" title="Voltar ao topo" className={`back-top ${activeScroll ? 'on-top' : ''}`}>
 				<i className="fa fa-chevron-up"></i>
 			</button>
-			<Question />
 			{props.displayFooter? <Footer /> : ''}
 		</>
 	}

@@ -49,7 +49,7 @@ export default function Gallery() {
                 </InputGroup>
                 {images.length > 0?
                     images.map(i => {
-                        return <a href={i.pageURL} target="_blank" rel="noreferrer"  className="mh-x2">
+                        return <a key={i} href={i.pageURL} target="_blank" rel="noreferrer"  className="mh-x2">
                             <Image src={i.largeImageURL} alt={i.tags} width={140} height={140} />
                         </a>
                     })

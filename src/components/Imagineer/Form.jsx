@@ -94,7 +94,7 @@ export default function ImagineerForm() {
                             </a>
                         </Link>
                     </div>
-                    <OverlayTrigger placement="top" overlay={<Tooltip>Traduz os textos preenchidos de acordo com o 'idioma' selecionado.</Tooltip>}>
+                    <OverlayTrigger placement="top" overlay={<Tooltip>Traduz os textos preenchidos de acordo com o idioma selecionado.</Tooltip>}>
                         <Button style={{marginRight: '6px'}} onClick={onTranslate}>Traduzir</Button>
                     </OverlayTrigger>
                     <Button onClick={saveForm}>Salvar</Button>

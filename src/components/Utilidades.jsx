@@ -11,6 +11,7 @@ export default function Utilities(){
 	const [hash, setHash] = useState("")
 	const [size, setSize] = useState(20)
 	const [number, setNumber] = useState("")
+	const [numberValue, setNumberValue] = useState("")
 	const {setMessager} = useAuth()
 	
 	const createHash = () => {
@@ -25,7 +26,7 @@ export default function Utilities(){
 	const numbers = numberValues
 
     const shuffleChoose = (value) => {
-        const values = value
+		const values = value
             .split(' ')
             .map(v => String(v).replace(/[^0-9]/ig, '').trim())
             .filter(v => v)
@@ -60,19 +61,6 @@ export default function Utilities(){
 				</Accordion>
 			</div>
 			<Form className="article">
-				<Recognizer>
-					<SpeechInput
-						type="textarea"
-						title="Conteúdo"
-						placeholder="Pratique sua pronúncia, elabore frases livremente."
-						clearOnEnd={true}
-						disabled={true}
-						printNote={true}
-						hasLabel={true}
-					/>
-				</Recognizer>
-
-				
 				<div className="mb-4">
 					<Form.Label>Gerador de Texto aleatório</Form.Label>
 					<InputGroup className="mb-2">
@@ -95,9 +83,12 @@ export default function Utilities(){
 							<SpeechInput
 							type="text"
 							title="Sorteio um número"
+							lang="en-US"
 							placeholder="Diga números aleatorios e seguida embaralhamos e sorteamos o vencedor."
 							disabled={true}
-							callback={(value) => shuffleChoose(value)}
+							value={numberValue}
+                            setValue={setNumberValue}
+							callback={value => shuffleChoose(value)}
 							clearOnEnd={true}
 							printNote={true}
 							hasLabel={true}

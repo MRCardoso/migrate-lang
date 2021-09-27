@@ -89,7 +89,6 @@ export default function ImagineerList(props) {
                     })}
                 </div>
             :""}
-            {/* {chapters.map(c => <p>{c.content}</p>)} */}
         </div>
     )
 }

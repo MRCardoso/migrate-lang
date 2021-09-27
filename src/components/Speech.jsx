@@ -3,7 +3,6 @@ import { Form, OverlayTrigger, Tooltip, DropdownButton, Button, Dropdown} from '
 import { useAuth } from '../contexts/AuthContext'
 import { requestTranslate } from '../services/requests'
 import {copy, enabledCloud} from '../services/utils'
-import Lang from './Lang'
 
 export default function Speech(props){
     const {setPhrase, phraseReason, setIsListining, isListning, phrase, handleSaveNote, note, micLang, setMicLang} = props
@@ -22,8 +21,7 @@ export default function Speech(props){
     }
     const startRecording = (e) => {
         e.preventDefault()
-        console.log(phrase)
-        phrase && setIsListining(prevState => !prevState)
+        setIsListining(prevState => !prevState)
     }
 
     const toggleLanguage = () => {
@@ -60,7 +58,7 @@ export default function Speech(props){
                 <Form.Control as="textarea" className="mb-2" rows={6} onChange={e => setPhrase(e.target.value)} value={phrase} placeholder="Coloque seu texto aqui para ativar os botões abaixo..." />
                 <div className="d-flex speech-buttons">
                     <div style={{flex: 1}}>
-                        <Button variant={`${isListning ? 'primary': 'light'}`} disabled={!phrase} size="sm" type="button" aria-label="ativar/desativar fala" onClick={startRecording}>
+                        <Button variant={`${isListning ? 'primary': 'light'}`} size="sm" type="button" aria-label="ativar/desativar fala" onClick={startRecording}>
                             <i className={`fa fa-${isListning ? "stop" : "microphone"}`}></i>
                         </Button>
                         <Button disabled={isListning || !phrase} size="sm" type="button" aria-label="traduzir" onClick={onTranslate}>
@@ -80,13 +78,17 @@ export default function Speech(props){
                 <div className={`speech-reason ${phraseReason.status ? 'text-success': (phraseReason.status===false? 'text-danger':'text-secondary')}`}>
                     {'status' in phraseReason && note ?
                         <>
-                        <i className="mh-x2 clicable fa fa-copy" aria-label="Copiar texto" onClick={copyText}></i>
                         <OverlayTrigger placement="bottom" overlay={<Tooltip>{phraseReason.message}</Tooltip>}>
                             <i aria-label="Validacao" className={`mh-x2 clicable fa fa-${phraseReason.status ? 'check-circle': 'exclamation-circle'}`}></i>
                         </OverlayTrigger>
                         </>
                     : '' }
-                    <strong>{note}</strong>
+                    {note?
+                    <>
+                        <i className="mh-x2 clicable fa fa-copy" aria-label="Copiar texto" onClick={copyText}></i>
+                        <strong>{note}</strong>
+                    </>
+                    : ''}
                 </div>
             </div>
         </React.Fragment>
