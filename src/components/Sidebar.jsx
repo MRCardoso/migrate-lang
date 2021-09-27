@@ -12,7 +12,7 @@ export default function Sidebar({activeScroll, currentPath}) {
         {url: 'https://www.instagram.com/mardozux/', icon: 'instagram', label: "Instagram de game developer"},
         {url: 'https://mardozux.itch.io/', icon: 'gamepad', label: "Jogos publicados" },
     ]
-	const paths = [{uri: '/frases', label: 'Frases'}, {uri: '/imagineer', label: 'Imagineer'}];
+	const paths = [{uri: '/frases', label: 'Frases'}];
 	const indexPaths = [];
 	const isCurrentLink = (value) => {
 		if(currentPath){

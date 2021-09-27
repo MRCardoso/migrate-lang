@@ -2,18 +2,13 @@ import React, {useEffect, useState} from "react";
 import {FormControl, InputGroup,FloatingLabel, Form} from 'react-bootstrap';
 
 export default function SpeechInput(props){
-    const {setIsListining, isListning, note, setNote, startRecord} = props
-    const [value, setValue] = useState('')
+    const {setIsListining, isListning, note, setNote, startRecord, setMicLang, language, value, setValue, clearField} = props
+    const [] = useState('')
     
     useEffect(() => {
         if(startRecord === false){
             setValue(note)
-            if(typeof props.callback === "function"){
-                props.callback(note, setValue)
-            }
-            if(props.clearOnEnd){
-                setNote('')
-            }
+            props.clearOnEnd && setNote('')
         } else if(startRecord === true){
             setValue('')
         }
@@ -21,14 +16,12 @@ export default function SpeechInput(props){
     },[startRecord])
 
     useEffect(() => {
-        if(props.clearField)
-            refreshValue('')
-    }, [props.clearField])
+        clearField && setValue('')
+    }, [clearField])
 
-    const refreshValue = (value) => {
-        if( typeof props.refreshOrigin === 'function')
-            props.refreshOrigin(value)
-        setValue(value)
+    const toggleVoice = () => {
+        setMicLang(language)
+        setIsListining(prevState => !prevState)
     }
     
     return (
@@ -37,10 +30,10 @@ export default function SpeechInput(props){
                 {props.hasLabel? <Form.Label>{props.title}</Form.Label>: ''}
                 <InputGroup className="mb-2">
                     { props.type && props.type === "textarea"
-                    ? <FormControl as="textarea" value={value} rows={6} placeholder={props.placeholder || props.title} onChange={e => refreshValue(e.target.value)} disabled={props.disabled} />
-                    : <FormControl value={value} placeholder={props.placeholder || props.title} onChange={e => refreshValue(e.target.value)} disabled={props.disabled} />
+                    ? <FormControl as="textarea" value={value} rows={6} placeholder={props.placeholder || props.title} onChange={e => setValue(e.target.value)} disabled={props.disabled} />
+                    : <FormControl value={value} placeholder={props.placeholder || props.title} onChange={e => setValue(e.target.value)} disabled={props.disabled} />
                     }
-                    <InputGroup.Text onClick={() => setIsListining(prevState => !prevState)} className={isListning? 'button-purple text-white': ''}>
+                    <InputGroup.Text onClick={toggleVoice} className={isListning? 'button-purple text-white': ''}>
                         { isListning ? <i className="fa fa-stop"></i> : <i className="fa fa-microphone"></i>}
                     </InputGroup.Text>
                 </InputGroup>

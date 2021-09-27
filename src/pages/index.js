@@ -1,8 +1,6 @@
-// import Image from 'next/image'
-// import styles from '../styles/Home.module.css'
 import React from "react";
 
-import {Row} from "react-bootstrap";
+import Link from "next/link";
 import Card from '../components/Card'
 import Recognizer from '../components/Recognizer'
 import Speech from "../components/Speech";
@@ -53,6 +51,13 @@ export default function Home() {
 				<Recognizer>
 					<Speech />
 				</Recognizer>
+				<Link href="/imagineer">
+					<a className="w-100 btn btn-primary" title="historias">Aprenda atravez de histórias</a>
+				</Link>
+				<div className="d-flex w-100 justify-content-center">Ou</div>
+				<Link href="/imagineer/create">
+					<a className="w-100 mb-4 btn btn-primary" title="historias">Crie suas próprias</a>
+				</Link>
 			</article>
 
 			<article className="flex-center">

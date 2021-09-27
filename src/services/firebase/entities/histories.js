@@ -26,7 +26,7 @@ export const remove = (docid) => {
 }
 
 export const create = async (data) => {
-    const docRef = await __create(tableName, {content: data.content, image: data.image, lang: data.lang})
+    const docRef = await __create(tableName, {content: data.content, lang: data.lang})
     const promises = []
     data.chapters.map((chapter, index) => {
         promises.push(

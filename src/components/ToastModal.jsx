@@ -9,7 +9,11 @@ export default function ToastModal({message, onClose, title="Atenção", variant
                     <i onClick={onClose} className="clicable fa fa-times"></i>
                 </header>
                 <div>
-                    <p>{message}</p>
+                    {Array.isArray(message) ? 
+                        <ul>
+                            {message.map((msg, i) => <li key={i}>{msg}</li>)}
+                        </ul>
+                    : <p>{message}</p>}
                 </div>
             </div>
             : ""
