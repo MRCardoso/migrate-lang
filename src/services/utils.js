@@ -30,4 +30,7 @@ export const alphabetKeyIndex = alphabetValues.reduce((acc, value, index) => {
     return acc
 }, {})
 
-export const enabledCloud = (process.env.NEXT_PUBLIC_ENABLED_CLOUD_STORAGE==="true"? true: false)
+export const enabledCloud = (action) => {
+    const actions = process.env.NEXT_PUBLIC_ENABLED_CLOUD_STORAGE.split("|")
+    return actions.indexOf(action)  !== -1 ? true: false    
+}

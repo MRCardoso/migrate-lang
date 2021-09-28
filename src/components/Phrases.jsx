@@ -16,7 +16,10 @@ export default function Phrases(){
 	const [letters, setLetters] = useState([])
     const {setMessager} = useAuth()
 	
-	useEffect(() => { loadData(database) }, [])
+	useEffect(() => {
+		loadData(database)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 	useEffect(() => {
 		if(phrasesRaw.length > 0){
 			let newPhrases = []
@@ -40,6 +43,7 @@ export default function Phrases(){
 
 			setPhrases(newPhrases)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filter])
 
 	const copyText = (text) =>{
@@ -81,7 +85,7 @@ export default function Phrases(){
 	
 			refreshData(phrases)
 		} catch (error) {
-			setMessager({message: error.message || "Não foi possível baixar frases", variant: "success"})
+			setMessager({message: error.message || "Não foi possível baixar frases", variant: "danger"})
 		}
 		
 		setLoading(false)
@@ -170,7 +174,7 @@ export default function Phrases(){
 					</div>
 					<hr />
 					<div>
-					<Form.Group className="mb-3" controlId="formBasicEmail">
+					<Form.Group className="mb-3" controlId="formSearchWord">
 						<Form.Label>Buscar</Form.Label>
 						<Form.Control type="email" value={filter.text} autoComplete="off" onChange={e => setFilter({...filter, text: e.target.value})} placeholder="Busque por uma frase..." />
 					</Form.Group>

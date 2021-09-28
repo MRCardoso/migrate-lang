@@ -1,45 +1,90 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import {Form, FloatingLabel, Button} from 'react-bootstrap'
+import {Form, FloatingLabel, OverlayTrigger, Tooltip} from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext'
 import { getChapter, list } from '../../services/firebase/entities/histories'
 
 export default function ImagineerList(props) {
-    const {setPhrase, phraseReason, setIsListining, isListning, phrase, setPhraseReason, setNote, note} = props
+    const {setPhrase, phraseReason, setIsListining, isListning, startRecord, setPhraseReason, setNote, note} = props
     const [histories, setHistories] = useState([])
-    const [history, setHistory] = useState([])
+    const [history, setHistory] = useState(null)
     const [chapters, setChapters] = useState([])
     const [chapterIndex, setChapterIndex] = useState(0)
+    const [stateChapters, setStateChapters] = useState([])
+    const [chaptersCache, setChaptersCache] = useState({})
     const {setMessager, setLoading} = useAuth()
 
-    useEffect(async() => {
-        try {
-            setLoading(true)
-            const data = await list()
-            setHistories(data)
-        } catch (err) {
-            setMessager({variant: "danger", message: String(err)})
+    // run in component creating
+    useEffect(() => {
+        async function loadApi(){
+            try {
+                setLoading(true)
+                const data = await list()
+                setHistories(data)
+                updateProps(null, [])
+            } catch (err) {
+                console.log({err})
+                setMessager({variant: "danger", message: "Não foi possível baixar histórias"})
+            }
+            setLoading(false)
         }
-        setLoading(false)
+
+        loadApi()
+        return () => {
+            setChaptersCache({})
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-        
+
+    useEffect(() => {
+        if(startRecord === false){
+            const items = [...stateChapters]
+            let hit = phraseReason.status === true ? 1 : 0
+            let fail = phraseReason.status === false ? 1 : 0
+            
+            if(items[chapterIndex]) {
+                hit += items[chapterIndex].hit
+                fail += items[chapterIndex].fail
+            }
+
+            console.log(phraseReason, chapterIndex, hit, fail)
+
+            items[chapterIndex] = {hit, fail}
+            setStateChapters(items)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[startRecord])
+
+    const updateProps = (h, c) =>{
+        setHistory(h)
+        setChapters(c)
+        setNote("")
+        setStateChapters([])
+        setPhraseReason({})
+        setChapterIndex(0)
+    }
+
     const loadChapter = async (history) => {
+        setLoading(true)
         try {
             let data = []
             if(history!==""){
-                data = await getChapter(history)
+                if(chaptersCache[history]){
+                    data = chaptersCache[history]
+                    console.warn(`chapters from the cache`)
+                } else{
+                    data = await getChapter(history)
+                    chaptersCache[history] = data
+                }
                 data.sort((a, b) => a.order - b.order)
             }
             
-            const h = histories.find(h => h.id===history)
-            setHistory(h)
-            setChapters(data)
-            setNote("")
-            setPhraseReason({})
-            setChapterIndex(0)
+            updateProps(histories.find(h => h.id===history), data)
         } catch (error) {
+            console.log(error)
             setMessager({variant: "danger", message: "Não foi possível recuperar capítulos"})
         }
+        setLoading(false)
     }
 
     const renderValidateContent = content =>{
@@ -78,12 +123,24 @@ export default function ImagineerList(props) {
                             <button type="button" className={`btn btn-${chapterIndex === index && isListning ? 'primary' : 'light'}`} onClick={() => startRecordChapter(index, c)}>
                                 { chapterIndex === index && isListning ? <i className="fa fa-stop"></i> : <i className="fa fa-microphone"></i>}
                             </button>
-                            <div className="clicable" onClick={e=> setChapterIndex(index)}>{chapterIndex === index && !isListning && note ? renderValidateContent(c.content) : c.content}</div>
-                            {chapterIndex === index && 'status' in phraseReason ? 
-                            <button type="button" className={`btn btn-${phraseReason.status ? 'success': 'danger'} btn-sm`}>
-                                <i className={`fa fa-${phraseReason.status ? 'check-circle': 'exclamation-circle'}`}></i>
-                            </button>
-                            :''}
+                            <div className="clicable" onClick={e=> setChapterIndex(index)}>
+                                {chapterIndex === index && !isListning && note ? renderValidateContent(c.content) : c.content}
+                                <br />
+                                {stateChapters[index]?
+                                <>
+                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>Pronúncias corretas</Tooltip>}>
+                                        <>
+                                        <i aria-label="Pronúncias corretas" className="text-success fa fa-check-circle"></i> {stateChapters[index].hit}
+                                        </>
+                                    </OverlayTrigger>
+                                    <OverlayTrigger placement="bottom" overlay={<Tooltip>Pronúncias erradas</Tooltip>}>
+                                        <>
+                                        <i aria-label="Pronúncias erradas" className="text-danger fa fa-exclamation-circle"></i> {stateChapters[index].fail}
+                                        </>
+                                    </OverlayTrigger>
+                                </>
+                                :''}
+                            </div>
                         </div>
                         )
                     })}

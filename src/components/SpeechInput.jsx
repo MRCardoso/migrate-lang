@@ -21,6 +21,7 @@ export default function SpeechInput(props){
 
     useEffect(() => {
         clearField && setValue('')
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [clearField])
 
     const toggleVoice = () => {

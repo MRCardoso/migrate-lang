@@ -87,9 +87,9 @@ export default function Recognizer(props){
 			setStartRecord(true)
 		}
 		mic.onaudioend = (e) => {
-			setStartRecord(false)
 			comparePhrases(note)
 			onTranslate(note)
+			setStartRecord(false)
 		}
 
 		mic.onresult = event => {

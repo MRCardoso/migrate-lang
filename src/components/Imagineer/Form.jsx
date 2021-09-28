@@ -27,12 +27,18 @@ export default function ImagineerForm() {
         setLoading(true)
         try {
             await create({content, lang, chapters})
-            setLoading(false)
-            reload()
+            setMessager({variant: "success", message: "História criada com sucesso"})
+            clearForm()
         } catch (error) {
-            setLoading(false)
-            setMessager({variant: "danger", message: (err.message || "Não foi possível salvar História")})
+            setMessager({variant: "danger", message: (error.message || "Não foi possível salvar História")})
         }
+        setLoading(false)
+    }
+
+    const clearForm = () => {
+        setContent("")
+        setChapters([])
+        setLang("pt-BR")
     }
 
     const addChapter = () => {
@@ -78,7 +84,8 @@ export default function ImagineerForm() {
                 )
             })
             .catch(error =>{
-                setMessager({variant: "danger", message: error})
+                console.log(error)
+                setMessager({variant: "danger", message: (Array.isArray(error) ? error : "Erro inesperado ao traduzer, tente novamente mais tarde.")})
             })
             .finally(() => setLoading(false))
     }
