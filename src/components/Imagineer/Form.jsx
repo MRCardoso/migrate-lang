@@ -6,11 +6,13 @@ import { create } from '../../services/firebase/entities/histories'
 import { requestTranslate } from '../../services/requests'
 import Recognizer from '../Recognizer'
 import SpeechInput from '../SpeechInput'
+import { text2Speech } from '../../services/utils'
 
 export default function ImagineerForm() {
     const [content, setContent] = useState('')
     const [chapters, setChapters] = useState([])
-    const [lang, setLang] = useState("pt-BR")
+    const [lang, setLang] = useState("en-US")
+    const [listen, setListen] = useState(false)
     const {setMessager, setLoading} = useAuth()
     
 
@@ -64,6 +66,7 @@ export default function ImagineerForm() {
         chapters.map(c => items.push(c.content))
         
         setLoading(true)
+        setMessager({})
         
         requestTranslate(lang, items)
             .then(translates => {
@@ -85,7 +88,7 @@ export default function ImagineerForm() {
             })
             .catch(error =>{
                 console.log(error)
-                setMessager({variant: "danger", message: (Array.isArray(error) ? error : "Erro inesperado ao traduzer, tente novamente mais tarde.")})
+                setMessager({variant: "danger", message: (Array.isArray(error) || typeof error === "string" ? error : "Erro inesperado ao traduzir, tente novamente mais tarde.")})
             })
             .finally(() => setLoading(false))
     }
@@ -125,14 +128,16 @@ export default function ImagineerForm() {
                             type="text"
                             title="Título"
                             language={lang}
-                            placeholder="Dê um nome a sua história..."
+                            placeholder="Dê um nome para a história..."
                             value={content}
                             setValue={setContent}
                             clearOnEnd={true}
                             disabled={false}
                             printNote={true}
                             hasLabel={true}
-                        />
+                        >
+                            <InputGroup.Text className={`clicable ${listen ? 'circle-disable': ''}`} onClick={e=> !listen && text2Speech(content, lang, setListen)}><i aria-label="ouvir" className="fa fa-volume-down"></i></InputGroup.Text>
+                        </SpeechInput>
                     </Recognizer>
                 </Form.Group>
 
@@ -142,11 +147,24 @@ export default function ImagineerForm() {
                     chapters.map((c, index) =>{
                         return (
                             <Form.Group key={index} className="mb-3" controlId="formGroupEmail">
-                                <Form.Label>Capítulo {index+1}</Form.Label>
-                                <InputGroup className="mb-2">
-                                    <Form.Control type="text" autoComplete="off" value={c.content} onChange={e => updateChapter(e.target.value, index) } placeholder="título..." />
-                                    <InputGroup.Text className="btn-danger" onClick={e=> removeChapter(index)}><i className="fa fa-minus"></i></InputGroup.Text>
-                                </InputGroup>
+                                <Recognizer isMany={false}>
+                                    <SpeechInput
+                                        type="textarea"
+                                        title={`Capítulo ${index+1}`}
+                                        language={lang}
+                                        placeholder="Preencha o capítulo..."
+                                        value={c.content}
+                                        setValue={(v) => {updateChapter(v, index)}}
+                                        callback={value => updateChapter(value, index) }
+                                        clearOnEnd={true}
+                                        disabled={false}
+                                        printNote={true}
+                                        hasLabel={true}
+                                    >
+                                        <InputGroup.Text className={`clicable ${listen ? 'circle-disable': ''}`} onClick={e=> !listen && text2Speech(c.content, lang,setListen)}><i aria-label="ouvir" className="fa fa-volume-down"></i></InputGroup.Text>
+                                        <InputGroup.Text className="clicable btn-danger" onClick={e=> removeChapter(index)}><i aria-label="remover" className="fa fa-minus"></i></InputGroup.Text>
+                                    </SpeechInput>
+                                </Recognizer>
                             </Form.Group>
                         )
                     })

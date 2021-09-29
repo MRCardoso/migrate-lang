@@ -25,7 +25,6 @@ export default function Sidebar({activeScroll, currentPath}) {
 		setColorPicker(value)
 	}
 	if(!currentPath) {
-		indexPaths.push({uri: '#utilidades', label: "Utilidades"})
 		indexPaths.push({uri: '#contato', label: "Contato"})
 	}
 	return (

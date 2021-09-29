@@ -1,5 +1,6 @@
 import React from "react";
-import { Row, Col, Table, Container, Card } from "react-bootstrap";
+import { Table, Accordion, Card } from "react-bootstrap";
+import {alphabetValues, numberValues} from '../services/utils' 
 
 export default function Tips(){
 	const wordsHR = [
@@ -33,28 +34,46 @@ export default function Tips(){
 	]
 
 	return (
-		<section className="mb-60">
-				{wordsHR.map((item, index) => {
-					return (
-						<Card className="mb-4" key={index}>
-							<Card.Header>{item.title}</Card.Header>
-							<Card.Body>
-								<Table striped bordered hover className="table-responsive">
-									<thead>
-										<tr>
-											{item.cols.map((col, i) => <th key={i}>{col}</th>)}
-										</tr>
-									</thead>
-									<tbody>
-										{item.rows.map((row, index2) => {
-											return (<tr key={index2}>{row.map(r => <td key={r}>{r}</td>)}</tr>)
-										})}
-									</tbody>
-								</Table>
-							</Card.Body>
-						</Card>
-					)
-				})}
-		</section>
+		<>
+			<div className="mb-4">
+				<Accordion defaultActiveKey="0">
+					<Accordion.Item eventKey="0">
+						<Accordion.Header>Alfabeto</Accordion.Header>
+						<Accordion.Body className="text-center">
+							{alphabetValues.map(letter => <span key={letter} className="button-circle button-purple">{letter}</span>)}
+						</Accordion.Body>
+					</Accordion.Item>
+					<Accordion.Item eventKey="1">
+						<Accordion.Header>Números</Accordion.Header>
+						<Accordion.Body className="text-center">
+							{numberValues.map(numb => <span key={numb} className="button-circle button-purple">{numb}</span>)}
+						</Accordion.Body>
+					</Accordion.Item>
+				</Accordion>
+			</div>
+			<section className="mb-60">
+					{wordsHR.map((item, index) => {
+						return (
+							<Card className="mb-4" key={index}>
+								<Card.Header>{item.title}</Card.Header>
+								<Card.Body>
+									<Table striped bordered hover className="table-responsive">
+										<thead>
+											<tr>
+												{item.cols.map((col, i) => <th key={i}>{col}</th>)}
+											</tr>
+										</thead>
+										<tbody>
+											{item.rows.map((row, index2) => {
+												return (<tr key={index2}>{row.map(r => <td key={r}>{r}</td>)}</tr>)
+											})}
+										</tbody>
+									</Table>
+								</Card.Body>
+							</Card>
+						)
+					})}
+			</section>
+		</>
 	)
 }

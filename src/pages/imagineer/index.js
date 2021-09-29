@@ -8,7 +8,7 @@ export default function imagineer(){
 	return (
 		<Capsule
 			title="Histórias"
-			description="Conte-me uma historia..."
+			description="Pratique sua pronúncia lendo histórias..."
 			path="imagineer"
 			displayFooter={true}
 			>

@@ -1,3 +1,4 @@
+const text2SpeechCache = null
 export const shuffle = (o) => {
     for (let j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
@@ -33,4 +34,14 @@ export const alphabetKeyIndex = alphabetValues.reduce((acc, value, index) => {
 export const enabledCloud = (action) => {
     const actions = process.env.NEXT_PUBLIC_ENABLED_CLOUD_STORAGE.split("|")
     return actions.indexOf(action)  !== -1 ? true: false    
+}
+
+export const text2Speech = (text, lang = 'en-US', state = null) => {
+	if(typeof window === "undefined") return {}
+	const synthesis = window.speechSynthesis;
+	const textToSpeech = new SpeechSynthesisUtterance(text);
+	textToSpeech.lang = lang
+    textToSpeech.onstart = () => state !== null && state(true)
+    textToSpeech.onend = () => state !== null && state(false)
+	synthesis.speak(textToSpeech)
 }

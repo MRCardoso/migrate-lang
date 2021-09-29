@@ -2,21 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { Spinner } from "react-bootstrap";
 // import Card from "./Card";
 // import { CardGroup } from "react-bootstrap";
 let GitCacheData = null;
 
 export default function About() {
     const [gitInfo, setGitInfo] = useState(null)
-    const [dots, setDots] = useState(0)
     useEffect(() => {
-        setInterval(() => {
-            setDots(n => {
-                if (n > 2) return 0
-                return ++n
-            })
-        }, 600);
-        
         if(GitCacheData === null){
             fetch("https://api.github.com/users/MRCardoso")
             .then(res => res.json())
@@ -35,11 +28,7 @@ export default function About() {
 
     if(gitInfo === null){
         return (
-            <div className="loading">
-                <div style={{height: '40px'}}>
-                    {new Array(dots).fill(1).map((_, n) => <i key={n} arial-label="Ponto" style={{padding: '0 2px'}} className="fa fa-circle"></i>)}
-                </div>
-            </div>
+            <Spinner animation="grow" />
         )
     }
     

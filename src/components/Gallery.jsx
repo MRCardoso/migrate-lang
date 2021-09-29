@@ -1,21 +1,26 @@
 import React, { useState } from 'react'
 import {Form, InputGroup} from 'react-bootstrap'
 import Image from 'next/image'
-import { pixabayUri } from '../../services/utils'
+import { pixabayUri } from '../services/requests'
+import { useAuth } from '../contexts/AuthContext'
 
 export default function Gallery() {
     const [imageType, setImageType] = useState('photo')
     const [imageSearch, setImageSearch] = useState('')
     const [imagePage, setImagePage] = useState(1)
     const [images, setImages] = useState([])
+    const {setLoading} = useAuth()
 
     const findImages = (page, type) => {
-        const uri = pixabayUri(formHistory.imageSearch, 20, page, type)
+        const uri = pixabayUri(imageSearch, 50, page, type)
         setImages([])
+        setImagePage(page)
+        setLoading(true)
         return new Promise((resolve) => {
             fetch(uri)
                 .then(res => res.json())
                 .then(response => resolve(response.hits))
+                .finally(() => setLoading(false))
         })
     }
 
@@ -49,7 +54,7 @@ export default function Gallery() {
                 </InputGroup>
                 {images.length > 0?
                     images.map(i => {
-                        return <a key={i} href={i.pageURL} target="_blank" rel="noreferrer"  className="mh-x2">
+                        return <a key={i.id} href={i.pageURL} target="_blank" rel="noreferrer"  className="mh-x2">
                             <Image src={i.largeImageURL} alt={i.tags} width={140} height={140} />
                         </a>
                     })

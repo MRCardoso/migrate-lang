@@ -7,7 +7,7 @@ export default function imagineer(){
 	return (
 		<Capsule
 			title="Criar história"
-			description="Conte-me uma historia..."
+			description="Crie histórias e ajude a outras pessoas aprender apartir de seus contos..."
 			path="imagineer"
 			displayFooter={true}
 			>
