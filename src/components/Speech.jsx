@@ -57,21 +57,21 @@ export default function Speech(props){
                     </button>
                     <div className={`${lang === 'en-US' ? 'active-language' : ''}`}>Inglês</div>
                 </div>
-                <Form.Control as="textarea" className="mb-2" rows={6} onChange={e => setPhrase(e.target.value)} value={phrase} placeholder="Coloque seu texto aqui e pratique, traduza ou escute..." />
+                <Form.Control as="textarea" accessKey="w" className="mb-2" rows={6} onChange={e => setPhrase(e.target.value)} value={phrase} placeholder="Coloque seu texto aqui e pratique, traduza ou escute..." />
                 <div className="d-flex speech-buttons">
                     <div style={{flex: 1}}>
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Falar</Tooltip>}>
-                            <Button variant={`${isListning ? 'primary': 'light'}`} size="sm" type="button" aria-label="ativar/desativar fala" onClick={startRecording}>
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Falar [alt + S]</Tooltip>}>
+                            <Button accessKey="s" variant={`${isListning ? 'primary': 'light'}`} size="sm" type="button" aria-label="ativar/desativar fala" onClick={startRecording}>
                                 <i className={`fa fa-${isListning ? "stop" : "microphone"}`}></i>
                             </Button>
                         </OverlayTrigger>
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Traduzir</Tooltip>}>
-                            <Button disabled={isListning || !phrase} size="sm" type="button" aria-label="traduzir" onClick={onTranslate}>
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Traduzir [alt + T]</Tooltip>}>
+                            <Button accessKey="t" disabled={isListning || !phrase} size="sm" type="button" aria-label="traduzir" onClick={onTranslate}>
                                 <i className="fa fa-language"></i>
                             </Button>
                         </OverlayTrigger>
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Ouvir</Tooltip>}>
-                            <Button disabled={!phrase || listen} variant="light" size="sm" type="button" aria-label="traduzir" onClick={() => text2Speech(phrase, lang, setListen)}>
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Ouvir [alt + L]</Tooltip>}>
+                            <Button accessKey="l" disabled={!phrase || listen} variant="light" size="sm" type="button" aria-label="traduzir" onClick={() => text2Speech(phrase, lang, setListen)}>
                                 <i className="fa fa-volume-up"></i>
                             </Button>
                         </OverlayTrigger>

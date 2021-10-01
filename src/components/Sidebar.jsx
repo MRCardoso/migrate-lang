@@ -36,7 +36,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 						<Image
 							src="/logo.png"
 							alt="Logo Marca"
-							width={60}
+							width={48}
 							height={40}
 							/>
 						</a>

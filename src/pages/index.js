@@ -49,7 +49,8 @@ export default function Home() {
 					<a href="https://www.grammarly.com/" className="btn btn-sm btn-secondary mh-x2" target="_blank" rel="noreferrer">
 						<i className="fa fa-puzzle-piece"></i> grammarly
 					</a>
-					em seu navegador, para ajudar com a gramática.</p>
+					em seu navegador, para ajudar com a gramática.
+				</p>
 			</article>
 
 			<article className="flex-center">
