@@ -6,7 +6,7 @@ import { create } from '../../services/firebase/entities/histories'
 import { requestTranslate } from '../../services/requests'
 import Recognizer from '../Recognizer'
 import SpeechInput from '../SpeechInput'
-import { text2Speech } from '../../services/utils'
+import { prepareError, text2Speech } from '../../services/utils'
 
 export default function ImagineerForm() {
     const [content, setContent] = useState('')
@@ -87,8 +87,7 @@ export default function ImagineerForm() {
                 )
             })
             .catch(error =>{
-                console.log(error)
-                setMessager({variant: "danger", message: (Array.isArray(error) || typeof error === "string" ? error : "Erro inesperado ao traduzir, tente novamente mais tarde.")})
+                setMessager({variant: "danger", message: prepareError(error)})
             })
             .finally(() => setLoading(false))
     }

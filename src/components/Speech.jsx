@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, OverlayTrigger, Tooltip, DropdownButton, Button, Dropdown} from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 import { requestTranslate } from '../services/requests'
-import {copy, enabledCloud, text2Speech} from '../services/utils'
+import {copy, enabledCloud, prepareError, text2Speech} from '../services/utils'
 
 export default function Speech(props){
     const {setPhrase, phraseReason, setIsListining, isListning, phrase, handleSaveNote, note, setNote, setMicLang} = props
@@ -41,7 +41,7 @@ export default function Speech(props){
                 setPhrase(translates[phrase])
             })
             .catch(error =>{
-                setMessager({variant: "danger", message: error})
+                setMessager({variant: "danger", message: prepareError(error)})
             })
             .finally(() => setLoading(false))
     }

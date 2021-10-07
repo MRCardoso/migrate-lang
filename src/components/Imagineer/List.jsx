@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import {Form, FloatingLabel, OverlayTrigger, Tooltip, Button} from 'react-bootstrap'
+import {Form, FloatingLabel, OverlayTrigger, Tooltip, Button, Badge} from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext'
 import { getChapter, list } from '../../services/firebase/entities/histories'
 import { text2Speech } from '../../services/utils'
@@ -12,6 +12,7 @@ export default function ImagineerList(props) {
     const [chapters, setChapters] = useState([])
     const [chapterIndex, setChapterIndex] = useState(0)
     const [stateChapters, setStateChapters] = useState([])
+    const [chaptersScore, setChapterScore] = useState({hit: 0, fail: 0}) 
     const [listen, setListen] = useState(false)
     const {setMessager, setLoading} = useAuth()
 
@@ -39,6 +40,8 @@ export default function ImagineerList(props) {
             const items = [...stateChapters]
             let hit = phraseReason.status === true ? 1 : 0
             let fail = phraseReason.status === false ? 1 : 0
+
+            setChapterScore({hit: (chaptersScore.hit+hit), fail: (chaptersScore.fail+fail) })
             
             if(items[chapterIndex]) {
                 hit += items[chapterIndex].hit
@@ -56,6 +59,7 @@ export default function ImagineerList(props) {
         setChapters(c)
         setNote("")
         setStateChapters([])
+        setChapterScore({hit: 0, fail: 0})
         setPhraseReason({})
         setChapterIndex(0)
     }
@@ -102,8 +106,22 @@ export default function ImagineerList(props) {
             </FloatingLabel>
             {history ?
                 <div className="histories">
-                    <h3 className="pt-4">{history.content}</h3>
-                    <p>{note}</p>
+                    <h3 className="pt-4 text-center">{history.content}</h3>
+                    <div className="histories-score">
+                        <div>
+                            <strong>Capítulos</strong>
+                            <span>{chapterIndex+1}/{chapters.length}</span>
+                        </div>
+                        <div>
+                            <strong>Acertos</strong>
+                            <span>{chaptersScore.hit}</span>
+                        </div>
+                        <div>
+                            <strong>Erros</strong>
+                            <span>{chaptersScore.fail}</span>
+                        </div>
+                    </div>
+                    <p className="text-center mt-2 mb-2">{note}</p>
                     {chapters.map((c, index) => {
                         return (
                         <div key={index} className={`histories-content ${chapterIndex !== index? 'histories-content-disabled': ''}`}>
@@ -123,20 +141,18 @@ export default function ImagineerList(props) {
                                         <i className="fa fa-volume-up"></i>
                                     </Button>
                                 </OverlayTrigger>
-                                {stateChapters[index]?
                                 <>
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>Pronúncias corretas</Tooltip>}>
                                         <div className="mh-x2 btn btn-light btn-sm">
-                                            <i aria-label="Pronúncias corretas" className="text-success mh-x2 fa fa-check-circle"></i>{stateChapters[index].hit}
+                                            <i aria-label="Pronúncias corretas" className="text-success mh-x2 fa fa-check-circle"></i> {stateChapters[index] ? stateChapters[index].hit: 0}
                                         </div>
                                     </OverlayTrigger>
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>Pronúncias erradas</Tooltip>}>
                                         <div className="mh-x2 btn btn-light btn-sm">
-                                            <i aria-label="Pronúncias erradas" className="text-danger mh-x2 fa fa-exclamation-circle"></i>{stateChapters[index].fail}
+                                            <i aria-label="Pronúncias erradas" className="text-danger mh-x2 fa fa-exclamation-circle"></i>{stateChapters[index] ? stateChapters[index].fail : 0}
                                         </div>
                                     </OverlayTrigger>
                                 </>
-                                :''}
                             </div>
                         </div>
                         )

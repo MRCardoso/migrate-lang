@@ -24,6 +24,11 @@ export const isGuestRoutes = (path) => {
     )
 }
 
+export const prepareError = (error) => {
+    console.log({error})
+    return (Array.isArray(error) || typeof error === "string" ? error : "Erro inesperado ao traduzir, tente novamente mais tarde.")
+}
+
 export const alphabetValues = ["A", "B", "C", "D", "E", "F","G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 export const numberValues = new Array(100).fill(0).map((_, i) => i + 1)
 export const alphabetKeyIndex = alphabetValues.reduce((acc, value, index) => {

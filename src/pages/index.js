@@ -35,15 +35,23 @@ export default function Home() {
 				<Recognizer isMany={false}>
 					<Speech />
 				</Recognizer>
-				<Link href="/imagineer">
-					<a className="w-100 btn btn-primary" title="historias">Aprenda atravez de histórias</a>
-				</Link>
+				<div className="links-vertical">
+					<Link href="/imagineer">
+						<a className="link-vertical-item" title="historias">Aprenda atravez de histórias</a>
+					</Link>
+					<Link href="https://mardozux.itch.io/the-imaginner">
+						<a className="link-vertical-item" title="The imaginner Game" target="_blank" rel="noreferrer">
+							<i className="fa fa-gamepad mh-x2"></i>Aprenda jogando
+						</a>
+					</Link>
+					<Link href="/imagineer/create">
+						<a className="link-vertical-item" title="Crie suas historias">
+							<i className="fa fa-plus mh-x2"></i> Crie suas próprias
+						</a>
+					</Link>
+				</div>
 				<div className="d-flex w-100 justify-content-center">Ou</div>
-				<Link href="/imagineer/create">
-					<a className="w-100 mb-4 btn btn-primary" title="historias">
-						<i className="fa fa-plus"></i> Crie suas próprias
-					</a>
-				</Link>
+				
 				<p className="d-flex justify-content-center">
 					Baixe a extensão
 					<a href="https://www.grammarly.com/" className="btn btn-sm btn-secondary mh-x2" target="_blank" rel="noreferrer">
