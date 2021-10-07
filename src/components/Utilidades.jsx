@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import {Form, InputGroup, FormControl, Accordion} from 'react-bootstrap';
+import {Form, InputGroup, FormControl} from 'react-bootstrap';
 
 import Recognizer from "./Recognizer";
 import SpeechInput from "./SpeechInput";
 import {randomBytes} from "crypto"
-import {shuffle, rand, copy, validateNumber, alphabetValues, numberValues} from '../services/utils' 
+import {shuffle, rand, copy, validateNumber} from '../services/utils' 
 import { useAuth } from "../contexts/AuthContext";
 
 export default function Utilities(){
 	const [hash, setHash] = useState("")
 	const [size, setSize] = useState(20)
 	const [number, setNumber] = useState("")
+	const [numberValue, setNumberValue] = useState("")
 	const {setMessager} = useAuth()
 	
 	const createHash = () => {
@@ -21,11 +22,8 @@ export default function Utilities(){
         setHash(randomBytes(validateNumber(size, 20)).toString("hex"))
     }
 
-	const alphabet = alphabetValues
-	const numbers = numberValues
-
     const shuffleChoose = (value) => {
-        const values = value
+		const values = value
             .split(' ')
             .map(v => String(v).replace(/[^0-9]/ig, '').trim())
             .filter(v => v)
@@ -42,70 +40,42 @@ export default function Utilities(){
     }
 
 	return (
-		<div id="utilidades">
+		<Form className="article">
 			<div className="mb-4">
-				<Accordion defaultActiveKey="0">
-					<Accordion.Item eventKey="0">
-						<Accordion.Header>Alfabeto</Accordion.Header>
-						<Accordion.Body className="text-center">
-							{alphabet.map(letter => <span key={letter} className="button-circle button-purple">{letter}</span>)}
-						</Accordion.Body>
-					</Accordion.Item>
-					<Accordion.Item eventKey="1">
-						<Accordion.Header>Números</Accordion.Header>
-						<Accordion.Body className="text-center">
-							{numbers.map(numb => <span key={numb} className="button-circle button-purple">{numb}</span>)}
-						</Accordion.Body>
-					</Accordion.Item>
-				</Accordion>
+				<Form.Label>Gerador de Texto aleatório</Form.Label>
+				<InputGroup className="mb-2">
+					<InputGroup.Text className="clicable btn-info text-white" onClick={() => copyText()}>
+						<i className="fa fa-copy"></i>
+					</InputGroup.Text>
+					<FormControl value={hash} placeholder="Seu código aleatorio" disabled={true} />
+					<FormControl value={size} type="number" placeholder="Tamanho" onChange={e => setSize(e.target.value)} />
+					
+					<InputGroup.Text className="clicable btn-success text-white" onClick={() => createHash()}>
+						<i aria-label="Hash string" className="fa fa-hashtag"></i> Hashstring
+					</InputGroup.Text>
+					<InputGroup.Text className="clicable btn-secondary text-white" onClick={() => createHex()}>
+						<i aria-label="Token string" className="fa fa-key"></i> Token
+					</InputGroup.Text>
+				</InputGroup>
 			</div>
-			<Form className="article">
-				<Recognizer>
-					<SpeechInput
-						type="textarea"
-						title="Conteúdo"
-						placeholder="Pratique sua pronúncia, elabore frases livremente."
-						clearOnEnd={true}
+			<div className="mb-4">
+				<Recognizer isMany={false}>
+						<SpeechInput
+						type="text"
+						title="Sorteio um número"
+						lang="en-US"
+						placeholder="Diga números aleatorios e seguida embaralhamos e sorteamos o vencedor."
 						disabled={true}
+						value={numberValue}
+						setValue={setNumberValue}
+						callback={value => shuffleChoose(value)}
+						clearOnEnd={true}
 						printNote={true}
 						hasLabel={true}
-					/>
+						/>
 				</Recognizer>
-
-				
-				<div className="mb-4">
-					<Form.Label>Gerador de Texto aleatório</Form.Label>
-					<InputGroup className="mb-2">
-						<InputGroup.Text className="clicable btn-info text-white" onClick={() => copyText()}>
-							<i className="fa fa-copy"></i>
-						</InputGroup.Text>
-						<FormControl value={hash} placeholder="Seu código aleatorio" disabled={true} />
-						<FormControl value={size} type="number" placeholder="Tamanho" onChange={e => setSize(e.target.value)} />
-						
-						<InputGroup.Text className="clicable btn-success text-white" onClick={() => createHash()}>
-							<i aria-label="Hash string" className="fa fa-hashtag"></i> Hashstring
-						</InputGroup.Text>
-						<InputGroup.Text className="clicable btn-secondary text-white" onClick={() => createHex()}>
-							<i aria-label="Token string" className="fa fa-key"></i> Token
-						</InputGroup.Text>
-					</InputGroup>
-				</div>
-				<div className="mb-4">
-					<Recognizer isMany={false}>
-							<SpeechInput
-							type="text"
-							title="Sorteio um número"
-							placeholder="Diga números aleatorios e seguida embaralhamos e sorteamos o vencedor."
-							disabled={true}
-							callback={(value) => shuffleChoose(value)}
-							clearOnEnd={true}
-							printNote={true}
-							hasLabel={true}
-							/>
-					</Recognizer>
-					{number? <InputGroup.Text className="btn-success text-white">Valor Sorteado: {number}</InputGroup.Text> :''}
-				</div>
-			</Form>
-		</div>
+				{number? <InputGroup.Text className="btn-success text-white">Valor Sorteado: {number}</InputGroup.Text> :''}
+			</div>
+		</Form>
 	)
 }

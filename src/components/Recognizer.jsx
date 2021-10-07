@@ -10,7 +10,7 @@ const instance = () =>{
 	mic.continuous = true
 	mic.interimResults = true
 	console.log(getLanguage())
-	mic.lang = getLanguage()
+	// mic.lang = getLanguage()
 	return mic
 }
 
@@ -23,6 +23,8 @@ export default function Recognizer(props){
 	const [saveNotes, setSaveNotes] = useState([])
 	const [phraseReason, setPhraseReason] = useState({})
 	const [startRecord, setStartRecord] = useState(null)
+	const [micLang, setMicLang] = useState("en-US")
+	const [translation, setTranslation] = useState('')
 	
 	useEffect(() => {
 		handleListening()
@@ -57,11 +59,17 @@ export default function Recognizer(props){
 			setPhraseReason(reason)
 		}
 	}
+
+	const onTranslate = (note) => {
+		setTranslation(note)
+	}
 	
 	const handleListening = () => {
 		if(isListning){
 			try {
+				mic.lang = micLang
 				setNote('')
+				onTranslate('')
 				setPhraseReason({})
 				mic.start()
 				mic.onend = ()=> { mic.start() }
@@ -74,13 +82,14 @@ export default function Recognizer(props){
 			mic.onend = () => console.log('end')
 		}
 		
-		mic.onstart = () => {console.log('Mic is on')}
+		mic.onstart = () => {console.log(`recording in ${mic.lang}...`)}
 		mic.onaudiostart = () => {
 			setStartRecord(true)
 		}
 		mic.onaudioend = (e) => {
-			setStartRecord(false)
 			comparePhrases(note)
+			onTranslate(note)
+			setStartRecord(false)
 		}
 
 		mic.onresult = event => {
@@ -148,7 +157,11 @@ export default function Recognizer(props){
 			setSaveNotes,
 			setPhraseReason,
 			handleListening,
-			handleSaveNote
+			handleSaveNote,
+			micLang,
+			setMicLang,
+			translation,
+			onTranslate
 		})}
 		</>
 	)

@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import Link from 'next/link'
 import Image from 'next/image'
 import { Container, Nav, Navbar, Form} from "react-bootstrap"
-import Lang from "./Lang"
 
 export default function Sidebar({activeScroll, currentPath}) {
 	const [colorPicker, setColorPicker] = useState("#EAEBFD")
@@ -26,7 +25,6 @@ export default function Sidebar({activeScroll, currentPath}) {
 		setColorPicker(value)
 	}
 	if(!currentPath) {
-		indexPaths.push({uri: '#utilidades', label: "Utilidades"})
 		indexPaths.push({uri: '#contato', label: "Contato"})
 	}
 	return (
@@ -38,7 +36,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 						<Image
 							src="/logo.png"
 							alt="Logo Marca"
-							width={60}
+							width={48}
 							height={40}
 							/>
 						</a>
@@ -64,7 +62,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 							})}
 						</Nav>
 						<Form.Control type="color" value={colorPicker} onChange={e => setCollor(e.target.value)} title="Escolha uma cor" />
-						<Lang />
+						{/* <Lang /> */}
 						<Nav className="me-right links-outline">
 							{thirdPart.map(t => {
 								return (

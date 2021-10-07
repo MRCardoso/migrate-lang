@@ -6,15 +6,15 @@ import Head from 'next/head'
 import Sidebar from '../components/Sidebar'
 import Footer from '../components/Footer'
 
-import { canonicalName, appName } from '../services/metakeys';
+import { canonicalName, appName, noIndexPath } from '../services/metakeys';
 import React, { useEffect, useState } from 'react'
 import About from './About'
-import Question from './Question'
 import AuthProvider from '../contexts/AuthContext'
 
 export default function Capsule(props) {
 	const url = canonicalName(props.path)
 	const logoUrl = canonicalName("logo.png")
+	
 	const displaySidebar = (typeof props.displaySidebar === "undefined" ? true : props.displaySidebar)
 	const displayTitle = (typeof props.displayTitle === "undefined" ? true : props.displayTitle)
 	const [activeScroll, setActiveScroll] = useState(false)
@@ -48,7 +48,6 @@ export default function Capsule(props) {
 			<button type="button" onClick={scrollTop} aria-label="Voltar ao topo" title="Voltar ao topo" className={`back-top ${activeScroll ? 'on-top' : ''}`}>
 				<i className="fa fa-chevron-up"></i>
 			</button>
-			<Question />
 			{props.displayFooter? <Footer /> : ''}
 		</>
 	}
@@ -61,7 +60,7 @@ export default function Capsule(props) {
 				<meta name="description" content={props.description} />
 				<link rel="canonical" href={url} />
 				<meta name="author" content="Marlon Cardoso" />
-				<meta name="robots" content="index" />
+				<meta name="robots" content={noIndexPath(props.path)? "noindex": "index"} />
 
 				{/* Open Graph Facebook */}
 				<meta property="og:title" content={props.title} />

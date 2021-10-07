@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { Image } from 'react-bootstrap'
 
 export default function Footer(){
     const d = new Date()
