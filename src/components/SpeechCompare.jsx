@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { requestTranslate } from '../services/requests'
 import {copy, enabledCloud, prepareError, text2Speech} from '../services/utils'
 
-export default function Speech(props){
+export default function SpeechCompare(props){
     const {setPhrase, phraseReason, setIsListining, isListning, phrase, handleSaveNote, note, setNote, setMicLang} = props
     const {setMessager, setLoading} = useAuth()
     const [lang, setLang] = useState('en-US')
@@ -50,24 +50,12 @@ export default function Speech(props){
         <React.Fragment>
             <div className="speech-container">
                 <Form.Label>Digite algo</Form.Label>
-                <div className="toggle-language">
-                    <div className={`${lang === 'pt-BR' ? 'active-language' : ''}`}>Português</div>
-                    <button type="button" onClick={() => toggleLanguage()}>
-                        <i className="fa fa-exchange"></i>
-                    </button>
-                    <div className={`${lang === 'en-US' ? 'active-language' : ''}`}>Inglês</div>
-                </div>
                 <Form.Control as="textarea" accessKey="w" className="mb-2" rows={8} onChange={e => setPhrase(e.target.value)} value={phrase} placeholder="Coloque seu texto aqui e pratique, traduza ou escute..." />
                 <div className="d-flex speech-buttons">
                     <div style={{flex: 1}}>
                         <OverlayTrigger placement="top" overlay={<Tooltip>Falar [alt + S]</Tooltip>}>
                             <Button accessKey="s" variant={`${isListning ? 'primary': 'light'}`} size="sm" type="button" aria-label="ativar/desativar fala" onClick={startRecording}>
                                 <i className={`fa fa-${isListning ? "stop" : "microphone"}`}></i>
-                            </Button>
-                        </OverlayTrigger>
-                        <OverlayTrigger placement="top" overlay={<Tooltip>Traduzir [alt + T]</Tooltip>}>
-                            <Button accessKey="t" disabled={isListning || !phrase} size="sm" type="button" aria-label="traduzir" onClick={onTranslate}>
-                                <i className="fa fa-language"></i>
                             </Button>
                         </OverlayTrigger>
                         <OverlayTrigger placement="top" overlay={<Tooltip>Ouvir [alt + L]</Tooltip>}>

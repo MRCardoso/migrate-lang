@@ -36,7 +36,7 @@ export default function Footer(){
                     </Link>
                 </strong>
             </span>
-            <div>
+            {/* <div>
                 <form action="https://www.paypal.com/donate" method="post" target="_top">
                     <input type="hidden" name="business" value="5GLEV64R9MAEU" />
                     <input type="hidden" name="no_recurring" value="1" />
@@ -45,7 +45,7 @@ export default function Footer(){
                     <input type="image" src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Faça doações com o botão do PayPal" />
                     <img alt="Doar valor" border="0" src="https://www.paypal.com/pt_BR/i/scr/pixel.gif" width="1" height="1" />
                 </form>
-            </div>
+            </div> */}
 
         </footer>
     )

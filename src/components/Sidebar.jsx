@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import Link from 'next/link'
-import Image from 'next/image'
 import { Container, Nav, Navbar, Form} from "react-bootstrap"
 
 export default function Sidebar({activeScroll, currentPath}) {
@@ -29,21 +28,14 @@ export default function Sidebar({activeScroll, currentPath}) {
 	}
 	return (
 		<header>
-			<Navbar className={activeScroll ? 'black-purple fixed-top': ''} expand="lg">
+			<Navbar className={`black-purple ${activeScroll ? 'border-buttom-white fixed-top': ''}`} expand="lg">
 				<Container>
 					<Link href="/">
-						<a className="navbar-brand">
-						<Image
-							src="/logo.png"
-							alt="Logo Marca"
-							width={48}
-							height={40}
-							/>
-						</a>
+						<a className="navbar-brand text-white">Megrolang</a> 
 					</Link>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
-						<Nav className="me-auto">
+						{/* <Nav className="me-auto">
 							{indexPaths.map(p => {
 								return (
 									<Link key={p.uri} href={p.uri}>
@@ -51,7 +43,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 									</Link>
 								)
 							})}
-						</Nav>
+						</Nav> */}
 						<Nav className="me-right">
 							{paths.map(p => {
 								return (
@@ -61,9 +53,9 @@ export default function Sidebar({activeScroll, currentPath}) {
 								)
 							})}
 						</Nav>
-						<Form.Control type="color" value={colorPicker} onChange={e => setCollor(e.target.value)} title="Escolha uma cor" />
+						{/* <Form.Control type="color" value={colorPicker} onChange={e => setCollor(e.target.value)} title="Escolha uma cor" /> */}
 						{/* <Lang /> */}
-						<Nav className="me-right links-outline">
+						{/* <Nav className="me-right links-outline">
 							{thirdPart.map(t => {
 								return (
 									<a key={t.icon} href={t.url} target="_blank" rel="noreferrer" title={t.label}>
@@ -71,7 +63,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 									</a>
 								)
 							})}
-						</Nav>
+						</Nav> */}
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>

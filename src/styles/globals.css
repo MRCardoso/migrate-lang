@@ -123,6 +123,8 @@ a {
 .black-purple{
   background: var(--bg-light) !important;
   color: var(--text-light) !important;
+}
+.border-buttom-white{
   border-bottom: 1px solid var(--bg-white);
 }
 
@@ -200,6 +202,42 @@ a {
   /* justify-content: center; */
   text-align: left;
   /* height: 100vh; */
+}
+
+.flex-home{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100vh;
+}
+.app-features{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.app-features .app-features-card{
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin: 0 16px;
+  height: 200px;
+}
+.app-features .app-features-card p{
+  flex: 1;
+}
+.app-features ul li a{
+  padding: 12px;
+  text-decoration: none;
+}
+.app-features ul li a:hover{
+  background-color: var(--bg-dark);
+  border-radius: 2px;
+  border-bottom: 1px solid var(--bg-white);
 }
 
 .full-height{
@@ -602,7 +640,7 @@ input:focus, textarea:focus, select:focus{
 }
 
 .circle {
-  animation: 2s infinite alternate circle;
+  animation: 1s infinite alternate circle;
 }
 
 @keyframes circle {

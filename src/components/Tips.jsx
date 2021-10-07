@@ -36,20 +36,15 @@ export default function Tips(){
 	return (
 		<>
 			<div className="mb-4">
-				<Accordion defaultActiveKey="0">
-					<Accordion.Item eventKey="0">
-						<Accordion.Header>Alfabeto</Accordion.Header>
-						<Accordion.Body className="text-center">
-							{alphabetValues.map(letter => <span key={letter} className="button-circle button-purple">{letter}</span>)}
-						</Accordion.Body>
-					</Accordion.Item>
-					<Accordion.Item eventKey="1">
-						<Accordion.Header>Números</Accordion.Header>
-						<Accordion.Body className="text-center">
-							{numberValues.map(numb => <span key={numb} className="button-circle button-purple">{numb}</span>)}
-						</Accordion.Body>
-					</Accordion.Item>
-				</Accordion>
+				<div className="text-center">
+				<h4>Alfabeto</h4>
+					{alphabetValues.map(letter => <span key={letter} className="btn btn-secondary btn-sm mh-x2">{letter}</span>)}
+				</div>
+				<div className="text-center mt-4">
+				<h4>Números</h4>
+					{numberValues.map(numb => <span key={numb} className="btn btn-secondary btn-sm mh-x2">{numb}</span>)}
+				</div>
+				<hr />
 			</div>
 			<section className="mb-60">
 					{wordsHR.map((item, index) => {

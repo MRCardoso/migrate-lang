@@ -17,6 +17,7 @@ export default function Capsule(props) {
 	
 	const displaySidebar = (typeof props.displaySidebar === "undefined" ? true : props.displaySidebar)
 	const displayTitle = (typeof props.displayTitle === "undefined" ? true : props.displayTitle)
+	const useContainer = (typeof props.useContainer === "undefined" ? true : props.useContainer)
 	const [activeScroll, setActiveScroll] = useState(false)
 
 	useEffect(() => {
@@ -39,7 +40,7 @@ export default function Capsule(props) {
 		return <>
 			{displaySidebar ? <Sidebar activeScroll={activeScroll} currentPath={props.path} /> : ''}
 			<main id="app">
-				<section className="container">
+				<section className={`${useContainer?'container': ''}`}>
 					{displayTitle? <header><h1>{props.title}</h1></header> :''}
 					{props.children}
 				</section>
