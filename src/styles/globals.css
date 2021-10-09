@@ -123,12 +123,14 @@ a {
 .black-purple{
   background: var(--bg-light) !important;
   color: var(--text-light) !important;
+}
+.border-buttom-white{
   border-bottom: 1px solid var(--bg-white);
 }
 
 .navbar-light .navbar-nav .active-link{
   font-weight: bold;
-  border-bottom: 1px solid var(--bg-light);
+  border-bottom: 1px solid var(--bg-white);
 }
 
 .black-purple .navbar-nav .nav-link, .black-purple a[rel="noreferrer"]{
@@ -202,6 +204,41 @@ a {
   /* height: 100vh; */
 }
 
+.flex-home{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.app-features{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.app-features .app-features-card{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 16px;
+  height: 180px;
+}
+.app-features .app-features-card p{
+  flex: 1;
+}
+.app-features ul li a{
+  padding: 12px;
+  text-decoration: none;
+}
+.app-features ul li a:hover{
+  background-color: var(--bg-dark);
+  border-radius: 2px;
+  border-bottom: 1px solid var(--bg-white);
+}
+
 .full-height{
   height: 100vh;
 }
@@ -219,6 +256,12 @@ a {
   /* box-shadow: 0 0 4px #222; */
 }
 
+.flex-columns{
+  display: flex;
+  flex-direction: column;
+  margin-right: 8px
+}
+
 .flex-start{
   justify-content: flex-start !important;
 }
@@ -228,6 +271,21 @@ a {
 }
 .flex-between{
   justify-content: space-between;
+}
+
+.speech-text{
+  width: 100%;
+  padding: 12px;
+  min-height: 30vh;
+  position: relative;
+}
+.speech-textarea{
+  position: relative;
+}
+.speech-textarea button, .speech-text button{
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 .flex-text{
   width: 100%;
@@ -372,14 +430,28 @@ a {
 /* Footer */
 footer.footer{
   display: flex !important;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-around;
+  flex-direction: row;
   padding: 20px 0;
   text-align: center;
   background-color: var(--bg-dark);
   /* background: linear-gradient(to top, var(--bg-dark) 10%, transparent 90%); */
   color: var(--text-light);
   width: 100%;
+}
+
+.footer ul{
+  list-style: none;
+  margin: auto 0;
+  text-align: center;
+  padding: 0;
+  background: transparent;
+}
+.footer ul li{
+  display: inline;
+}
+.footer ul li a{
+  padding: 8px;
 }
 
 .footer.footer a{
@@ -452,7 +524,7 @@ input:focus, textarea:focus, select:focus{
 .speech-container{
   display: flex;
   flex-direction: column;
-  margin: 34px 0;
+  /* margin: 34px 0; */
   width: 100%;
   background-color: var(--bg-white);
   box-shadow: 0 0 4px var(--border-black);
@@ -460,7 +532,10 @@ input:focus, textarea:focus, select:focus{
   word-wrap: break-word;
 }
 .speech-container label{
-  padding: 8px 8px 0 8px
+  padding-left: 8px;
+  padding-top: 4px;
+  margin: 0;
+  color: var(--border-black);
 }
 
 .speech-container > .speech-buttons{
@@ -475,11 +550,10 @@ input:focus, textarea:focus, select:focus{
   padding-bottom: 8px;
 }
 
-.speech-container textarea{
+.textarea-pretty{
   border: none !important;
-  resize: none !important;
-  border-radius: 0 !important;
-  border-bottom: 1px solid var(--bg-dark) !important;
+  border-radius: 4px !important;
+  border-bottom: 1px solid var(--bg-light) !important;
 }
 
 .speech-container hr{
@@ -602,7 +676,7 @@ input:focus, textarea:focus, select:focus{
 }
 
 .circle {
-  animation: 2s infinite alternate circle;
+  animation: 1s infinite alternate circle;
 }
 
 @keyframes circle {
@@ -648,6 +722,15 @@ input:focus, textarea:focus, select:focus{
   .flex-inline{
     display: flex;
     flex-direction: column;
+  }
+
+  .app-features{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+  }
+  .app-features .app-features-card{
+    width: auto;
   }
 
   .links-vertical{

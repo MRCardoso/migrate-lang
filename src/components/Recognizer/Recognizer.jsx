@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from "react";
-import { save as onlineSave } from "../services/firebase/entities/phrases";
-import { getLanguage, save as offlineSave } from '../services/storage';
+import { save as onlineSave } from "../../services/firebase/entities/phrases";
+import { getLanguage, save as offlineSave } from '../../services/storage';
 
 
 const instance = () =>{
@@ -123,9 +123,9 @@ export default function Recognizer(props){
 	const handleSaveNote = async (saveCloud, next) => {
 		try {
 			if(phraseReason && "status" in phraseReason){
-				var promises = [offlineSave(phrase, phraseReason.status, saveCloud)]
+				var promises = [offlineSave(phrase, phraseReason.status, saveCloud, micLang)]
 				if(saveCloud)
-					promises.push(onlineSave(phrase, phraseReason.status))
+					promises.push(onlineSave(phrase, phraseReason.status, micLang))
 				
 				return Promise.all(promises).then(_ => {
 					setNote('')
@@ -161,7 +161,8 @@ export default function Recognizer(props){
 			micLang,
 			setMicLang,
 			translation,
-			onTranslate
+			onTranslate,
+			closeOnSpeakend: (props.isMany === undefined ? false: props.isMany)
 		})}
 		</>
 	)

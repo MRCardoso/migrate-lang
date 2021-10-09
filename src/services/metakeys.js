@@ -13,3 +13,10 @@ export const noIndexPath = (path) => {
 export const canonicalName = (path = '') => {
     return `https://megrolang.com.br/${path || ''}`
 }
+
+export const gameUri = 'https://mardozux.itch.io/the-imaginner'
+
+export const paypalInfo = {
+    key: '5GLEV64R9MAEU',
+    uri: 'https://www.paypal.com/donate'
+}

@@ -4,12 +4,13 @@ import {Form, InputGroup, Button, OverlayTrigger, Tooltip} from 'react-bootstrap
 import { useAuth } from '../../contexts/AuthContext'
 import { create } from '../../services/firebase/entities/histories'
 import { requestTranslate } from '../../services/requests'
-import Recognizer from '../Recognizer'
-import SpeechInput from '../SpeechInput'
+import Recognizer from '../Recognizer/Recognizer'
+import SpeechInput from '../Recognizer/SpeechInput'
 import { prepareError, text2Speech } from '../../services/utils'
 
 export default function ImagineerForm() {
     const [content, setContent] = useState('')
+    const [linkRef, setLinkRef] = useState('')
     const [chapters, setChapters] = useState([])
     const [lang, setLang] = useState("en-US")
     const [listen, setListen] = useState(false)
@@ -28,7 +29,7 @@ export default function ImagineerForm() {
         }
         setLoading(true)
         try {
-            await create({content, lang, chapters})
+            await create({content, linkRef, lang, chapters})
             setMessager({variant: "success", message: "História criada com sucesso"})
             clearForm()
         } catch (error) {
@@ -39,6 +40,7 @@ export default function ImagineerForm() {
 
     const clearForm = () => {
         setContent("")
+        setLinkRef("")
         setChapters([])
         setLang("pt-BR")
     }
@@ -97,7 +99,7 @@ export default function ImagineerForm() {
             <Form>
                 <div className="d-flex mb-4">
                     <div style={{flex: 1}}>
-                        <Link href="/imagineer">
+                        <Link href="/historias">
                             <a title="Crie sua propria história" className="btn btn-light">
                                 <i className="fa fa-chevron-left"></i> Voltar
                             </a>
@@ -136,6 +138,25 @@ export default function ImagineerForm() {
                             hasLabel={true}
                         >
                             <InputGroup.Text className={`clicable ${listen ? 'circle-disable': ''}`} onClick={e=> !listen && text2Speech(content, lang, setListen)}><i aria-label="ouvir" className="fa fa-volume-down"></i></InputGroup.Text>
+                        </SpeechInput>
+                    </Recognizer>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="storyContent">
+                    <Recognizer isMany={false}>
+                        <SpeechInput
+                            type="text"
+                            title="Link da história"
+                            language={lang}
+                            placeholder="Informe o link de onde tirou sua história para dar os devidos créditos..."
+                            value={linkRef}
+                            setValue={setLinkRef}
+                            clearOnEnd={true}
+                            disabled={false}
+                            printNote={true}
+                            hasLabel={true}
+                            enableVoice={false}
+                        >
                         </SpeechInput>
                     </Recognizer>
                 </Form.Group>

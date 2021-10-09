@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {FormControl, InputGroup,FloatingLabel, Form} from 'react-bootstrap';
 
 export default function SpeechInput(props){
-    const {setIsListining, isListning, note, setNote, startRecord, setMicLang, language, value, setValue, clearField} = props
+    const {setIsListining, isListning, note, setNote, startRecord, setMicLang, language, value, setValue, clearField, enableVoice=true} = props
     const [] = useState('')
     
     useEffect(() => {
@@ -38,9 +38,11 @@ export default function SpeechInput(props){
                     ? <FormControl as="textarea" value={value} placeholder={props.placeholder || props.title} onChange={e => setValue(e.target.value)} disabled={props.disabled} />
                     : <FormControl value={value} placeholder={props.placeholder || props.title} onChange={e => setValue(e.target.value)} disabled={props.disabled} />
                     }
+                    {enableVoice? 
                     <InputGroup.Text onClick={toggleVoice} className={isListning? 'button-purple text-white': ''}>
                         { isListning ? <i className="fa fa-stop"></i> : <i className="fa fa-microphone"></i>}
                     </InputGroup.Text>
+                    : ''}
                     {props.children}
                 </InputGroup>
                 {props.printNote? <Form.Text className="Form.text-muted">{note}</Form.Text>: ''}

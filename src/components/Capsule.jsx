@@ -8,7 +8,6 @@ import Footer from '../components/Footer'
 
 import { canonicalName, appName, noIndexPath } from '../services/metakeys';
 import React, { useEffect, useState } from 'react'
-import About from './About'
 import AuthProvider from '../contexts/AuthContext'
 
 export default function Capsule(props) {
@@ -17,6 +16,7 @@ export default function Capsule(props) {
 	
 	const displaySidebar = (typeof props.displaySidebar === "undefined" ? true : props.displaySidebar)
 	const displayTitle = (typeof props.displayTitle === "undefined" ? true : props.displayTitle)
+	const useContainer = (typeof props.useContainer === "undefined" ? true : props.useContainer)
 	const [activeScroll, setActiveScroll] = useState(false)
 
 	useEffect(() => {
@@ -39,11 +39,10 @@ export default function Capsule(props) {
 		return <>
 			{displaySidebar ? <Sidebar activeScroll={activeScroll} currentPath={props.path} /> : ''}
 			<main id="app">
-				<section className="container">
-					{displayTitle? <header><h1>{props.title}</h1></header> :''}
+				<section className={`${useContainer?'container': ''}`}>
+					{displayTitle? <header className="mt-4 mb-2"><h1>{props.title}</h1></header> :''}
 					{props.children}
 				</section>
-				{!props.path ? <About />: ''}
 			</main>
 			<button type="button" onClick={scrollTop} aria-label="Voltar ao topo" title="Voltar ao topo" className={`back-top ${activeScroll ? 'on-top' : ''}`}>
 				<i className="fa fa-chevron-up"></i>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Accordion, Card } from "react-bootstrap";
+import { Table, Card } from "react-bootstrap";
 import {alphabetValues, numberValues} from '../services/utils' 
 
 export default function Tips(){
@@ -35,21 +35,17 @@ export default function Tips(){
 
 	return (
 		<>
-			<div className="mb-4">
-				<Accordion defaultActiveKey="0">
-					<Accordion.Item eventKey="0">
-						<Accordion.Header>Alfabeto</Accordion.Header>
-						<Accordion.Body className="text-center">
-							{alphabetValues.map(letter => <span key={letter} className="button-circle button-purple">{letter}</span>)}
-						</Accordion.Body>
-					</Accordion.Item>
-					<Accordion.Item eventKey="1">
-						<Accordion.Header>Números</Accordion.Header>
-						<Accordion.Body className="text-center">
-							{numberValues.map(numb => <span key={numb} className="button-circle button-purple">{numb}</span>)}
-						</Accordion.Body>
-					</Accordion.Item>
-				</Accordion>
+			<div className="mb-4 mt-4">
+				<div>
+					<h4>Alfabeto</h4>
+					{alphabetValues.map(letter => <span key={letter} className="btn btn-secondary btn-sm mh-x2">{letter}</span>)}
+				</div>
+				<hr />
+				<div>
+					<h4>Números</h4>
+					{numberValues.map(numb => <span key={numb} className="btn btn-secondary btn-sm mh-x2 mb-2">{numb}</span>)}
+				</div>
+				<hr />
 			</div>
 			<section className="mb-60">
 					{wordsHR.map((item, index) => {

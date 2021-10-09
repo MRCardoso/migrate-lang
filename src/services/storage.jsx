@@ -28,14 +28,14 @@ const migrateToV2 = (content) => {
     }, [])
 }
 
-export const save = (content, reason, saveCloud) => {
+export const save = (content, reason, saveCloud, lang) => {
     return new Promise(resolve => {
         try {
             const hit = (reason===true? 1 : 0)
             const fail = (reason===false? 1 : 0)
             const key = dataKey(S_KEY_DATA)
             const nextValue = String(content).toLowerCase().trim()
-            const newItem = {id: Date.now(), content: nextValue, hit, fail, synced: saveCloud }
+            const newItem = {id: Date.now(), content: nextValue, hit, fail, lang, synced: saveCloud }
             const newList = []
             
             let items = read(key)

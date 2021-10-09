@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import {Form, InputGroup, FormControl} from 'react-bootstrap';
 
-import Recognizer from "./Recognizer";
-import SpeechInput from "./SpeechInput";
+import Recognizer from "./Recognizer/Recognizer";
+import SpeechInput from "./Recognizer/SpeechInput";
 import {randomBytes} from "crypto"
 import {shuffle, rand, copy, validateNumber} from '../services/utils' 
 import { useAuth } from "../contexts/AuthContext";
@@ -12,6 +12,7 @@ export default function Utilities(){
 	const [size, setSize] = useState(20)
 	const [number, setNumber] = useState("")
 	const [numberValue, setNumberValue] = useState("")
+	const [colorPicker, setColorPicker] = useState("#EAEBFD")
 	const {setMessager} = useAuth()
 	
 	const createHash = () => {
@@ -32,6 +33,11 @@ export default function Utilities(){
         const index = rand(0, shuffles.length-1)
         setNumber(shuffles[index])
     }
+
+	const setCollor = (value) => {
+		document.body.style = `background: ${value} !important`
+		setColorPicker(value)
+	}
 
     const copyText = () =>{
         if(copy(hash)){
@@ -75,6 +81,9 @@ export default function Utilities(){
 						/>
 				</Recognizer>
 				{number? <InputGroup.Text className="btn-success text-white">Valor Sorteado: {number}</InputGroup.Text> :''}
+			</div>
+			<div>
+				<Form.Control type="color" value={colorPicker} onChange={e => setCollor(e.target.value)} title="Escolha uma cor" />
 			</div>
 		</Form>
 	)
