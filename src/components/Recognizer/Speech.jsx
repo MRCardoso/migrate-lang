@@ -27,8 +27,8 @@ export default function Speech(props){
     const {setMessager, setLoading} = useAuth()
     const [lang, setLang] = useState('en-US')
     const [listen, setListen] = useState(false)
-    const copyText = () =>{
-        if(copy(note)){
+    const copyText = (value) =>{
+        if(copy(value)){
             setMessager({variant: "success", message: "texto copiado para a área de transferência"})
         }
     }
@@ -131,15 +131,20 @@ export default function Speech(props){
                         <>
                             <p className="speech-text">
                                 {note}
-                                <Button disabled={!note} size="sm" type="button" aria-label="Copiar texto" onClick={copyText}>
+                                <Button disabled={!note} size="sm" type="button" aria-label="Copiar texto" onClick={() => copyText(note)}>
                                     <i className="fa fa-copy"></i>
                                 </Button>
                             </p>
                         </>
                     :
                     <>
-                        <Form.Label>Digite algo</Form.Label>
-                        <Form.Control as="textarea" accessKey="w" className="textarea-pretty" rows={textSize} onChange={e => setPhrase(e.target.value)} value={phrase} placeholder={textPlaceholder} />
+                        <Form.Group className="speech-textarea">
+                            <Form.Label>Digite algo</Form.Label>
+                            <Form.Control as="textarea" accessKey="w" className="textarea-pretty" rows={textSize} onChange={e => setPhrase(e.target.value)} value={phrase} placeholder={textPlaceholder} />
+                            <Button disabled={!phrase} size="sm" type="button" aria-label="Copiar texto" onClick={() => copyText(phrase)}>
+                                <i className="fa fa-copy"></i>
+                            </Button>
+                        </Form.Group>
                         {'status' in phraseReason && note ?
                             <div className={`speech-reason ${phraseReason.status ? 'text-success': (phraseReason.status===false? 'text-danger':'text-secondary')}`}>
                             {note?
@@ -148,7 +153,7 @@ export default function Speech(props){
                                     <i aria-label="Validacao" className={`mh-x2 clicable fa fa-${phraseReason.status ? 'check-circle': 'exclamation-circle'}`}></i>
                                 </OverlayTrigger>
                                 <strong>{note}</strong>
-                                <Button className="mh-x2" variant="light" size="sm" type="button" aria-label="Copiar texto" onClick={copyText}>
+                                <Button className="mh-x2" variant="light" size="sm" type="button" aria-label="Copiar texto" onClick={() => copyText(note)}>
                                     <i className="fa fa-copy"></i>
                                 </Button>
                                 <Button className="mh-x2" variant="light" size="sm" type="button" aria-label="Escutar" disabled={listen} onClick={() => text2Speech(note, lang, setListen)}>

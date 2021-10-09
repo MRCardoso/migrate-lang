@@ -21,7 +21,7 @@ export const remove = (docid) => {
 export const create = async (data) => {
     const lastHistory = await __one(tableName, {order: ['order', 'desc']})
     const order = ( (lastHistory.docs ? lastHistory.docs[0].data().order : 0) + 1)
-    const docRef = await __create(tableName, {content: data.content, lang: data.lang, order})
+    const docRef = await __create(tableName, {content: data.content, linkRef: data.linkRef, lang: data.lang, order})
     const promises = []
     data.chapters.map((chapter, index) => {
         promises.push(

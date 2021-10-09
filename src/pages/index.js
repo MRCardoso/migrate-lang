@@ -6,6 +6,7 @@ import Speech from "../components/Recognizer/Speech";
 import Capsule from '../components/Capsule';
 import { Container} from "react-bootstrap";
 import Image from 'next/image'
+import { gameUri, paypalInfo } from "../services/metakeys";
 
 export default function Home() {
 	const cards = [
@@ -34,6 +35,20 @@ export default function Home() {
 				`
 			] 
 			
+		},
+		{
+			title:"Privacidade",
+			message: [
+				`
+				Nenhuma informação sensível é coletada pelo site, os únicos dados capturados tem objetivo de ajudá-lo, e a outras pessoas com suas experiências, em momento algum, dados são capturados sem haver a prévia iniciativa do usuário.
+				`,
+				`
+				Cookie - apenas as frases salvas em "privado" são persistidas no navegador do usuário, e podem ser removidas a qualquer momento limpado "o dados do navegador"
+				`,
+				`
+				Dados salvos - As frases são salvas para lhe ajudar com o aprendizado, persistindo aqueles textos que considerar mais difíceis de reproduzir, quando opta por “salvar público" seja uma frase ou história, seu texto será salva na nuvem para popular a base de dados desta aplicação, e com suas experiência, ajudar outras pessoas.
+				`
+			]
 		}
 	]
 
@@ -69,13 +84,13 @@ export default function Home() {
 									<p>
 										Este é um simples jogo desenvolvido para ajuda-lo com a pronúncia enquanto progride e atinge seu maior score
 									</p>
-									<Link href="https://mardozux.itch.io/the-imaginner">
+									<Link href={gameUri}>
 										<a title="The imaginner Game" className="w-100 btn btn-secondary" target="_blank" rel="noreferrer">Acesse aqui</a>
 									</Link>
 								</div>
 							</div>
 							<div  style={{flex: 2, textAlign: 'center'}}>
-								<Image src="/logo.png" alt="Logo Marca" width={228} height={220} />
+								<Image src="/logo.png" alt="Logo Marca" width={200} height={160} />
 								<h4 className="text-center">Essas são as ferramentas</h4>
 							</div>
 							<div style={{flex:1}}>
@@ -89,7 +104,7 @@ export default function Home() {
 									</Link>
 								</div>
 								<div className="app-features-card">
-									<h6><i className="fa fa-language mh-x2"></i>Tradutor</h6>
+									<h6><i className="fa fa-language mh-x2"></i>Traduza seus textos</h6>
 									<p>
 										Aprenda enquanto traduz seus textos e ouça com a frase é dita
 									</p>
@@ -102,7 +117,7 @@ export default function Home() {
 					</section>
 				</Container>
 			</article>
-			<article className="flex-center container mt-4">
+			<article className="flex-center container mt-4" id="sobre">
 				{cards.map(c => {
 					return (
 						<div key={c.title}>
@@ -113,14 +128,28 @@ export default function Home() {
 					)
 				})}
 			</article>
-			<article className="container mt-4">
+			<article className="container mb-4" id="contato">
+				<div className="d-flex">
+					<div>
+						<h4>Contato</h4>
+						<p>
+							Em caso de dúvidas ou sugestões sinta-se livre para preencher o formulário abaixo, e deixe sua opinião sobre a plataforma e ajude-a crescer
+						</p>
+						<a href="https://forms.gle/y7dpwJvt347UhFLTA" className="" target="_blank" rel="noreferrer">
+							clique aqui
+						</a>
+					</div>
+				</div>
+				<hr />
+			</article>
+			<article className="container mt-4" id="doar">
 				<div className="d-flex">
 					<div className="mh-x2 mb-4">
 						<h3>Está gostando desta aplicação?</h3>
 						<p>Considere contribuir para ajudar este projeto crescer, e sempre estar trazendo novidades no seu aprendizado.</p>
 
-						<form action="https://www.paypal.com/donate" method="post" target="_top">
-							<input type="hidden" name="business" value="5GLEV64R9MAEU" />
+						<form action={paypalInfo.uri} method="post" target="_top">
+							<input type="hidden" name="business" value={paypalInfo.key} />
 							<input type="hidden" name="no_recurring" value="1" />
 							<input type="hidden" name="item_name" value="Uma aplicacao com reconhecimento de fala pra praticar a pronuncia do ingles, em busca da proficiencia" />
 							<input type="hidden" name="currency_code" value="BRL" />

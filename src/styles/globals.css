@@ -282,8 +282,9 @@ a {
 .speech-textarea{
   position: relative;
 }
-.speech-text button{
+.speech-textarea button, .speech-text button{
   position: absolute;
+  top: 10px;
   right: 10px;
 }
 .flex-text{
@@ -551,8 +552,7 @@ input:focus, textarea:focus, select:focus{
 
 .textarea-pretty{
   border: none !important;
-  resize: none !important;
-  border-radius: 0 !important;
+  border-radius: 4px !important;
   border-bottom: 1px solid var(--bg-light) !important;
 }
 

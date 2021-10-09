@@ -8,7 +8,7 @@ export default function novaHistoria(){
 		<Capsule
 			title="Criar história"
 			description="Crie histórias e ajude a outras pessoas aprender apartir de seus contos..."
-			path="imagineer"
+			path="historia"
 			displayFooter={true}
 			>
 			<ImagineerForm />

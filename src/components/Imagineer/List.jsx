@@ -106,7 +106,19 @@ export default function ImagineerList(props) {
             </FloatingLabel>
             {history ?
                 <div className="histories">
-                    <h3 className="pt-4 text-center">{history.content}</h3>
+                    <h3 className="pt-4 text-center">
+                        {history.content}
+                    </h3>
+                    {history.linkRef ? 
+                    <div className="text-center mb-4">
+                        <strong className="mh-x2">Fonte:</strong>
+                        {/^http(s)?/.test(history.linkRef) ? 
+                            <Link href={history.linkRef}>
+                                <a target="_blank" rel="noreferrer" title="Bob the imaginner">{history.linkRef}</a>
+                            </Link>
+                        : history.linkRef}
+                    </div>
+                    :''}
                     <div className="histories-score">
                         <div>
                             <strong>Capítulos</strong>

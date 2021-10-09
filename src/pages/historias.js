@@ -9,7 +9,7 @@ export default function historias(){
 		<Capsule
 			title="Histórias"
 			description="Pratique sua pronúncia lendo histórias..."
-			path="imagineer"
+			path="historias"
 			displayFooter={true}
 			>
 				<Recognizer>
