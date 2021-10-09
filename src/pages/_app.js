@@ -6,16 +6,13 @@ import * as gtag from '../services/gtag'
 
 function MyApp({ Component, pageProps }) {
 	const router = useRouter()
-		useEffect(() => {
-			const handleRouteChange = (uri) => {
-				console.log({uri})
-				gtag.pageview(uri)
-			}
-			router.events.on('routeChangeComplete', handleRouteChange)
-			return () => {
-				router.events.off('routeChangeComplete', handleRouteChange)
-			}
-		}, [router.events])
+	
+	useEffect(() => {
+		const handleRouteChange = (uri) => gtag.pageview(uri)
+		router.events.on('routeChangeComplete', handleRouteChange)
+		return () => router.events.off('routeChangeComplete', handleRouteChange)
+	}, [router.events])
+
 	return (
 	<>
 		{/* Global Site Tag (gtag.js) - Google Analytics */}
