@@ -160,8 +160,8 @@ export default function ImagineerList(props) {
                 </div>
             :""}
 
-            <Link href="/imagineer/create">
-                <a className="button-circle button-purple text-white button-fixed-left-down" title="Criar história">
+            <Link href="/nova-historia">
+                <a className="button-circle button-purple text-white button-fixed-left-down" title="Nova história">
                     <i className="fa fa-plus"></i>
                 </a>
             </Link>

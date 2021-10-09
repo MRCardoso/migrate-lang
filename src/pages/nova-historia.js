@@ -1,9 +1,9 @@
 import React from "react";
 
-import Capsule from '../../components/Capsule'
-import ImagineerForm from "../../components/Imagineer/Form"
+import Capsule from '../components/Capsule'
+import ImagineerForm from "../components/Imagineer/Form"
 
-export default function imagineer(){
+export default function novaHistoria(){
 	return (
 		<Capsule
 			title="Criar história"

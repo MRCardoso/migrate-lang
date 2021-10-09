@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Accordion, Card } from "react-bootstrap";
+import { Table, Card } from "react-bootstrap";
 import {alphabetValues, numberValues} from '../services/utils' 
 
 export default function Tips(){
@@ -35,14 +35,15 @@ export default function Tips(){
 
 	return (
 		<>
-			<div className="mb-4">
-				<div className="text-center">
-				<h4>Alfabeto</h4>
+			<div className="mb-4 mt-4">
+				<div>
+					<h4>Alfabeto</h4>
 					{alphabetValues.map(letter => <span key={letter} className="btn btn-secondary btn-sm mh-x2">{letter}</span>)}
 				</div>
-				<div className="text-center mt-4">
-				<h4>Números</h4>
-					{numberValues.map(numb => <span key={numb} className="btn btn-secondary btn-sm mh-x2">{numb}</span>)}
+				<hr />
+				<div>
+					<h4>Números</h4>
+					{numberValues.map(numb => <span key={numb} className="btn btn-secondary btn-sm mh-x2 mb-2">{numb}</span>)}
 				</div>
 				<hr />
 			</div>

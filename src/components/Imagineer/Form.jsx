@@ -4,8 +4,8 @@ import {Form, InputGroup, Button, OverlayTrigger, Tooltip} from 'react-bootstrap
 import { useAuth } from '../../contexts/AuthContext'
 import { create } from '../../services/firebase/entities/histories'
 import { requestTranslate } from '../../services/requests'
-import Recognizer from '../Recognizer'
-import SpeechInput from '../SpeechInput'
+import Recognizer from '../Recognizer/Recognizer'
+import SpeechInput from '../Recognizer/SpeechInput'
 import { prepareError, text2Speech } from '../../services/utils'
 
 export default function ImagineerForm() {
@@ -97,7 +97,7 @@ export default function ImagineerForm() {
             <Form>
                 <div className="d-flex mb-4">
                     <div style={{flex: 1}}>
-                        <Link href="/imagineer">
+                        <Link href="/historias">
                             <a title="Crie sua propria história" className="btn btn-light">
                                 <i className="fa fa-chevron-left"></i> Voltar
                             </a>

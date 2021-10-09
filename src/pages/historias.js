@@ -1,10 +1,10 @@
 import React from "react";
 
-import Capsule from '../../components/Capsule'
-import ImagineerList from "../../components/Imagineer/List";
-import Recognizer from "../../components/Recognizer";
+import Capsule from '../components/Capsule'
+import ImagineerList from "../components/Imagineer/List";
+import Recognizer from "../components/Recognizer/Recognizer";
 
-export default function imagineer(){
+export default function historias(){
 	return (
 		<Capsule
 			title="Histórias"

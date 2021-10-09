@@ -12,7 +12,7 @@ export const remove = (docid) => {
     return __delete(tableName, docid)
 }
 
-export const save = async (value, reason) => {
+export const save = async (value, reason, lang) => {
     const hit = (typeof reason === "boolean" ? (reason===true? 1 : 0) : reason.hit)
     const fail = (typeof reason === "boolean" ? (reason===false? 1 : 0) : reason.fail)
     const nextValue = String(value).toLowerCase().trim()
@@ -22,14 +22,14 @@ export const save = async (value, reason) => {
     if(res.docs.length > 0){
         const [response] = res.docs
         const data = response.data()
-        const values = {hit: (data.hit + hit), fail: (data.fail+fail)}
+        const values = {hit: (data.hit + hit), fail: (data.fail+fail), lang}
         if(hit > 0 || fail > 0){
             await __update(tableName, response.id, values)
         }
         return Promise.resolve(true)
     }
     
-    await __create(tableName, {content: value, hit, fail})
+    await __create(tableName, {content: value, hit, fail, lang})
     
     return Promise.resolve(true)
 }

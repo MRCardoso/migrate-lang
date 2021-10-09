@@ -8,7 +8,6 @@ import Footer from '../components/Footer'
 
 import { canonicalName, appName, noIndexPath } from '../services/metakeys';
 import React, { useEffect, useState } from 'react'
-import About from './About'
 import AuthProvider from '../contexts/AuthContext'
 
 export default function Capsule(props) {
@@ -41,10 +40,9 @@ export default function Capsule(props) {
 			{displaySidebar ? <Sidebar activeScroll={activeScroll} currentPath={props.path} /> : ''}
 			<main id="app">
 				<section className={`${useContainer?'container': ''}`}>
-					{displayTitle? <header><h1>{props.title}</h1></header> :''}
+					{displayTitle? <header className="mt-4 mb-2"><h1>{props.title}</h1></header> :''}
 					{props.children}
 				</section>
-				{!props.path ? <About />: ''}
 			</main>
 			<button type="button" onClick={scrollTop} aria-label="Voltar ao topo" title="Voltar ao topo" className={`back-top ${activeScroll ? 'on-top' : ''}`}>
 				<i className="fa fa-chevron-up"></i>
