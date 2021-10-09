@@ -27,7 +27,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 			<Navbar className={`black-purple ${activeScroll ? 'border-buttom-white fixed-top': ''}`} expand="lg">
 				<Container>
 					<Link href="/">
-						<a className="navbar-brand text-white">Megrolang</a> 
+						<a className="navbar-brand text-white" title="Home - Megrolang">Megrolang</a>
 					</Link>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
@@ -43,7 +43,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 								paths.map(p => {
 									return (
 										<Link key={p.uri} href={p.uri}>
-											<a className={'nav-link '+(isCurrentLink(p.uri) ? 'active-link' : '')}>
+											<a className={'nav-link '+(isCurrentLink(p.uri) ? 'active-link' : '')} title={p.label}>
 												{p.icon ? <i className={`mh-x2 fa fa-${p.icon}`}></i> : ''}
 												{p.label}
 											</a>
@@ -53,7 +53,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 							: indexPaths.map(p => {
 								return (
 									<Link key={p.uri} href={p.uri}>
-										<a className={'nav-link '+(isCurrentLink(p.uri) ? 'active-link' : '')}>
+										<a className={'nav-link '+(isCurrentLink(p.uri) ? 'active-link' : '')} title={p.label}>
 											{p.icon ? <i className={`mh-x2 fa fa-${p.icon}`}></i> : ''}
 											{p.label}
 										</a>
