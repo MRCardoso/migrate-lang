@@ -95,12 +95,12 @@ export default function Speech(props){
                     <OverlayTrigger placement="top" overlay={<Tooltip>Ouvir [alt + L]</Tooltip>}>
                         <Button
                             accessKey="l"
-                            disabled={!phrase || listen}
+                            disabled={closeOnSpeakend ? (!note || listen || isListning) : (!phrase || listen || isListning)}
                             variant="light"
                             type="button" 
                             aria-label="ouvir"
                             className="mb-2 fa fa-volume-up"
-                            onClick={() => text2Speech(phrase, lang, setListen)}>
+                            onClick={() => text2Speech((closeOnSpeakend ? note : phrase), lang, setListen)}>
                             <i ></i>
                         </Button>
                     </OverlayTrigger>
