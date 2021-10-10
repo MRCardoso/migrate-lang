@@ -1,3 +1,5 @@
+import { event } from "./gtag";
+
 export const appName = "Megrolang - pratiquei seu inglês"
 
 export const keywords = (extraKeys = []) => {
@@ -19,4 +21,49 @@ export const gameUri = 'https://mardozux.itch.io/the-imaginner'
 export const paypalInfo = {
     key: '5GLEV64R9MAEU',
     uri: 'https://www.paypal.com/donate'
+}
+
+export const gaEventImaginner = () => {
+    event({
+        action: "bob_the_imaginner",
+        category: "engagement",
+        label: "The imaginner",
+        value: "access link game"
+    })
+}
+
+export const gaEventSocialMidia = (name) => {
+    event({
+        action: "social_midia",
+        category: "engagement",
+        label: name,
+        value: `access ${name}`
+    })
+}
+
+export const gaEventDonate = (name) => {
+    event({
+        action: "donate",
+        category: "contribute",
+        label: `Donate ${name}`,
+        value: `access ${name}`
+    })
+}
+
+export const gaEventTranslate = (state) => {
+    event({
+        action: "request_translate",
+        category: "resources",
+        label: `Translate ${state}`,
+        value: `access ${state}`
+    })
+}
+
+export const gaEventStories = (name) => {
+    event({
+        action: "read_stories",
+        category: "engagement",
+        label: name,
+        value: `access ${name}`
+    })
 }

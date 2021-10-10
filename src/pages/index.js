@@ -6,9 +6,11 @@ import Speech from "../components/Recognizer/Speech";
 import Capsule from '../components/Capsule';
 import { Container} from "react-bootstrap";
 import Image from 'next/image'
-import { gameUri, paypalInfo } from "../services/metakeys";
+import { gaEventDonate, paypalInfo } from "../services/metakeys";
+import LinkTheImaginner from "../components/GaEvents/LinkTheImaginner";
 
 export default function Home() {
+
 	const cards = [
 		{
 			title: "Sobre",
@@ -52,6 +54,7 @@ export default function Home() {
 		// }
 	]
 
+
 	return (
 		<Capsule
 			title="Pratique sua pronúncia do inglês"
@@ -84,9 +87,7 @@ export default function Home() {
 									<p>
 										Este é um simples jogo desenvolvido para ajuda-lo com a pronúncia enquanto progride e atinge seu maior score
 									</p>
-									<Link href={gameUri}>
-										<a title="The imaginner Game" className="w-100 btn btn-secondary" target="_blank" rel="noreferrer">Acesse aqui</a>
-									</Link>
+									<LinkTheImaginner className="w-100 btn btn-secondary">Acesse aqui</LinkTheImaginner>
 								</div>
 							</div>
 							<div  style={{flex: 2, textAlign: 'center'}}>
@@ -145,15 +146,17 @@ export default function Home() {
 			<article className="container mt-4" id="doar">
 				<div className="d-flex">
 					<div className="mh-x2 mb-4">
-						<h3>Está gostando desta aplicação?</h3>
-						<p>Considere contribuir para ajudar este projeto crescer, e sempre estar trazendo novidades no seu aprendizado.</p>
+						<h3>Está gostando desta site?</h3>
+						<p>
+							Considere contribuir para ajudar este projeto crescer, e sempre estar trazendo novidades no seu aprendizado.
+						</p>
 
 						<form action={paypalInfo.uri} method="post" target="_top">
 							<input type="hidden" name="business" value={paypalInfo.key} />
 							<input type="hidden" name="no_recurring" value="1" />
 							<input type="hidden" name="item_name" value="Uma aplicacao com reconhecimento de fala pra praticar a pronuncia do ingles, em busca da proficiencia" />
 							<input type="hidden" name="currency_code" value="BRL" />
-							<input type="image" src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Faça doações com o botão do PayPal" />
+							<input type="image" onClick={() => gaEventDonate('paypal')} src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Faça doações com o botão do PayPal" />
 							<img alt="Doar valor" border="0" src="https://www.paypal.com/pt_BR/i/scr/pixel.gif" width="1" height="1" />
 						</form>
 					</div>
