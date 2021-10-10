@@ -1,4 +1,5 @@
 import axios from "axios";
+import { gaEventTranslate } from "./metakeys";
 
 export const apiUri = process.env.NEXT_PUBLIC_API_URI
 
@@ -28,6 +29,7 @@ export const requestTranslate = (lang, texts) => {
         .post('/translate', {phrases})
         .then(response => {
             if('errors' in response.data){
+                gaEventTranslate("error validation")
                 reject(response.data.errors)
                 return
             }
@@ -36,8 +38,12 @@ export const requestTranslate = (lang, texts) => {
                 if (response.data[c.text])
                     translates[c.text] = response.data[c.text]
             })
+            gaEventTranslate(`${texts.length} texts [${origin} -> ${trans}]`)
             resolve(translates)
         })
-        .catch(reject)
+        .catch(e => {
+            gaEventTranslate("error request/permission")
+            reject(e)
+        })
     })
 }

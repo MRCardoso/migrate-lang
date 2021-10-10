@@ -4,6 +4,7 @@ import {Form, FloatingLabel, OverlayTrigger, Tooltip, Button, Badge} from 'react
 import { useAuth } from '../../contexts/AuthContext'
 import { getChapter, list } from '../../services/firebase/entities/histories'
 import { text2Speech } from '../../services/utils'
+import { gaEventStories } from '../../services/metakeys'
 
 export default function ImagineerList(props) {
     const {setPhrase, phraseReason, setIsListining, isListning, startRecord, setPhraseReason, setNote, note} = props
@@ -72,8 +73,9 @@ export default function ImagineerList(props) {
                 data = await getChapter(history)
                 data.sort((a, b) => a.order - b.order)
             }
-            
-            updateProps(histories.find(h => h.id===history), data)
+            const hCurr = histories.find(h => h.id===history)
+            gaEventStories(hCurr.content)
+            updateProps(hCurr, data)
         } catch (error) {
             console.log(error)
             setMessager({variant: "danger", message: "Não foi possível recuperar capítulos"})

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {FormControl, InputGroup,FloatingLabel, Form} from 'react-bootstrap';
+import {FormControl, InputGroup, Form} from 'react-bootstrap';
 
 export default function SpeechInput(props){
     const {setIsListining, isListning, note, setNote, startRecord, setMicLang, language, value, setValue, clearField, enableVoice=true} = props

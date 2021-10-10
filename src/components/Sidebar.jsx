@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import Link from 'next/link'
-import { Container, Nav, Navbar, Form} from "react-bootstrap"
-import { gameUri } from "../services/metakeys";
+import { Container, Nav, Navbar} from "react-bootstrap"
+import LinkTheImaginner from "./GaEvents/LinkTheImaginner";
 
 export default function Sidebar({activeScroll, currentPath}) {
 	const paths = [
@@ -32,11 +32,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="me-auto">
-							<Link href={gameUri}>
-								<a className="nav-link" target="_blank" rel="noreferrer" title="Bob the imaginner">
-									<i className="mh-x2 fa fa-gamepad"></i>
-								</a>
-							</Link>
+							<LinkTheImaginner className="nav-link"><i className="mh-x2 fa fa-gamepad"></i></LinkTheImaginner>
 						</Nav>
 						<Nav className="me-right">
 							{currentPath!==""? 

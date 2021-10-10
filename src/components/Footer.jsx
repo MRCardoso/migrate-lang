@@ -1,6 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
-import { Container, Nav, Navbar } from 'react-bootstrap'
+import { gaEventSocialMidia } from '../services/metakeys'
 
 export default function Footer(){
     const d = new Date()
@@ -42,7 +41,7 @@ export default function Footer(){
                     {thirdPart.map(t => {
                         return (
                             <li key={t.icon}>
-                                <a href={t.url} target="_blank" rel="noreferrer" title={t.label}>
+                                <a href={t.url} target="_blank" rel="noreferrer" onClick={() => gaEventSocialMidia(t.label)} title={t.label}>
                                     <i className={`fa fa-${t.icon}`}></i>
                                 </a>
                             </li>
