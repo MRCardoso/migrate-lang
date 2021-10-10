@@ -106,7 +106,7 @@ export default function Speech(props){
                     :''}
                     {enableSave?
                     <OverlayTrigger placement="top" overlay={<Tooltip>Salve o resultado nos dados do navegador, ou na nuvem e ajude a popular nossa base de dados.</Tooltip>}>
-                        <DropdownButton aria-label="salvar" title={<i aria-label="salvar" className="fa fa-save"></i>} variant={`${isListning || !phrase? 'light': 'primary'}`} disabled={isListning || !phrase}>
+                        <DropdownButton title={<i aria-label="salvar" className="fa fa-save"></i>} variant={`${isListning || !phrase? 'light': 'primary'}`} disabled={isListning || !phrase}>
                             <Dropdown.Item href="#" onClick={() => customSave(false)}><i className={`fa fa-save`}></i> Salvar privado</Dropdown.Item>
                             {enabledCloud?
                             <Dropdown.Item href="#" onClick={() => customSave(true)}><i className={`fa fa-cloud`}></i> Salvar público</Dropdown.Item>

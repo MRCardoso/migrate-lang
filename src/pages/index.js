@@ -36,20 +36,20 @@ export default function Home() {
 			] 
 			
 		},
-		{
-			title:"Privacidade",
-			message: [
-				`
-				Nenhuma informação sensível é coletada pelo site, os únicos dados capturados tem objetivo de ajudá-lo, e a outras pessoas com suas experiências, em momento algum, dados são capturados sem haver a prévia iniciativa do usuário.
-				`,
-				`
-				Cookie - apenas as frases salvas em "privado" são persistidas no navegador do usuário, e podem ser removidas a qualquer momento limpado "o dados do navegador"
-				`,
-				`
-				Dados salvos - As frases são salvas para lhe ajudar com o aprendizado, persistindo aqueles textos que considerar mais difíceis de reproduzir, quando opta por “salvar público" seja uma frase ou história, seu texto será salva na nuvem para popular a base de dados desta aplicação, e com suas experiência, ajudar outras pessoas.
-				`
-			]
-		}
+		// {
+		// 	title:"Privacidade",
+		// 	message: [
+		// 		`
+		// 		Nenhuma informação sensível é coletada pelo site, os únicos dados capturados tem objetivo de ajudá-lo, e a outras pessoas com suas experiências, em momento algum, dados são capturados sem haver a prévia iniciativa do usuário.
+		// 		`,
+		// 		`
+		// 		Cookie - apenas as frases salvas em "privado" são persistidas no navegador do usuário, e podem ser removidas a qualquer momento limpado "o dados do navegador"
+		// 		`,
+		// 		`
+		// 		Dados salvos - As frases são salvas para lhe ajudar com o aprendizado, persistindo aqueles textos que considerar mais difíceis de reproduzir, quando opta por “salvar público" seja uma frase ou história, seu texto será salva na nuvem para popular a base de dados desta aplicação, e com suas experiência, ajudar outras pessoas.
+		// 		`
+		// 	]
+		// }
 	]
 
 	return (
@@ -136,7 +136,7 @@ export default function Home() {
 							Em caso de dúvidas ou sugestões sinta-se livre para preencher o formulário abaixo, e deixe sua opinião sobre a plataforma e ajude-a crescer
 						</p>
 						<a href="https://forms.gle/y7dpwJvt347UhFLTA" title="Deixe sua opinião" className="btn btn-primary" target="_blank" rel="noreferrer">
-							clique aqui
+							Deixe sua opinião
 						</a>
 					</div>
 				</div>
