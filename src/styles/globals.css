@@ -346,6 +346,8 @@ a {
   /* background: var(--bg-black); */
   background: url("../../public/images/black-370118_1280.png") no-repeat;
   width: 100%;
+  overflow-y: scroll;
+  max-height: 80vh;
 }
 
 .histories-score{

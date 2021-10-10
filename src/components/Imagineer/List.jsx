@@ -114,7 +114,7 @@ export default function ImagineerList(props) {
                         <strong className="mh-x2">Fonte:</strong>
                         {/^http(s)?/.test(history.linkRef) ? 
                             <Link href={history.linkRef}>
-                                <a target="_blank" rel="noreferrer" title="Bob the imaginner">{history.linkRef}</a>
+                                <a target="_blank" rel="noreferrer" title="Fonte da história">{history.linkRef}</a>
                             </Link>
                         : history.linkRef}
                     </div>

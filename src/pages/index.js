@@ -36,20 +36,20 @@ export default function Home() {
 			] 
 			
 		},
-		{
-			title:"Privacidade",
-			message: [
-				`
-				Nenhuma informação sensível é coletada pelo site, os únicos dados capturados tem objetivo de ajudá-lo, e a outras pessoas com suas experiências, em momento algum, dados são capturados sem haver a prévia iniciativa do usuário.
-				`,
-				`
-				Cookie - apenas as frases salvas em "privado" são persistidas no navegador do usuário, e podem ser removidas a qualquer momento limpado "o dados do navegador"
-				`,
-				`
-				Dados salvos - As frases são salvas para lhe ajudar com o aprendizado, persistindo aqueles textos que considerar mais difíceis de reproduzir, quando opta por “salvar público" seja uma frase ou história, seu texto será salva na nuvem para popular a base de dados desta aplicação, e com suas experiência, ajudar outras pessoas.
-				`
-			]
-		}
+		// {
+		// 	title:"Privacidade",
+		// 	message: [
+		// 		`
+		// 		Nenhuma informação sensível é coletada pelo site, os únicos dados capturados tem objetivo de ajudá-lo, e a outras pessoas com suas experiências, em momento algum, dados são capturados sem haver a prévia iniciativa do usuário.
+		// 		`,
+		// 		`
+		// 		Cookie - apenas as frases salvas em "privado" são persistidas no navegador do usuário, e podem ser removidas a qualquer momento limpado "o dados do navegador"
+		// 		`,
+		// 		`
+		// 		Dados salvos - As frases são salvas para lhe ajudar com o aprendizado, persistindo aqueles textos que considerar mais difíceis de reproduzir, quando opta por “salvar público" seja uma frase ou história, seu texto será salva na nuvem para popular a base de dados desta aplicação, e com suas experiência, ajudar outras pessoas.
+		// 		`
+		// 	]
+		// }
 	]
 
 	return (
@@ -71,7 +71,7 @@ export default function Home() {
 						<aside className="app-features mt-4">
 							<div  style={{flex: 1}}>
 								<div className="app-features-card mb-2">
-									<h6><i className="fa fa-book mh-x2"></i>Histórias</h6>
+									<strong><i className="fa fa-book mh-x2"></i>Histórias</strong>
 									<p>
 										Aprenda com pequenas histórias, pratique enquanto lê, aprenda enquanto conhece novos mundos
 									</p>
@@ -80,7 +80,7 @@ export default function Home() {
 									</Link>
 								</div>
 								<div className="app-features-card">
-									<h6><i className="fa fa-gamepad mh-x2"></i>Jogue um jogo</h6>
+									<strong><i className="fa fa-gamepad mh-x2"></i>Jogue um jogo</strong>
 									<p>
 										Este é um simples jogo desenvolvido para ajuda-lo com a pronúncia enquanto progride e atinge seu maior score
 									</p>
@@ -95,21 +95,21 @@ export default function Home() {
 							</div>
 							<div style={{flex:1}}>
 								<div className="app-features-card mb-2">
-									<h6><i className="fa fa-microphone mh-x2"></i>Reconhecimento de voz</h6>
+									<strong><i className="fa fa-microphone mh-x2"></i>Reconhecimento de voz</strong>
 									<p>
 										Cansado de digitar aquele artigo longo? que tal escrever falando
 									</p>
 									<Link href="/falar">
-										<a title="historias" className="w-100 btn btn-secondary">Acesse aqui</a>
+										<a title="Reconhecimento de voz" className="w-100 btn btn-secondary">Acesse aqui</a>
 									</Link>
 								</div>
 								<div className="app-features-card">
-									<h6><i className="fa fa-language mh-x2"></i>Traduza seus textos</h6>
+									<strong><i className="fa fa-language mh-x2"></i>Traduza seus textos</strong>
 									<p>
 										Aprenda enquanto traduz seus textos e ouça com a frase é dita
 									</p>
 									<Link href="/traduzir">
-										<a title="historias" className="w-100 btn btn-secondary">Acesse aqui</a>
+										<a title="Traduza seus textos" className="w-100 btn btn-secondary">Acesse aqui</a>
 									</Link>
 								</div>
 							</div>
@@ -135,8 +135,8 @@ export default function Home() {
 						<p>
 							Em caso de dúvidas ou sugestões sinta-se livre para preencher o formulário abaixo, e deixe sua opinião sobre a plataforma e ajude-a crescer
 						</p>
-						<a href="https://forms.gle/y7dpwJvt347UhFLTA" className="" target="_blank" rel="noreferrer">
-							clique aqui
+						<a href="https://forms.gle/y7dpwJvt347UhFLTA" title="Deixe sua opinião" className="btn btn-primary" target="_blank" rel="noreferrer">
+							Deixe sua opinião
 						</a>
 					</div>
 				</div>

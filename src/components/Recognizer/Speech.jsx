@@ -95,19 +95,18 @@ export default function Speech(props){
                     <OverlayTrigger placement="top" overlay={<Tooltip>Ouvir [alt + L]</Tooltip>}>
                         <Button
                             accessKey="l"
-                            disabled={!phrase || listen}
+                            disabled={closeOnSpeakend ? (!note || listen || isListning) : (!phrase || listen || isListning)}
                             variant="light"
                             type="button" 
                             aria-label="ouvir"
                             className="mb-2 fa fa-volume-up"
-                            onClick={() => text2Speech(phrase, lang, setListen)}>
-                            <i ></i>
+                            onClick={() => text2Speech((closeOnSpeakend ? note : phrase), lang, setListen)}>
                         </Button>
                     </OverlayTrigger>
                     :''}
                     {enableSave?
                     <OverlayTrigger placement="top" overlay={<Tooltip>Salve o resultado nos dados do navegador, ou na nuvem e ajude a popular nossa base de dados.</Tooltip>}>
-                        <DropdownButton title={<i className="fa fa-save"></i>} variant={`${isListning || !phrase? 'light': 'primary'}`} disabled={isListning || !phrase}>
+                        <DropdownButton title={<i aria-label="salvar" className="fa fa-save"></i>} variant={`${isListning || !phrase? 'light': 'primary'}`} disabled={isListning || !phrase}>
                             <Dropdown.Item href="#" onClick={() => customSave(false)}><i className={`fa fa-save`}></i> Salvar privado</Dropdown.Item>
                             {enabledCloud?
                             <Dropdown.Item href="#" onClick={() => customSave(true)}><i className={`fa fa-cloud`}></i> Salvar público</Dropdown.Item>
