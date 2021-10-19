@@ -42,7 +42,6 @@ export default function ImagineerForm() {
         setContent("")
         setLinkRef("")
         setChapters([])
-        setLang("pt-BR")
     }
 
     const addChapter = () => {

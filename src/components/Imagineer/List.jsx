@@ -3,7 +3,7 @@ import Link from 'next/link'
 import {Form, FloatingLabel, OverlayTrigger, Tooltip, Button, Badge} from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext'
 import { getChapter, list } from '../../services/firebase/entities/histories'
-import { text2Speech } from '../../services/utils'
+import { copy, text2Speech } from '../../services/utils'
 import { gaEventStories } from '../../services/metakeys'
 
 export default function ImagineerList(props) {
@@ -98,6 +98,12 @@ export default function ImagineerList(props) {
         }
     }
 
+    const copyText = (value) =>{
+        if(copy(value)){
+            setMessager({variant: "success", message: "texto copiado para a área de transferência"})
+        }
+    }
+
     return (
         <div className="flex-center" style={{minHeight: '100vh'}}>
             <FloatingLabel controlId="chooseHistory" onChange={(e) => loadChapter(e.target.value, 0)} label="Escolha uma história e pratique">
@@ -155,14 +161,19 @@ export default function ImagineerList(props) {
                                         <i className="fa fa-volume-up"></i>
                                     </Button>
                                 </OverlayTrigger>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip>Ouvir</Tooltip>}>
+                                    <Button variant="light" size="sm" type="button" aria-label="Copiar texto" onClick={() => copyText(c.content)}>
+                                        <i className="fa fa-copy"></i>
+                                    </Button>
+                                </OverlayTrigger>
                                 <>
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>Pronúncias corretas</Tooltip>}>
-                                        <div className="mh-x2 btn btn-light btn-sm">
+                                        <div className={`mh-x2 btn btn-light btn-sm${chapterIndex !== index ? ' histories-content-disabled': ''}`}>
                                             <i aria-label="Pronúncias corretas" className="text-success mh-x2 fa fa-check-circle"></i> {stateChapters[index] ? stateChapters[index].hit: 0}
                                         </div>
                                     </OverlayTrigger>
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip>Pronúncias erradas</Tooltip>}>
-                                        <div className="mh-x2 btn btn-light btn-sm">
+                                        <div className={`mh-x2 btn btn-light btn-sm${chapterIndex !== index ? ' histories-content-disabled': ''}`}>
                                             <i aria-label="Pronúncias erradas" className="text-danger mh-x2 fa fa-exclamation-circle"></i>{stateChapters[index] ? stateChapters[index].fail : 0}
                                         </div>
                                     </OverlayTrigger>
