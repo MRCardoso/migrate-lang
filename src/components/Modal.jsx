@@ -3,7 +3,7 @@ import {Button, Modal} from 'react-bootstrap';
 
 export default function ModalForm(props) {
     return (
-        <Modal show={props.isOpen} onHide={() =>{ props.closeCallback()}}>
+        <Modal show={props.isOpen} onHide={() =>{ props.closeCallback()}} size="lg">
             <Modal.Header closeButton>
                 <Modal.Title>{props.title}</Modal.Title>
             </Modal.Header>

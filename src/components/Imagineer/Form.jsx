@@ -136,7 +136,7 @@ export default function ImagineerForm() {
                             printNote={true}
                             hasLabel={true}
                         >
-                            <InputGroup.Text className={`clicable ${listen ? 'circle-disable': ''}`} onClick={e=> !listen && text2Speech(content, lang, setListen)}><i aria-label="ouvir" className="fa fa-volume-down"></i></InputGroup.Text>
+                            <InputGroup.Text className={`clicable ${listen ? 'circle-disable': ''}`} onClick={e=> !listen && text2Speech(content, lang, setListen)}><i aria-label="ouvir" className="fa fa-volume-up"></i></InputGroup.Text>
                         </SpeechInput>
                     </Recognizer>
                 </Form.Group>
@@ -180,7 +180,7 @@ export default function ImagineerForm() {
                                         printNote={true}
                                         hasLabel={true}
                                     >
-                                        <InputGroup.Text className={`clicable ${listen ? 'circle-disable': ''}`} onClick={e=> !listen && text2Speech(c.content, lang,setListen)}><i aria-label="ouvir" className="fa fa-volume-down"></i></InputGroup.Text>
+                                        <InputGroup.Text className={`clicable ${listen ? 'circle-disable': ''}`} onClick={e=> !listen && text2Speech(c.content, lang,setListen)}><i aria-label="ouvir" className="fa fa-volume-up"></i></InputGroup.Text>
                                         <InputGroup.Text className="clicable btn-danger" onClick={e=> removeChapter(index)}><i aria-label="remover" className="fa fa-minus"></i></InputGroup.Text>
                                     </SpeechInput>
                                 </Recognizer>

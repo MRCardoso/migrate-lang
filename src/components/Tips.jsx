@@ -9,13 +9,13 @@ export default function Tips(){
 			cols: ["Palavra", "Como soa"],
 			rows: [
 				["Head", "Read"],
+				["Heal", "Real"],
+				["High", "Ri"],
+				["Hand", "Rand"],
 				["Red", "Réd"],
 				["River", "Uriver"],
 				["Right", "Uright"],
 				["Range", "Urange"],
-				["Head", "Read"],
-				["Heal", "Ri"],
-				["Hand", "Rand"],
 			]
 		},
 		{

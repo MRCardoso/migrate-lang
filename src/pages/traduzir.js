@@ -15,7 +15,7 @@ export default function traduzir() {
 		>
 			<article className="flex-center" style={{minHeight: '100vh'}}>
 				<Recognizer isMany={false}>
-                    <Speech textPlaceholder="Coloque seu texto e traduza ou escute..." textSize={8} enableSpeak={false} enableTranslate={true} enableListening={true} enableSave={false} enableChangeLanguage={true} />
+                    <Speech textPlaceholder="Coloque seu texto e traduza ou escute..." textSize={8} enableSpeak={false} enableTranslate={true} enableListening={true} enableSave={false} enableChangeLanguage={true} enableCopyPhrase={true} />
                 </Recognizer>
 			</article>
 		</Capsule>

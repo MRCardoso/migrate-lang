@@ -157,8 +157,8 @@ export default function ImagineerList(props) {
                                     </Button>
                                 </OverlayTrigger>
                                 <OverlayTrigger placement="bottom" overlay={<Tooltip>Ouvir</Tooltip>}>
-                                    <Button variant="light" disabled={chapterIndex !== index || listen} size="sm" onClick={() => text2Speech(c.content, history.lang, setListen)}>
-                                        <i className="fa fa-volume-up"></i>
+                                    <Button variant={chapterIndex === index && listen ? "primary" : "light"} disabled={chapterIndex !== index} size="sm" onClick={() => text2Speech(c.content, history.lang, setListen)}>
+                                        <i className={`fa fa-${chapterIndex === index && listen ? 'stop' :'volume-up'}`}></i>
                                     </Button>
                                 </OverlayTrigger>
                                 <OverlayTrigger placement="bottom" overlay={<Tooltip>Ouvir</Tooltip>}>
