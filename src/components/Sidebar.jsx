@@ -5,10 +5,10 @@ import LinkTheImaginner from "./GaEvents/LinkTheImaginner";
 
 export default function Sidebar({activeScroll, currentPath}) {
 	const paths = [
-		{uri: '/frases', label: 'Frases', icon: 'quote-right'},
 		{uri: '/falar', label: 'Falar', icon: 'microphone'},
 		{uri: '/traduzir', label: 'Traduzir', icon: 'language'},
 		{uri: '/historias', label: 'Histórias', icon: 'book'},
+		{uri: '/frases', label: 'Frases', icon: 'quote-right'},
 		{uri: '/dicas', label: 'Dicas', icon: 'info'},
 	];
 	const indexPaths = [

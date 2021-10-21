@@ -5,7 +5,8 @@ import { list as onlineList, remove as onlineRemove } from "../services/firebase
 import { list as offlineList, remove as offlineRemove } from "../services/storage";
 import { useAuth } from "../contexts/AuthContext";
 
-export default function Phrases(){
+export default function Phrases(props){
+	const isModal = (typeof props.isModal === "undefined" ? false : props.isModal)
 	const [database, setDatabase] = useState("offline")
 	const [phrases, setPhrases] = useState([])
 	const [phrasesRaw, setPhrasesRaw] = useState([])
@@ -113,7 +114,7 @@ export default function Phrases(){
 				<div key={index} className="list">
 					<div className="list-phrase">
 						<header>
-							<i aria-label="Copiar texto" onClick={() => copyText(phrase.content)} className="clicable mh-x2 fa fa-copy"></i>
+							<i aria-label="Copiar texto" onClick={() => isModal && props.onSelectPhrase ? props.onSelectPhrase(phrase.content) : copyText(phrase.content) } className="clicable mh-x2 fa fa-copy"></i>
 							<strong style={{margin: '0 4px'}}>{phrase.content}</strong>
 						</header>
 					</div>
@@ -130,7 +131,7 @@ export default function Phrases(){
 							</div>
 						</OverlayTrigger>
 					</div>
-					{database==="offline"?
+					{!isModal && database==="offline"?
 					<OverlayTrigger placement="bottom" overlay={<Tooltip>Remover pronúncia</Tooltip>}>
 						<Button disabled={disableAction} size="sm" variant="danger" aria-label="Remover frase" onClick={() => onRemove(phrase)}>
 							<i className="fa fa-times-circle"></i>
@@ -172,13 +173,13 @@ export default function Phrases(){
 							return <span key={letter} className="btn btn-sm" style={{margin: '0 2px'}}>{letter}</span>
 						})}
 					</div>
+					
 					<hr />
-					<div>
+					
 					<Form.Group className="mb-3" controlId="formSearchWord">
 						<Form.Label>Buscar</Form.Label>
 						<Form.Control type="email" value={filter.text} autoComplete="off" onChange={e => setFilter({...filter, text: e.target.value})} placeholder="Busque por uma frase..." />
 					</Form.Group>
-					</div>
 				</div>
 			{ 
 				loading ? 

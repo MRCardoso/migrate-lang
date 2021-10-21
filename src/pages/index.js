@@ -68,7 +68,7 @@ export default function Home() {
 				<Container>
 					<h3 className="text-center">Esse é um site com features feitos para ajudá-lo no aprendizado do inglês.</h3>
 					<Recognizer isMany={false}>
-						<Speech textSize={3} enableSpeak={true} enableTranslate={false} enableListening={false} enableSave={true} enableChangeLanguage={false} />
+						<Speech textSize={3} enableSpeak={true} enableTranslate={false} enableListening={false} enableSave={true} enableCopyPhrase={true} enableChangeLanguage={false} />
 					</Recognizer>
 					<section>
 						<aside className="app-features mt-4">

@@ -3,6 +3,8 @@ import { Form, OverlayTrigger, Tooltip, DropdownButton, Button, Dropdown} from '
 import { useAuth } from '../../contexts/AuthContext'
 import { requestTranslate } from '../../services/requests'
 import {copy, enabledCloud, prepareError, text2Speech} from '../../services/utils'
+import Modal from '../Modal'
+import Phrases from '../Phrases'
 
 export default function Speech(props){
     const {
@@ -21,12 +23,14 @@ export default function Speech(props){
         enableListening=true,
         enableSave = true,
         enableChangeLanguage=true,
+        enableCopyPhrase = false,
         textSize=8,
         textPlaceholder="Coloque seu texto aqui e pratique, traduza ou escute..."
     } = props
     const {setMessager, setLoading} = useAuth()
     const [lang, setLang] = useState('en-US')
     const [listen, setListen] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false)
     const copyText = (value) =>{
         if(copy(value)){
             setMessager({variant: "success", message: "texto copiado para a área de transferência"})
@@ -66,6 +70,12 @@ export default function Speech(props){
 
     return (
         <React.Fragment>
+            <Modal isOpen={modalOpen} closeCallback={e => setModalOpen(false)} title="Selecione uma frase">
+                <Phrases onSelectPhrase={(value) => {
+                    setModalOpen(false)
+                    setPhrase(value)
+                }} isModal={true} />
+            </Modal>
             <div className="d-flex justify-content-center align-items-start mt-4 mb-4">
                 <div className="flex-columns">
                     {enableSpeak?
@@ -95,11 +105,11 @@ export default function Speech(props){
                     <OverlayTrigger placement="top" overlay={<Tooltip>Ouvir [alt + L]</Tooltip>}>
                         <Button
                             accessKey="l"
-                            disabled={closeOnSpeakend ? (!note || listen || isListning) : (!phrase || listen || isListning)}
-                            variant="light"
+                            disabled={closeOnSpeakend ? (!note || isListning) : (!phrase || isListning)}
+                            variant={listen ? 'primary': 'light'}
                             type="button" 
                             aria-label="ouvir"
-                            className="mb-2 fa fa-volume-up"
+                            className={`mb-2 fa fa-${listen ? 'stop': 'volume-up'}`}
                             onClick={() => text2Speech((closeOnSpeakend ? note : phrase), lang, setListen)}>
                         </Button>
                     </OverlayTrigger>
@@ -114,6 +124,18 @@ export default function Speech(props){
                         </DropdownButton>
                     </OverlayTrigger>
                     :''}
+                    {enableCopyPhrase ? 
+                    <OverlayTrigger placement="top" overlay={<Tooltip>Selecione uma frase</Tooltip>}>
+                        <Button
+                            disabled={isListning}
+                            variant="light"
+                            type="button" 
+                            aria-label="Selecionar frase"
+                            className="mt-2 fa fa-clipboard"
+                            onClick={() => setModalOpen(true)}>
+                        </Button>
+                    </OverlayTrigger>
+                    : ''}
                 </div>
 
                 <div className="speech-container">
@@ -155,8 +177,8 @@ export default function Speech(props){
                                 <Button className="mh-x2" variant="light" size="sm" type="button" aria-label="Copiar texto" onClick={() => copyText(note)}>
                                     <i className="fa fa-copy"></i>
                                 </Button>
-                                <Button className="mh-x2" variant="light" size="sm" type="button" aria-label="Escutar" disabled={listen} onClick={() => text2Speech(note, lang, setListen)}>
-                                    <i className="fa fa-volume-up"></i>
+                                <Button className="mh-x2" variant={listen? "primary":"light"} size="sm" type="button" aria-label="Escutar" onClick={() => text2Speech(note, lang, setListen)}>
+                                    <i className={`fa fa-${listen? "stop" : "volume-up"}`}></i>
                                 </Button>
                             </>
                             : ''}

@@ -1,4 +1,4 @@
-const text2SpeechCache = null
+let text2SpeechCache = null
 export const shuffle = (o) => {
     for (let j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
@@ -47,6 +47,16 @@ export const text2Speech = (text, lang = 'en-US', state = null) => {
 	const textToSpeech = new SpeechSynthesisUtterance(text);
 	textToSpeech.lang = lang
     textToSpeech.onstart = () => state !== null && state(true)
-    textToSpeech.onend = () => state !== null && state(false)
-	synthesis.speak(textToSpeech)
+    textToSpeech.onend = (e) => {
+        text2SpeechCache = null
+        state !== null && state(false)
+    }
+    
+    if(text2SpeechCache !== null){
+        text2SpeechCache = null
+        synthesis.cancel()
+    } else{
+        text2SpeechCache = text
+        synthesis.speak(textToSpeech)
+    }
 }
