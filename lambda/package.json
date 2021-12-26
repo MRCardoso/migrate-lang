@@ -1,0 +1,24 @@
+{
+  "name": "lambda-megrolang",
+  "version": "1.0.0",
+  "description": "",
+  "main": "megrolang.js",
+  "scripts": {
+    "predeploy": "rm -rf node_modules && npm i --only=dev && gulp && npm i --platform=linux --arch=x64 --target=12.x firebase",
+    "deploy": "serverless deploy --verbose --stage",
+    "postdeploy": "rm -rf node_modules services"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^9.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.5",
+    "gulp": "^4.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "serverless-dotenv-plugin": "^3.10.0",
+    "typescript": "^4.5.4"
+  }
+}

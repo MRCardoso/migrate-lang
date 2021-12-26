@@ -31,6 +31,11 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
-
+lambda/.env.dev
+lambda/.env.prod
+lambda/node_modules/
+lambda/services
+lambda/.serverless
+lambda/package-lock.json
 # vercel
 .vercel

@@ -1,0 +1,14 @@
+{
+  "files": [
+    "../src/services/firebase/**/*.js"
+  ],
+  "compilerOptions": {
+    "rootDir": "../src",
+    "noImplicitAny": false,
+    "allowJs": true,
+    "target": "es5"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

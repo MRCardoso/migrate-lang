@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build --profile && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "cd lambda && npm run deploy",
+    "terminate": "cd lambda && serverless remove --stage",
+    "invoke": "cd lambda && serverless invoke --stage prod -f megrolang -l --data"
   },
   "keywords": [
     "megrolang",
@@ -27,7 +30,7 @@
   "dependencies": {
     "axios": "^0.21.4",
     "bootstrap": "^5.1.1",
-    "firebase": "^9.0.2",
+    "firebase": "^9.6.1",
     "font-awesome": "^4.7.0",
     "next": "11.1.2",
     "react": "^17.0.2",

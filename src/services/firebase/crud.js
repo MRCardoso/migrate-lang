@@ -1,8 +1,13 @@
 import app from "./app"
 import { getFirestore, collection, getDocs, addDoc, where, query, doc, limit, orderBy, updateDoc, deleteDoc } from 'firebase/firestore';
-import { enabledCloud } from "../utils";
+
 
 const db = getFirestore(app)
+
+export const enabledCloud = (action) => {
+    const actions = process.env.NEXT_PUBLIC_ENABLED_CLOUD_STORAGE.split("|")
+    return actions.indexOf(action)  !== -1 ? true: false
+}
 
 const validatePermission = (action, next) => {
     if(!enabledCloud(action)){

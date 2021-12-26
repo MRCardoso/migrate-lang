@@ -1,0 +1,26 @@
+service: phrase
+frameworkVersion: '2'
+useDotenv: true
+plugins:
+  - serverless-dotenv-plugin
+provider:
+  name: aws
+  lambdaHashingVersion: 20201221
+  region: ${env:NEXT_PUBLIC_AWS_REGION}
+  stage: ${sls:stage}
+functions:
+  megrolang:
+    handler: megrolang.handle
+    runtime: nodejs12.x
+    name: Megrolang-db-${sls:stage}
+    description: Get phrases, stories and chapter from firebase database
+    memorySize: 256 # optional, in MB, default is 1024
+    # timeout: 10 # optional, in seconds, default is 6
+    environment:
+      NEXT_PUBLIC_ENABLED_CLOUD_STORAGE: ${env:NEXT_PUBLIC_ENABLED_CLOUD_STORAGE}
+      NEXT_PUBLIC_FIREBASE_API_KEY: ${env:NEXT_PUBLIC_FIREBASE_API_KEY}
+      NEXT_PUBLIC_FIREBASE_API_DOMAIN: ${env:NEXT_PUBLIC_FIREBASE_API_DOMAIN}
+      NEXT_PUBLIC_FIREBASE_API_PROJECT: ${env:NEXT_PUBLIC_FIREBASE_API_PROJECT}
+      NEXT_PUBLIC_FIREBASE_API_BUCKET: ${env:NEXT_PUBLIC_FIREBASE_API_BUCKET}
+      NEXT_PUBLIC_FIREBASE_API_SENDERID: ${env:NEXT_PUBLIC_FIREBASE_API_SENDERID}
+      NEXT_PUBLIC_FIREBASE_API_APPID: ${env:NEXT_PUBLIC_FIREBASE_API_APPID}
