@@ -15,7 +15,7 @@ functions:
     name: Megrolang-db-${sls:stage}
     description: Get phrases, stories and chapter from firebase database
     memorySize: 256 # optional, in MB, default is 1024
-    # timeout: 10 # optional, in seconds, default is 6
+    timeout: 15 # optional, in seconds, default is 6
     environment:
       NEXT_PUBLIC_ENABLED_CLOUD_STORAGE: ${env:NEXT_PUBLIC_ENABLED_CLOUD_STORAGE}
       NEXT_PUBLIC_FIREBASE_API_KEY: ${env:NEXT_PUBLIC_FIREBASE_API_KEY}

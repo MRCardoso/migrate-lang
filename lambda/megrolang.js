@@ -28,7 +28,7 @@ module.exports.handle = async (event) => {
 			body: {type: event.type, data: response.items, ...response.paginator}
 		}
 	} catch (error) {
-		console.log({error})
+		console.log({ErrAPI: error})
 		const err = (typeof error === "string" ? error : "Erro inesperado, tente novamente mais tarde.")
 		return {statusCode: 400, body: err}
 	}

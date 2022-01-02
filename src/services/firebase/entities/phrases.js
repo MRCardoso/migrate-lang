@@ -7,7 +7,6 @@ export const list = async (limit=null, pager=null, prev="0") => {
     const params = await queryPaginator(limit, pager, prev, tableName)
     params["order"] = ["content", "asc"]
     const response = await __all(tableName, params)
-    console.log(response.docs)
     const paginator = responsePaginator(response.docs, pager, prev)
     const items = response.docs.map(doc => ({id: doc.id, ...doc.data()}))
     return {items, paginator}
