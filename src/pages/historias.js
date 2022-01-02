@@ -8,7 +8,7 @@ export default function historias(){
 	return (
 		<Capsule
 			title="Histórias"
-			description="Pratique sua pronúncia lendo histórias..."
+			description="Aprenda inglês, lendo histórias curtas, ou contando suas próprias, Fale inglês com pequenos contos, pratique seu inglês através de suas histórias"
 			path="historias"
 			displayFooter={true}
 			>

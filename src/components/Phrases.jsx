@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Alert, OverlayTrigger, Tooltip, Spinner, Button, Form} from "react-bootstrap"
+import { Alert, OverlayTrigger, Tooltip, Spinner, Button, Form, Accordion} from "react-bootstrap"
 import {alphabetValues, copy, enabledCloud } from '../services/utils'
 import { list as onlineList, remove as onlineRemove } from "../services/firebase/entities/phrases"
 import { list as offlineList, remove as offlineRemove } from "../services/storage";
 import { useAuth } from "../contexts/AuthContext";
+import { PAGE_SIZE } from "../services/firebase/crud";
+import Paginator from "./Paginator";
 
 export default function Phrases(props){
 	const isModal = (typeof props.isModal === "undefined" ? false : props.isModal)
-	const [database, setDatabase] = useState("offline")
+	const [isOnline, setIsOnline] = useState(true)
 	const [phrases, setPhrases] = useState([])
 	const [phrasesRaw, setPhrasesRaw] = useState([])
 	const [cacheOnline, setCacheOnline] = useState(false)
@@ -15,10 +17,11 @@ export default function Phrases(props){
 	const [disableAction, setDisableAction] = useState(false)
 	const [filter, setFilter] = useState({text:"",letter:""})
 	const [letters, setLetters] = useState([])
+	const [paginator, setPaginator] = useState(null)
     const {setMessager} = useAuth()
 	
 	useEffect(() => {
-		loadData(database)
+		loadData(isOnline)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 	useEffect(() => {
@@ -55,6 +58,7 @@ export default function Phrases(props){
 
 	const refreshData = (phrases) => {
 		const letterArray = []
+		phrases.sort((a, b) => a.content.localeCompare(b.content))
 		phrases.forEach(phrase => {
 			const l = phrase.content[0].toUpperCase()
 			if(letterArray.indexOf(l) === -1) letterArray.push(l)
@@ -67,15 +71,17 @@ export default function Phrases(props){
 
 	const loadData = async (value) => {
 		let phrases = []
-		setDatabase(value)
+		setIsOnline(value)
 		refreshData([])
 		setLoading(true)
 
 		try {
-			if(value === "online"){
+			if(value){
 				if(cacheOnline === false){
-					phrases = await onlineList()
-					setCacheOnline(phrases)
+					const onData = await onlineList(PAGE_SIZE, null)
+					phrases = onData.items
+					setPaginator(onData.paginator)
+					setCacheOnline(onData.items)
 				} else{
 					phrases = cacheOnline
 				}
@@ -95,7 +101,7 @@ export default function Phrases(props){
 	const onRemove = async ({id}) =>{
 		setDisableAction(true)
 		try {
-            if (database === "online"){
+            if (isOnline){
                 await onlineRemove(id)
             } else{
                 await offlineRemove(id)
@@ -131,7 +137,7 @@ export default function Phrases(props){
 							</div>
 						</OverlayTrigger>
 					</div>
-					{!isModal && database==="offline"?
+					{!isModal && !isOnline?
 					<OverlayTrigger placement="bottom" overlay={<Tooltip>Remover pronúncia</Tooltip>}>
 						<Button disabled={disableAction} size="sm" variant="danger" aria-label="Remover frase" onClick={() => onRemove(phrase)}>
 							<i className="fa fa-times-circle"></i>
@@ -148,49 +154,50 @@ export default function Phrases(props){
 	return (
 		<>
 			<section className="flex-center" style={{minHeight: '100vh'}}>
-				<div className="pronounce-filters">
-					<div style={{display: 'flex', flexDirection:'column'}}>
-						<span className="mb-2" style={{verticalAlign:'bottom'}}>Base de dados</span>
-						<div>
-							<button className={`btn btn-sm btn-${database === "offline"?"primary":"light"}`} style={{flex: 1, margin: '0 2px'}} onClick={() => loadData("offline")}>Privado</button>
-							{enabledCloud?
-							<button className={`btn btn-sm btn-${database === "online"?"primary":"light"}`} style={{flex: 1, margin: '0 2px'}} onClick={() => loadData("online")}>Público</button>
-							:""}
-						</div>
-					</div>
-					
-					<hr />
-					<div key="filter-letter" className="mt-4 mb-4">
-						<h6 className="mb-2">Filter por letra</h6>
-						{alphabetValues.map(letter => {
-							if(letters.indexOf(letter) !== -1){
-								return <button key={letter}
-											className={`btn btn-sm btn-${filter.letter == letter ? 'primary': 'secondary'}`}
-											style={{margin: '0 2px'}}
-											onClick={() => setFilter({...filter, letter: filter.letter === letter ? "" : letter})}
-										>{letter}</button>
-							}
-							return <span key={letter} className="btn btn-sm" style={{margin: '0 2px'}}>{letter}</span>
-						})}
-					</div>
-					
-					<hr />
-					
-					<Form.Group className="mb-3" controlId="formSearchWord">
-						<Form.Label>Buscar</Form.Label>
-						<Form.Control type="email" value={filter.text} autoComplete="off" onChange={e => setFilter({...filter, text: e.target.value})} placeholder="Busque por uma frase..." />
-					</Form.Group>
-				</div>
+				{
+					enabledCloud('phrases')
+					? <Form.Check type="switch" className="mb-2" id="is-database-online" label="Base de dados online" checked={isOnline} onChange={() => loadData(isOnline ? false : true)} /> 
+					: ''
+				}
+				{phrases.length > 0 ? 
+					<Accordion flush>
+						<Accordion.Item eventKey="0">
+							<Accordion.Header>Busca avançada</Accordion.Header>
+							<Accordion.Body>
+								<div key="filter-letter" className="mt-4 mb-4">
+									{/* <h6 className="mb-2">Filtrar</h6> */}
+									{alphabetValues.map(letter => {
+										if(letters.indexOf(letter) !== -1){
+											return <button key={letter}
+														className={`btn btn-sm btn-${filter.letter == letter ? 'primary': 'secondary'}`}
+														style={{margin: '0 2px'}}
+														onClick={() => setFilter({...filter, letter: filter.letter === letter ? "" : letter})}
+													>{letter}</button>
+										}
+										return <span key={letter} className="btn btn-sm" style={{margin: '0 2px'}}>{letter}</span>
+									})}
+								</div>
+								<Form.Group className="mb-3" controlId="formSearchWord">
+									{/* <Form.Label>Buscar</Form.Label> */}
+									<Form.Control type="email" value={filter.text} autoComplete="off" onChange={e => setFilter({...filter, text: e.target.value})} placeholder="Busque por uma frase..." />
+								</Form.Group>
+							</Accordion.Body>
+						</Accordion.Item>
+					</Accordion>
+				:''}
 			{ 
 				loading ? 
 				<div className="d-flex align-items-center justify-content-center" style={{minHeight: '50vh'}}>
 					<Spinner animation="grow" />
 				</div>
 				: 
-				phrases.length > 0?  renderPhrases() :
-				<Alert variant="warning" className="mt-2">
-					{filter.text? `Nenhuma frase encontrada para a busca "${filter.text}"` : "Nenhuma frase foi encontrada"}
-				</Alert>
+				<>
+					{isOnline ? <Paginator pager={paginator} request={onlineList} response={refreshData} /> : ''}
+					{phrases.length > 0?  renderPhrases() :
+					<Alert variant="warning" className="mt-2">
+						{filter.text? `Nenhuma frase encontrada para a busca "${filter.text}"` : "Nenhuma frase foi encontrada"}
+					</Alert>}
+				</>
 			}
 			</section>
 		</>

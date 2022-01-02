@@ -9,7 +9,7 @@ export default function traduzir() {
 	return (
 		<Capsule
 			title="Reconhecimento de voz"
-			description="Aplicação para praticar e melhorar a pronunciação do inglês, rumo a proficiência."
+			description="Aprenda conversando consigo mesmo, deixe seus pensamentos fluírem e pratique seu inglês falado."
 			path="falar"
 			displayFooter={true}
 		>

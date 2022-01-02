@@ -7,7 +7,7 @@ export default function Frases(){
 	return (
 		<Capsule
 			title="Frase cadastradas"
-			description="Lista com as frases escolhidas pelo usuário para futuros exercícios."
+			description="Aprenda inglês todos os dias com pequenas frazes, como melhorar seu aprendizado com frazes que mais tem dificuldade, como tornar o aprendizado divertidos"
 			path="frases"
 			displayFooter={true}
 			>

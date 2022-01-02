@@ -266,6 +266,9 @@ a {
   justify-content: flex-start !important;
 }
 
+.hide{
+  display: none;
+}
 .flex{
   display: flex;
 }
@@ -304,6 +307,14 @@ a {
   background: var(--bg-white);
   border-radius: 4px;
   margin: 8px;
+}
+
+.list-story{
+  cursor: pointer;
+  flex-direction: column;
+}
+.list-story:hover{
+  background: var(--bg-grey);
 }
 
 .list-phrase{

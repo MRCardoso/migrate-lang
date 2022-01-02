@@ -58,7 +58,7 @@ export default function Home() {
 	return (
 		<Capsule
 			title="Pratique sua pronúncia do inglês"
-			description="Aplicação para praticar e melhorar a pronunciação do inglês, rumo a proficiência."
+			description="Aprenda inglês todos os dias no seu ritmo, tornando o aprendizado divertido."
 			path=""
 			displayFooter={true}
 			displayTitle={false}
@@ -91,7 +91,9 @@ export default function Home() {
 								</div>
 							</div>
 							<div  style={{flex: 2, textAlign: 'center'}}>
-								<Image src="/logo.png" alt="Logo Marca" width={200} height={160} />
+								<Link href="/frases">
+									<a><Image src="/logo.png" alt="Logo Marca" width={200} height={160} /></a>
+								</Link>
 								<h4 className="text-center">Essas são as ferramentas</h4>
 							</div>
 							<div style={{flex:1}}>

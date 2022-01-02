@@ -9,7 +9,7 @@ export default function traduzir() {
 	return (
 		<Capsule
 			title="Traduza seus textos"
-			description="Aplicação para praticar e melhorar a pronunciação do inglês, rumo a proficiência."
+			description="Como aprender novas palavras, traduzindo textos que não conhece escrita e fala em inglês."
 			path="traduzir"
 			displayFooter={true}
 		>

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import {Form, FloatingLabel, OverlayTrigger, Tooltip, Button, Badge} from 'react-bootstrap'
+import {Form, FloatingLabel, OverlayTrigger, Tooltip, Button, Badge, Alert} from 'react-bootstrap'
 import { useAuth } from '../../contexts/AuthContext'
 import { getChapter, list } from '../../services/firebase/entities/histories'
 import { copy, text2Speech } from '../../services/utils'
 import { gaEventStories } from '../../services/metakeys'
+import { PAGE_SIZE } from '../../services/firebase/crud'
+import Paginator from '../Paginator'
 
 export default function ImagineerList(props) {
     const {setPhrase, phraseReason, setIsListining, isListning, startRecord, setPhraseReason, setNote, note} = props
@@ -15,6 +17,7 @@ export default function ImagineerList(props) {
     const [stateChapters, setStateChapters] = useState([])
     const [chaptersScore, setChapterScore] = useState({hit: 0, fail: 0}) 
     const [listen, setListen] = useState(false)
+    const [paginator, setPaginator] = useState(null)
     const {setMessager, setLoading} = useAuth()
 
     // run in component creating
@@ -22,9 +25,9 @@ export default function ImagineerList(props) {
         async function loadApi(){
             try {
                 setLoading(true)
-                const data = await list()
-                setHistories(data)
-                updateProps(null, [])
+                const onData = await list(PAGE_SIZE)
+                setPaginator(onData.paginator)
+                refreshData(onData.items)
             } catch (err) {
                 console.log({err})
                 setMessager({variant: "danger", message: "Não foi possível baixar histórias"})
@@ -55,6 +58,11 @@ export default function ImagineerList(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[startRecord])
 
+    const refreshData = (data) => {
+        setHistories(data)
+        updateProps(null, [])
+    }
+
     const updateProps = (h, c) =>{
         setHistory(h)
         setChapters(c)
@@ -70,7 +78,8 @@ export default function ImagineerList(props) {
         try {
             let data = []
             if(history!==""){
-                data = await getChapter(history)
+                const onData = await getChapter(history)
+                data = onData.items
                 data.sort((a, b) => a.order - b.order)
             }
             const hCurr = histories.find(h => h.id===history)
@@ -106,12 +115,25 @@ export default function ImagineerList(props) {
 
     return (
         <div className="flex-center" style={{minHeight: '100vh'}}>
-            <FloatingLabel controlId="chooseHistory" onChange={(e) => loadChapter(e.target.value, 0)} label="Escolha uma história e pratique">
-                <Form.Select aria-label="Floating label select example">
-                    <option value="">Selecione</option>
-                    {histories.map(h => <option key={h.id} value={h.id}>{h.content}</option>)}
-                </Form.Select>
-            </FloatingLabel>
+            <div className={history?'hide':''}>
+                <Paginator pager={paginator} request={list} response={refreshData} />
+            </div>
+            {histories.length > 0 ?
+                history ?
+                    <Button aria-label='Selecione outra história' onClick={_ => updateProps(null, [])}>Selecione outra história</Button> 
+                :
+                histories.map(h => {
+                    return (
+                        <div className='list list-story' key={h.id} onClick={_ => loadChapter(h.id, 0)}>
+                            <h5>{h.content}</h5>
+                            <small><strong>Fonte:</strong> {h.linkRef}</small>
+                        </div>
+                    )
+                })
+             :
+             <Alert variant="warning" className="mt-2">
+                Nenhuma história para contar
+            </Alert>}
             {history ?
                 <div className="histories">
                     <h3 className="pt-4 text-center">
