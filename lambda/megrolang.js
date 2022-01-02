@@ -1,7 +1,7 @@
 'use strict';
 const { list: Phrases, count: CountPhrase } = require('./services/firebase/entities/phrases')
 const { list: Story, getChapter, count: CountStory, countChapter } = require('./services/firebase/entities/histories');
-const PAGES = 4
+const { PAGE_SIZE } = require('./services/firebase/crud');
 /**
  * @param {object} event
  * @param {string} event.type the database origin
@@ -51,7 +51,7 @@ const handlePhrase =  async (event) => {
 		const total = await CountPhrase()
 		return Promise.resolve({items: total, paginator: null})
 	}
-	return Phrases((event.limit || PAGES), createPaginator(event), event.mode);
+	return Phrases((event.limit || PAGE_SIZE), createPaginator(event), event.mode);
 }
 
 const handleStory = async (event) => {
@@ -59,7 +59,7 @@ const handleStory = async (event) => {
 		const total = await CountStory()
 		return Promise.resolve({items: total, paginator: null})
 	}
-	return Story((event.limit || PAGES), createPaginator(event), event.mode);
+	return Story((event.limit || PAGE_SIZE), createPaginator(event), event.mode);
 }
 
 const handleChapter = async (event) => {
@@ -70,7 +70,7 @@ const handleChapter = async (event) => {
 		const total = await countChapter()
 		return Promise.resolve({items: total, paginator: null})
 	}
-	let {items, paginator} = await getChapter(event.id, (event.limit || PAGES), createPaginator(event), event.mode);
+	let {items, paginator} = await getChapter(event.id, (event.limit || PAGE_SIZE), createPaginator(event), event.mode);
 	items.sort((a, b) => a.order - b.order)
 	items = items.map(({id, content, order, history}) => ({id, content, order, history: history.id}))
 	return Promise.resolve({items, paginator})
