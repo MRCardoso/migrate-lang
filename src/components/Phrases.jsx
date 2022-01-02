@@ -159,32 +159,30 @@ export default function Phrases(props){
 					? <Form.Check type="switch" className="mb-2" id="is-database-online" label="Base de dados online" checked={isOnline} onChange={() => loadData(isOnline ? false : true)} /> 
 					: ''
 				}
-				{phrases.length > 0 ? 
-					<Accordion flush>
-						<Accordion.Item eventKey="0">
-							<Accordion.Header>Busca avançada</Accordion.Header>
-							<Accordion.Body>
-								<div key="filter-letter" className="mt-4 mb-4">
-									{/* <h6 className="mb-2">Filtrar</h6> */}
-									{alphabetValues.map(letter => {
-										if(letters.indexOf(letter) !== -1){
-											return <button key={letter}
-														className={`btn btn-sm btn-${filter.letter == letter ? 'primary': 'secondary'}`}
-														style={{margin: '0 2px'}}
-														onClick={() => setFilter({...filter, letter: filter.letter === letter ? "" : letter})}
-													>{letter}</button>
-										}
-										return <span key={letter} className="btn btn-sm" style={{margin: '0 2px'}}>{letter}</span>
-									})}
-								</div>
-								<Form.Group className="mb-3" controlId="formSearchWord">
-									{/* <Form.Label>Buscar</Form.Label> */}
-									<Form.Control type="email" value={filter.text} autoComplete="off" onChange={e => setFilter({...filter, text: e.target.value})} placeholder="Busque por uma frase..." />
-								</Form.Group>
-							</Accordion.Body>
-						</Accordion.Item>
-					</Accordion>
-				:''}
+				<Accordion flush>
+					<Accordion.Item eventKey="0">
+						<Accordion.Header>Busca avançada</Accordion.Header>
+						<Accordion.Body>
+							<div key="filter-letter" className="mt-4 mb-4">
+								{/* <h6 className="mb-2">Filtrar</h6> */}
+								{alphabetValues.map(letter => {
+									if(letters.indexOf(letter) !== -1){
+										return <button key={letter}
+													className={`btn btn-sm btn-${filter.letter == letter ? 'primary': 'secondary'}`}
+													style={{margin: '0 2px'}}
+													onClick={() => setFilter({...filter, letter: filter.letter === letter ? "" : letter})}
+												>{letter}</button>
+									}
+									return <span key={letter} className="btn btn-sm" style={{margin: '0 2px'}}>{letter}</span>
+								})}
+							</div>
+							<Form.Group className="mb-3" controlId="formSearchWord">
+								{/* <Form.Label>Buscar</Form.Label> */}
+								<Form.Control type="email" value={filter.text} autoComplete="off" onChange={e => setFilter({...filter, text: e.target.value})} placeholder="Busque por uma frase..." />
+							</Form.Group>
+						</Accordion.Body>
+					</Accordion.Item>
+				</Accordion>
 			{ 
 				loading ? 
 				<div className="d-flex align-items-center justify-content-center" style={{minHeight: '50vh'}}>
