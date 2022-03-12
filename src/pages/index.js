@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Link from "next/link";
 import Recognizer from '../components/Recognizer/Recognizer'
@@ -92,7 +92,7 @@ export default function Home() {
 							</div>
 							<div  style={{flex: 2, textAlign: 'center'}}>
 								<Link href="/frases">
-									<a><Image src="/logo.png" alt="Logo Marca" width={200} height={160} /></a>
+									<a><Image src="/logo.gif" alt="Logo Marca" width={164} height={195} /></a>
 								</Link>
 								<h4 className="text-center">Essas são as ferramentas</h4>
 							</div>
@@ -117,8 +117,16 @@ export default function Home() {
 								</div>
 							</div>
 						</aside>
+						<div className="d-flex justify-content-center">
+							<video width="750" height="500" controls loop muted autoPlay>
+								<source src="/preview.mp4" type="video/mp4"/>
+							</video>
+						</div>
 					</section>
 				</Container>
+			</article>
+			<article className="flex-center container mt-4">
+				
 			</article>
 			<article className="flex-center container mt-4" id="sobre">
 				{cards.map(c => {
