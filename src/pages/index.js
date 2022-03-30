@@ -91,8 +91,8 @@ export default function Home() {
 								</div>
 							</div>
 							<div  style={{flex: 2, textAlign: 'center'}}>
-								<Link href="/frases">
-									<a><Image src="/logo.gif" alt="Logo Marca" width={164} height={195} /></a>
+								<Link href="https://store.steampowered.com/app/1946280/Small_phrases_Great_stories/">
+									<a target='_blank'><Image src="/logo.gif" alt="Logo Marca" width={164} height={195} /></a>
 								</Link>
 								<h4 className="text-center">Essas são as ferramentas</h4>
 							</div>
