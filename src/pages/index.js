@@ -117,11 +117,6 @@ export default function Home() {
 								</div>
 							</div>
 						</aside>
-						<div className="d-flex justify-content-center">
-							<video width="750" height="500" controls loop muted autoPlay>
-								<source src="/preview.mp4" type="video/mp4"/>
-							</video>
-						</div>
 					</section>
 				</Container>
 			</article>

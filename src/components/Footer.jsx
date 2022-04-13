@@ -13,7 +13,7 @@ export default function Footer(){
         {url: 'https://github.com/MRCardoso', icon: 'git', label: "Github" },
         {url: 'https://www.facebook.com/mardozux', icon: 'facebook-square', label: "Página no facebook"},
         {url: 'https://www.instagram.com/mardozux/', icon: 'instagram', label: "Instagram de game developer"},
-        {url: 'https://mardozux.itch.io/', icon: 'gamepad', label: "Jogos publicados" },
+        {url: 'https://store.steampowered.com/developer/mardozux', icon: 'steam', label: "Jogos publicados" },
     ]
 
     const prettyMessage = () => {
