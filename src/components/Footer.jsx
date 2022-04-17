@@ -1,5 +1,6 @@
 import React from 'react'
 import { gaEventSocialMidia } from '../services/metakeys'
+import {version} from '../../package.json'
 
 export default function Footer(){
     const d = new Date()
@@ -47,6 +48,7 @@ export default function Footer(){
                             </li>
                         )
                     })}
+                    <li>V{version}</li>
                 </ul>
             </footer>
         </>

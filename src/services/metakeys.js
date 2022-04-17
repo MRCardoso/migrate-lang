@@ -16,7 +16,7 @@ export const canonicalName = (path = '') => {
     return `https://megrolang.com.br/${path || ''}`
 }
 
-export const gameUri = 'https://mardozux.itch.io/the-imaginner'
+export const gameUri = 'https://store.steampowered.com/app/1946280/Small_phrases_Great_stories/'
 
 export const paypalInfo = {
     key: '5GLEV64R9MAEU',

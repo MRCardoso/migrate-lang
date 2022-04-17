@@ -32,7 +32,7 @@ export default function Sidebar({activeScroll, currentPath}) {
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="me-auto">
-							<LinkTheImaginner className="nav-link"><i className="mh-x2 fa fa-gamepad"></i></LinkTheImaginner>
+							<LinkTheImaginner className="nav-link"><i className="mh-x2 fa fa-steam"></i></LinkTheImaginner>
 						</Nav>
 						<Nav className="me-right">
 							{currentPath!==""? 

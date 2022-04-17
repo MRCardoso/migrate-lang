@@ -6,7 +6,7 @@ import Speech from "../components/Recognizer/Speech";
 import Capsule from '../components/Capsule';
 import { Container} from "react-bootstrap";
 import Image from 'next/image'
-import { gaEventDonate, paypalInfo } from "../services/metakeys";
+import { gaEventDonate, gameUri, paypalInfo } from "../services/metakeys";
 import LinkTheImaginner from "../components/GaEvents/LinkTheImaginner";
 
 export default function Home() {
@@ -91,9 +91,15 @@ export default function Home() {
 								</div>
 							</div>
 							<div  style={{flex: 2, textAlign: 'center'}}>
-								<Link href="https://store.steampowered.com/app/1946280/Small_phrases_Great_stories/">
-									<a target='_blank'><Image src="/logo.gif" alt="Logo Marca" width={164} height={195} /></a>
-								</Link>
+								<div>
+									<Link href={gameUri}>
+										<a target='_blank' className="steam-label">
+											<Image src="/logo.gif" alt="Logo Marca" width={164} height={195} />
+											<span>+</span> 
+											<i className="fa fa-steam"></i>
+										</a>
+									</Link>
+								</div>
 								<h4 className="text-center">Essas são as ferramentas</h4>
 							</div>
 							<div style={{flex:1}}>

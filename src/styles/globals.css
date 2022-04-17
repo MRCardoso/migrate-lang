@@ -467,6 +467,25 @@ footer.footer{
   padding: 8px;
 }
 
+.steam-label{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--bg-white);
+  text-decoration: none;
+}
+.steam-label span {
+  font-size: 4em;
+}
+.steam-label i {
+  font-size: 8em;
+}
+.steam-label:hover{
+  text-decoration: none;
+  color: var(--bg-dark);
+}
 .footer.footer a{
   color: var(--text-light);
   text-decoration: none;
@@ -788,5 +807,16 @@ input:focus, textarea:focus, select:focus{
   }
   .table-responsive tbody tr {
       display : inline-block;
+  }
+
+  .steam-label{
+    display: flex;
+    flex-direction: column;
+  }
+  .steam-label span{
+    font-size: 2em;
+  }
+  .steam-label i{
+    font-size: 6em;
   }
 }
