@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from "react";
 import { save as onlineSave } from "../../services/firebase/entities/phrases";
+import { isMobile } from "../../services/requests";
 import { getLanguage, save as offlineSave } from '../../services/storage';
 
 
@@ -112,7 +113,7 @@ export default function Recognizer(props){
 			transcript = transcript.join('')
 			setNote(transcript)
 
-			if(isFinal){
+			if(isFinal && !isMobile()){
 				setIsListining(false)
 			}
 
