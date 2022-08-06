@@ -96,7 +96,9 @@ export default function Recognizer(props){
 		mic.onresult = event => {
 			let transcript = Array.from(event.results)
 			let isFinal = false
-			if(!phrase && (props.isMany === undefined || props.isMany)){
+			let allowClose = props.detectSpeak ?? false
+			let isMany  = props.isMany ?? false
+			if(isMany || !allowClose){
 				transcript = transcript.map(result => result[0].transcript)
 
 				if(transcript.indexOf("X") !== -1 || transcript.indexOf("x") !== -1){
@@ -113,7 +115,7 @@ export default function Recognizer(props){
 			transcript = transcript.join('')
 			setNote(transcript)
 
-			if(isFinal && !isMobile()){
+			if(allowClose && isFinal && !isMobile()){
 				setIsListining(false)
 			}
 

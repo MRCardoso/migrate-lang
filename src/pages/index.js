@@ -67,7 +67,7 @@ export default function Home() {
 			<article className="flex-home black-purple" style={{minHeight: '100vh', paddingBottom: '8px'}}>
 				<Container>
 					<h3 className="text-center">Esse é um site com features feitos para ajudá-lo no aprendizado do inglês.</h3>
-					<Recognizer isMany={false}>
+					<Recognizer isMany={false} detectSpeak={true}>
 						<Speech textSize={3} enableSpeak={true} enableTranslate={false} enableListening={false} enableSave={true} enableCopyPhrase={true} enableChangeLanguage={false} />
 					</Recognizer>
 					<section>

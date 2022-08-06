@@ -10,6 +10,7 @@ export default function Speech(props){
     const {
         setPhrase,
         phraseReason,
+        alwaysShowNote = false,
         setIsListining,
         isListning,
         phrase,
@@ -136,6 +137,7 @@ export default function Speech(props){
                         </Button>
                     </OverlayTrigger>
                     : ''}
+                    {props.children ? props.children : ''}
                 </div>
 
                 <div className="speech-container">
@@ -166,7 +168,7 @@ export default function Speech(props){
                                 <i className="fa fa-copy"></i>
                             </Button>
                         </Form.Group>
-                        {'status' in phraseReason && note ?
+                        {(alwaysShowNote || 'status' in phraseReason) && note ?
                             <div className={`speech-reason ${phraseReason.status ? 'text-success': (phraseReason.status===false? 'text-danger':'text-secondary')}`}>
                             {note?
                             <>
