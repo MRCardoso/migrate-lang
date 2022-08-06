@@ -5,7 +5,7 @@ import Speech from "../components/Recognizer/Speech";
 import Capsule from '../components/Capsule';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-export default function traduzir() {
+export default function Traduzir() {
 	const [isMany, setIsMany] = useState(true)
 	return (
 		<Capsule
