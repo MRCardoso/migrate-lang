@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { gaEventSocialMidia } from '../services/metakeys'
+import { list } from "../services/firebase/entities/links"
+import packageInfo from '../../package.json'
 
-export default function Footer(props){
+export default function Footer(){
+    const [links, setLinks] = useState([])
     const d = new Date()
     let hour = d.getHours()
     let minute = d.getMinutes()
     minute = (minute <10 ? `0${minute}`: minute)
     hour = (hour < 10 ? `0${hour}`: hour)
+
+    useEffect(() => {
+        const dowork = async () => {
+            const values = await list()
+            setLinks(values.items)
+        }
+        dowork()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
     const prettyMessage = () => {
         let message
@@ -30,7 +42,7 @@ export default function Footer(props){
             <footer className="footer">
                 <span>{prettyMessage()}</span>
                 <ul>
-                    {props.links?.map(t => {
+                    {links.map(t => {
                         return (
                             <li key={t.icon}>
                                 <a href={t.url} target="_blank" rel="noreferrer" onClick={() => gaEventSocialMidia(t.label)} title={t.label}>
@@ -39,7 +51,7 @@ export default function Footer(props){
                             </li>
                         )
                     })}
-                    <li>V{props.appVersion}</li>
+                    <li>V{packageInfo.version}</li>
                 </ul>
             </footer>
         </>

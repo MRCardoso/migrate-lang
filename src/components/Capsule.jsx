@@ -4,6 +4,7 @@ import 'font-awesome/css/font-awesome.min.css'
 import Head from 'next/head'
 
 import Sidebar from '../components/Sidebar'
+import Footer from '../components/Footer'
 
 import { canonicalName, appName, noIndexPath } from '../services/metakeys';
 import React, { useEffect, useState } from 'react'
@@ -46,6 +47,7 @@ export default function Capsule(props) {
 			<button type="button" onClick={scrollTop} aria-label="Voltar ao topo" title="Voltar ao topo" className={`back-top ${activeScroll ? 'on-top' : ''}`}>
 				<i className="fa fa-chevron-up"></i>
 			</button>
+			{props.displayFooter? <Footer /> : ''}
 		</>
 	}
 	return (
