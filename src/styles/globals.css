@@ -553,6 +553,14 @@ input:focus, textarea:focus, select:focus{
   word-wrap: break-word;
 }
 
+.speech-grid{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
 .speech-container{
   display: flex;
   flex-direction: column;
@@ -754,6 +762,20 @@ input:focus, textarea:focus, select:focus{
   .flex-inline{
     display: flex;
     flex-direction: column;
+  }
+
+  .flex-columns{
+    display: flex;
+    flex-direction: row;
+  }
+  .flex-columns button {
+    margin-right: 6px;
+  }
+  .speech-grid{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .app-features{

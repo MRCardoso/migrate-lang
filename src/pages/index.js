@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { gaEventDonate, gameUri, paypalInfo } from "../services/metakeys";
 import LinkTheImaginner from "../components/GaEvents/LinkTheImaginner";
 import LinkShare from "../components/GaEvents/LinkShare";
+import { isMobile } from "../services/requests";
 
 export default function Home() {
 
@@ -67,9 +68,9 @@ export default function Home() {
 		>
 			<article className="flex-home black-purple" style={{minHeight: '100vh', paddingBottom: '8px'}}>
 				<Container>
-					<h1 className="text-center" style={{fontSize: '1.75rem'}}>Esse é um site com features feitos para ajudá-lo no aprendizado do inglês.</h1>
+					<h3 className="text-center">Esse é um site com features feitos para ajudá-lo no aprendizado do inglês.</h3>
 					<Recognizer isMany={false} detectSpeak={true}>
-						<Speech textSize={3} enableSpeak={true} enableTranslate={false} enableListening={false} enableSave={true} enableCopyPhrase={true} enableChangeLanguage={false} />
+						<Speech textSize={isMobile() ? 10: 3} enableSpeak={true} enableTranslate={false} enableListening={false} enableSave={true} enableCopyPhrase={true} enableChangeLanguage={false} />
 					</Recognizer>
 					<section>
 						<aside className="app-features mt-4">
@@ -128,7 +129,7 @@ export default function Home() {
 				</Container>
 			</article>
 			<article className="flex-center container mt-4">
-				<div className="d-flex justify-content-md-center">
+				<div className="d-flex justify-content-center">
 					<LinkShare />
 				</div>
 			</article>

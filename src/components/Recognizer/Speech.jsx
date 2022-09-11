@@ -77,7 +77,7 @@ export default function Speech(props){
                     setPhrase(value)
                 }} isModal={true} />
             </Modal>
-            <div className="d-flex justify-content-center align-items-start mt-4 mb-4">
+            <div className="speech-grid">
                 <div className="flex-columns">
                     {enableSpeak?
                     <OverlayTrigger placement="top" overlay={<Tooltip>Falar [alt + S]</Tooltip>}>
@@ -117,7 +117,7 @@ export default function Speech(props){
                     :''}
                     {enableSave?
                     <OverlayTrigger placement="top" overlay={<Tooltip>Salve o resultado nos dados do navegador, ou na nuvem e ajude a popular nossa base de dados.</Tooltip>}>
-                        <DropdownButton title={<i aria-label="salvar" className="fa fa-save"></i>} variant={`${isListning || !phrase? 'light': 'primary'}`} disabled={isListning || !phrase}>
+                        <DropdownButton className='mb-2' title={<i aria-label="salvar" className="fa fa-save"></i>} variant={`${isListning || !phrase? 'light': 'primary'}`} disabled={isListning || !phrase}>
                             <Dropdown.Item href="#" onClick={() => customSave(false)}><i className={`fa fa-save`}></i> Salvar offline</Dropdown.Item>
                             {enabledCloud?
                             <Dropdown.Item href="#" onClick={() => customSave(true)}><i className={`fa fa-cloud`}></i> Salvar online</Dropdown.Item>
@@ -132,7 +132,7 @@ export default function Speech(props){
                             variant="light"
                             type="button" 
                             aria-label="Selecionar frase"
-                            className="mt-2 fa fa-clipboard"
+                            className="mb-2 fa fa-clipboard"
                             onClick={() => setModalOpen(true)}>
                         </Button>
                     </OverlayTrigger>
