@@ -17,6 +17,11 @@ export const canonicalName = (path = '') => {
 }
 
 export const gameUri = 'https://store.steampowered.com/app/1946280/Small_phrases_Great_stories/'
+export const whatsappLink = () => {
+    const url = canonicalName()
+    const text = `Olá, Esse é um site com features feitos para ajudá-lo no aprendizado do inglês. | Link: ${url}`
+    return `https://api.whatsapp.com/send?&text=${text}`
+}
 
 export const paypalInfo = {
     key: '5GLEV64R9MAEU',
@@ -29,6 +34,15 @@ export const gaEventImaginner = () => {
         category: "engagement",
         label: "The imaginner",
         value: "access link game"
+    })
+}
+
+export const gaEventShare = () => {
+    event({
+        action: "button_share",
+        category: "engagement",
+        label: "Share with friends",
+        value: "access link share"
     })
 }
 

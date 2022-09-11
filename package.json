@@ -1,10 +1,11 @@
 {
   "name": "megrolang",
-  "version": "4.3.1",
+  "version": "4.4.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build --profile && next export",
+    "analyze": "ANALYZE=true next build",
     "start": "next start",
     "lint": "next lint",
     "deploy": "cd lambda && npm run deploy",
@@ -28,6 +29,7 @@
     "speak practice"
   ],
   "dependencies": {
+    "@next/bundle-analyzer": "^12.3.0",
     "axios": "^0.21.4",
     "bootstrap": "^5.1.1",
     "firebase": "^9.6.1",

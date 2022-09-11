@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import Link from "next/link";
 import Recognizer from '../components/Recognizer/Recognizer'
@@ -8,6 +8,7 @@ import { Container} from "react-bootstrap";
 import Image from 'next/image'
 import { gaEventDonate, gameUri, paypalInfo } from "../services/metakeys";
 import LinkTheImaginner from "../components/GaEvents/LinkTheImaginner";
+import LinkShare from "../components/GaEvents/LinkShare";
 
 export default function Home() {
 
@@ -66,7 +67,7 @@ export default function Home() {
 		>
 			<article className="flex-home black-purple" style={{minHeight: '100vh', paddingBottom: '8px'}}>
 				<Container>
-					<h3 className="text-center">Esse é um site com features feitos para ajudá-lo no aprendizado do inglês.</h3>
+					<h1 className="text-center" style={{fontSize: '1.75rem'}}>Esse é um site com features feitos para ajudá-lo no aprendizado do inglês.</h1>
 					<Recognizer isMany={false} detectSpeak={true}>
 						<Speech textSize={3} enableSpeak={true} enableTranslate={false} enableListening={false} enableSave={true} enableCopyPhrase={true} enableChangeLanguage={false} />
 					</Recognizer>
@@ -127,7 +128,9 @@ export default function Home() {
 				</Container>
 			</article>
 			<article className="flex-center container mt-4">
-				
+				<div className="d-flex justify-content-md-center">
+					<LinkShare />
+				</div>
 			</article>
 			<article className="flex-center container mt-4" id="sobre">
 				{cards.map(c => {
@@ -168,7 +171,7 @@ export default function Home() {
 							<input type="hidden" name="item_name" value="Uma aplicacao com reconhecimento de fala pra praticar a pronuncia do ingles, em busca da proficiencia" />
 							<input type="hidden" name="currency_code" value="BRL" />
 							<input type="image" onClick={() => gaEventDonate('paypal')} src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Faça doações com o botão do PayPal" />
-							<img alt="Doar valor" border="0" src="https://www.paypal.com/pt_BR/i/scr/pixel.gif" width="1" height="1" />
+							<Image src="https://www.paypal.com/pt_BR/i/scr/pixel.gif" alt="Doar valor" width={1} height={1} />
 						</form>
 					</div>
 				</div>
